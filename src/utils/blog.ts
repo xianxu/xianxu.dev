@@ -182,10 +182,20 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
-    params: { blog: BLOG_BASE || undefined },
-    pageSize: blogPostsPerPage,
-  });
+  const all = await fetchPosts();
+  const visible = all.filter((p) => !p.hidden);
+  return [
+    ...paginate(visible, {
+      params: { blog: BLOG_BASE || undefined },
+      pageSize: blogPostsPerPage,
+      props: { showHidden: false },
+    }),
+    ...paginate(all, {
+      params: { blog: `${BLOG_BASE}/all` },
+      pageSize: blogPostsPerPage,
+      props: { showHidden: true },
+    }),
+  ];
 };
 
 /** */

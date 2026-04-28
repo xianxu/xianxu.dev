@@ -10,6 +10,7 @@ export interface Props {
   nextText?: string;
   currentPage?: number;
   lastPage?: number;
+  pageBase?: string;
 }
 
 const {
@@ -19,9 +20,10 @@ const {
   nextText = 'Older',
   currentPage = 1,
   lastPage = 1,
+  pageBase = `/${BLOG_BASE}`,
 } = Astro.props;
 
-const pageHref = (n: number) => (n === 1 ? `/${BLOG_BASE}` : `/${BLOG_BASE}/${n}`);
+const pageHref = (n: number) => (n === 1 ? pageBase : `${pageBase}/${n}`);
 
 // Compact list of page numbers with ellipses around the current page.
 const buildPages = (current: number, last: number): Array<number | '…'> => {
