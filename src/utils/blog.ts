@@ -55,6 +55,8 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     author,
     draft = false,
     highlight = false,
+    hidden = false,
+    comments = true,
     metadata = {},
   } = data;
 
@@ -92,6 +94,8 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
     draft: draft,
     highlight: highlight,
+    hidden: hidden,
+    comments: comments,
 
     metadata,
 
@@ -172,7 +176,7 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
   const _count = count || 4;
   const posts = await fetchPosts();
 
-  return posts ? posts.slice(0, _count) : [];
+  return posts ? posts.filter((p) => !p.hidden).slice(0, _count) : [];
 };
 
 /** */

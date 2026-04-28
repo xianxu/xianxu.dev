@@ -1,12 +1,12 @@
 ---
 title: "Conversation: agentic state management"
 publishDate: 2026-03-28
+hidden: true
 excerpt: "A parley conversation on why agentic coding state — issues, plans, logs — wants to live inside the repo, beside the code. Single-threaded topological execution as the sane default; minimal files per issue beat reinventing Jira on disk."
 tags:
   - tech
   - ai
 ---
-
 <style>
 h1 { color: #1a365d; border-bottom: 3px solid #4299e1; padding-bottom: 0.3rem; }
 h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.3rem; }

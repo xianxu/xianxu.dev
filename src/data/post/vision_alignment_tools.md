@@ -1,9 +1,9 @@
 ---
 title: Vision alignment tools
 publishDate: 2026-04-03
+hidden: true
 excerpt: "A parley on bridging business and tech vision. Mermaid is great for structure but weak for magnitude — Wardley Maps and Graphviz with weighted nodes do better. The deeper move: stop being the human translator and become the maintainer of a shared YAML schema."
 ---
-
 <style>
 h1 { color: #1a365d; border-bottom: 3px solid #4299e1; padding-bottom: 0.3rem; }
 h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.3rem; }

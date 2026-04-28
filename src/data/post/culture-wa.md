@@ -1,6 +1,7 @@
 ---
 title: WhatsApp Culture
 publishDate: 2025-04-18
+comments: false
 excerpt: "Six years inside WhatsApp's improbably quiet Menlo Park building, where the motto was Keep It Simple and the F word was Focus. Erlang hotloads, no code review, default trust, and a culture that built end-to-end encryption properly while Messenger chased fanfare."
 tags:
   - tech

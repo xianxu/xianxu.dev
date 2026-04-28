@@ -1,9 +1,9 @@
 ---
 title: Loom workflow system
 publishDate: 2026-04-05
+hidden: true
 excerpt: "A parley sketching \"Loom\": after parley, issues, and vision, a fourth repo-native tool for recurring agent-driven routines — the morning health check, the weekly oncall report. Together they form a kind of operating system for how a startup actually thinks."
 ---
-
 <style>
 h1 { color: #1a365d; border-bottom: 3px solid #4299e1; padding-bottom: 0.3rem; }
 h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.3rem; }

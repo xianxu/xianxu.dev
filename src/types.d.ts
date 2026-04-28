@@ -40,6 +40,12 @@ export interface Post {
   highlight?: boolean;
 
   /**  */
+  hidden?: boolean;
+
+  /**  */
+  comments?: boolean;
+
+  /**  */
   Content?: AstroComponentFactory;
   content?: string;
 

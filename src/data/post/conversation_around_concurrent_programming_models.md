@@ -1,11 +1,11 @@
 ---
 title: Conversation around concurrent programming models
 publishDate: 2025-05-12
+hidden: true
 excerpt: "A Parley transcript on Python's asyncio, Trio, and structured concurrency. The arc is almost comical: callbacks to promises to async/await to TaskGroups — we hid the tree structure of concurrency, then had to put it back. Maybe we should have stuck with monads."
 tags:
   - tech
 ---
-
 <style>
 h1 { color: #1a365d; border-bottom: 3px solid #4299e1; padding-bottom: 0.3rem; }
 h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.3rem; }
