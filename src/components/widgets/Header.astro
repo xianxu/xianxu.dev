@@ -14,6 +14,7 @@ interface Link {
   href?: string;
   ariaLabel?: string;
   icon?: string;
+  class?: string;
 }
 
 interface MenuLink extends Link {
@@ -98,7 +99,7 @@ const isActive = (href?: string) => {
         class="flex flex-col md:flex-row md:items-center md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
         {
-          links.map(({ text, href, links }) => (
+          links.map(({ text, href, links, class: linkClass }) => (
             <li class={links?.length ? 'dropdown' : ''}>
               {links?.length ? (
                 <>
@@ -129,6 +130,7 @@ const isActive = (href?: string) => {
                 <a
                   class:list={[
                     'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
+                    linkClass,
                     { 'aw-link-active': isActive(href) },
                   ]}
                   href={href}

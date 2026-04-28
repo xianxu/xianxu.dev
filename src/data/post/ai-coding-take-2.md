@@ -1,12 +1,12 @@
 ---
 title: "Claude Code: Take 2"
 publishDate: 2025-05-14
+published: true
 excerpt: "After more time pair-coding with Claude Code, the awe wears off. It's an overly eager junior with raw smarts and no taste — fast, useful for onboarding, but prone to ridiculous code that you'd reject from a new grad."
 tags:
   - tech
   - ai
 ---
-
 As [previously mentioned](/2025/04/reflection-on-ai-coding), I've been using `Claude Code`, an AI tool that assists coding, to create an `nvim` plugin called [Parley.nvim](https://github.com/xianxu/parley.nvim) that provides a live transcript to chat with LLMs from different providers. The tool is handy, and I've used it for many things since its creation. Now that I have more time under my belt working with `Claude Code` (and `OpenAI Codex`), I have a better understanding of them; thus, this is a take-2 on my experiences. Besides `Parley`, I also tinkered with AugmentCode's [vim plugin](https://github.com/augmentcode/augment.vim) and tried to convert it to `lua`, which is somewhat successful but not fully featured yet. 
 
 ## Experience Updated

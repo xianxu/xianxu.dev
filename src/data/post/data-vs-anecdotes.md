@@ -1,11 +1,11 @@
 ---
 title: "Data vs. Anecdotes: Which to Trust?"
 publishDate: 2026-02-04
+published: true
 excerpt: "Two quotes about data and intuition. \"I trust your data, and my intuition\" subtly inverts the knowledge hierarchy and subjugates domain expertise to authority. Bezos's version — when anecdotes disagree with data, investigate the measurement — is the better instinct."
 tags:
   - philosophy
 ---
-
 Two quotes. Which one do you resonate with more? One of them was a manifestation of organizational dysfunction, while the other offers a great insight. 
 
 Statement 1: *I trust your data, and my intuition*. 

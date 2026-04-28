@@ -34,7 +34,7 @@ export interface Post {
   metadata?: MetaData;
 
   /**  */
-  draft?: boolean;
+  published?: boolean;
 
   /**  */
   highlight?: boolean;

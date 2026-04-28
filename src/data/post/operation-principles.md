@@ -1,6 +1,7 @@
 ---
 title: My Operation Principles
 publishDate: 2025-09-20
+published: true
 excerpt: "My operating principles: be serious but not too serious, be curious and build a shared mind, be radically transparent, move fast and break things. "
 tags:
   - philosophy

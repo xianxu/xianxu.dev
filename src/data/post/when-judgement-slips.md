@@ -1,11 +1,11 @@
 ---
 title: When Judgment Slips
 publishDate: 2025-11-20
+published: true
 excerpt: "Judgment slips when decisions become emotional — when you're defending a person, a past call, or a principle rather than solving the problem in front of you. Four signals to watch for in yourself, and four ways to guard against them."
 tags:
   - philosophy
 ---
-
 In tech leadership[^high-impact-leadership], whether as people managers or as technical decision makers, we are expected to make calls. We constantly assess people, processes, systems, and risks. We’re trusted with those decisions because historically our judgment has often been right[^right-a-lot]. But how do you tell whether your judgment is grounded, or has slipped into something unhelpful?
 
 To me, it's when decisions are driven by emotional reactions that cloud objectivity. Judgments in those moments detach from goals and become about defending a person, a past decision, or an abstract principle or philosophy, instead of solving the concrete problem in front of you. It becomes more about winning the argument than making progress.

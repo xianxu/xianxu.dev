@@ -1,11 +1,11 @@
 ---
 title: Birthright Citizenship V2
 publishDate: 2025-09-27
+published: true
 excerpt: "Read narrowly, Wong Kim Ark's actual holding only covers children of permanent legal residents. For 127 years, every branch followed the broader dicta instead — until now. A close reading of holding versus dicta, reliance interest, and what the Court is likely to do."
 tags:
   - law
 ---
-
 The Trump administration [appealed to the Supreme Court](https://www.scotusblog.com/2025/09/trump-urges-supreme-court-to-decide-whether-to-end-birthright-citizenship/) ([filing](https://www.scotusblog.com/wp-content/uploads/2025/09/Trump-v.-Washington-with-appendix.pdf)), both on the merits and on further restriction of national injunctions yesterday (9/26). So they are, after all, serious about the issue on the merits. That prompted me to look deeper, to go back to the original sources. My impression from contemporary news was that the merits were clear-cut against the administration. But after digging in, the result is more interesting than I expected. (Previous installment on this topic: [Birthright Citizenship](/2025/05/birthright-citizenship)
 
 

@@ -1,6 +1,7 @@
 ---
 title: How WhatsApp Works
 publishDate: 2025-09-13
+published: true
 excerpt: "How WhatsApp actually worked: Erlang/BEAM/OTP all the way down, the biggest machines money could buy, location-transparent actors, and code hotloading as deployment. They bucked every Cloud Computing canon and ran the world's largest messaging system with a tiny team."
 tags:
   - tech

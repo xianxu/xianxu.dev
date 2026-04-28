@@ -1,12 +1,12 @@
 ---
 title: My AI Coding Workflow
 publishDate: 2026-03-08
+published: true
 excerpt: "An iterative spec flow built on a small Makefile and a handful of markdown files — issue, todo, lessons, specs — cuts through the opaque magic of workflow tools. The trick is treating specs as sketches that bound the agent's search space, not exact behavior to confine it. Let AI bringing in world's knowledge!"
 tags:
   - ai
   - tech
 ---
-
 *I used to write code; now I write poems...* - so to speak
 
 Previously, I introduced my thoughts that [AI is the new abstraction layer](/2026/02/ai-as-new-abstraction), and marveled at how far [AI coding has matured](/2026/03/dawn-of-ai-coding). So I went in a big way into tinkering in [parley.nvim](https://github.com/xianxu/parley.nvim) and would love to share the experience and the workflow I follow. If you remember my post [10 months ago](/2025/05/ai-coding-take-2#examples-of-the-bad), I got stuck in some semi-complex features. This round, it was easy to power through them, I haven't found anything that I wanted to create that I couldn't get the agent to do it for me!

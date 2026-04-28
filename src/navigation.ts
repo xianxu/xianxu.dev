@@ -6,6 +6,9 @@ export const headerData = {
     { text: 'Archive', href: getBlogPermalink() },
     { text: 'Tags', href: getPermalink('/tags') },
     { text: 'About', href: getPermalink('/about') },
+    ...(import.meta.env.DEV
+      ? [{ text: 'Drafts', href: getPermalink('/drafts'), class: 'text-yellow-500 dark:text-yellow-400' }]
+      : []),
   ],
   actions: [],
 };

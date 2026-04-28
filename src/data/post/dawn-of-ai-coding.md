@@ -1,6 +1,7 @@
 ---
 title: The Week Everything Changed
 publishDate: 2026-03-01
+published: true
 excerpt: "The week of February 23, 2026: Dorsey's layoffs, Cloudflare's one-engineer Next.js rewrite, Karpathy's tweet. Picking up Conductor, OpenCode, and OpenSpec over a weekend and shipping 15K lines on Parley — agentic coding is no longer the toy it was ten months ago."
 tags:
   - ai

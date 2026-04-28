@@ -1,11 +1,11 @@
 ---
 title: To Type or Not to Type
 publishDate: 2026-02-09
+published: true
 excerpt: "Mainstream type systems are simultaneously too strong (closed-world assumptions hurt during change) and too weak (can't say \"positive integer\" or \"age between 0 and 200\"). For startups in unsettled domains, duck typing wins — types are a luxury you afford after product-market fit."
 tags:
   - tech
 ---
-
 I’m a programming language enthusiast and love type systems. But I’ve also realized, as I’ve gained industrial experience, that this is often not such a useful pursuit, Mostly because our understanding of the world, and the businesses we are in, constantly changes. As a matter of fact, the software industry in general gravitates toward domains where our understanding of the problem is not well established (i.e., new industries). In such domains, business needs are typically unknown at the beginning. How do you model something that is unknown? This really calls for the power of weaker typing systems (duck typing, for example).
 
 In an ironic way, the type systems found in typical programming languages are both too strong, yet not strong enough.

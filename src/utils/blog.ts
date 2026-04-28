@@ -53,7 +53,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     tags: rawTags = [],
     category: rawCategory,
     author,
-    draft = false,
+    published = false,
     highlight = false,
     hidden = false,
     comments = true,
@@ -92,7 +92,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     tags: tags,
     author: author,
 
-    draft: draft,
+    published: published,
     highlight: highlight,
     hidden: hidden,
     comments: comments,
@@ -110,13 +110,14 @@ const load = async function (): Promise<Array<Post>> {
   const posts = await getCollection('post');
   const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
 
-  const results = (await Promise.all(normalizedPosts))
-    .sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())
-    .filter((post) => !post.draft);
+  const results = (await Promise.all(normalizedPosts)).sort(
+    (a, b) => b.publishDate.valueOf() - a.publishDate.valueOf()
+  );
 
   return results;
 };
 
+let _allPosts: Array<Post>;
 let _posts: Array<Post>;
 
 /** */
@@ -134,13 +135,25 @@ export const blogTagRobots = APP_BLOG.tag.robots;
 
 export const blogPostsPerPage = APP_BLOG?.postsPerPage;
 
-/** */
+/** All posts, including drafts. Use only in dev tools / drafts page. */
+export const fetchAllPosts = async (): Promise<Array<Post>> => {
+  if (!_allPosts) {
+    _allPosts = await load();
+  }
+  return _allPosts;
+};
+
+/** Published posts only — what visitors should ever see. */
 export const fetchPosts = async (): Promise<Array<Post>> => {
   if (!_posts) {
-    _posts = await load();
+    _posts = (await fetchAllPosts()).filter((p) => p.published === true);
   }
-
   return _posts;
+};
+
+/** Draft posts only. */
+export const fetchDrafts = async (): Promise<Array<Post>> => {
+  return (await fetchAllPosts()).filter((p) => p.published !== true);
 };
 
 /** */
@@ -201,7 +214,9 @@ export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateF
 /** */
 export const getStaticPathsBlogPost = async () => {
   if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
-  return (await fetchPosts()).flatMap((post) => ({
+  // Drafts get URLs in dev so you can preview them; production renders only published.
+  const posts = import.meta.env.DEV ? await fetchAllPosts() : await fetchPosts();
+  return posts.flatMap((post) => ({
     params: {
       blog: post.permalink,
     },

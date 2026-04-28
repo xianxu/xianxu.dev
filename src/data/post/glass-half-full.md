@@ -1,6 +1,7 @@
 ---
 title: A Glass Half Full
 publishDate: 2025-08-21
+published: true
 excerpt: "A short verse on the choice between half-full and half-empty — I think it is a very important choice. It is a fundamental choice. It affects you more in your life, Much more than in your work. "
 tags:
   - philosophy

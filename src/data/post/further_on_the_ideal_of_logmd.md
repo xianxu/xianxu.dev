@@ -1,6 +1,7 @@
 ---
 title: "Conversation: further on the ideal of log.md"
 publishDate: 2026-03-28
+published: true
 hidden: true
 excerpt: "A follow-up parley: log.md is the least controllable file in an agentic issue structure because it depends on the model voluntarily writing during execution. Drop it. Let git history and plan.md diffs serve as the log instead."
 tags:

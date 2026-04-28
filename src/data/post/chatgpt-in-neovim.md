@@ -1,11 +1,11 @@
 ---
 title: ChatGPT in NeoVIM
 publishDate: 2025-04-18
+published: true
 excerpt: "The stock ChatGPT app is awful for organizing long research threads. Running gp.nvim in Neovim instead — full transcript, freely editable, customizable syntax highlighting — turns a chat into the building blocks of a real research report."
 tags:
   - tech
 ---
-
 I use ChatGPT (and some other LLMs) a lot, mainly as a soundboard and a research tool. In such use cases, I'm looking for a collaborative tool where we can bounce ideas back and forth and construct a narrative I agree with. The transcript serves as note, where I can annotate/highlight important points to remember. Using the stock ChatGPT app is pretty limiting for such purpose, as it does not allow me to easily organize and review a long conversation thread. Until the light bulb moment: Is there a NeoVIM plugin, where the text in the editor are freely editable, but you can also pull advice from a chatbot?
 
 And of course there is! Several actually. I tried out [gp.nvim](https://github.com/Robitx/gp.nvim) and it works great. 

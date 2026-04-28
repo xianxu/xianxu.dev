@@ -1,11 +1,11 @@
 ---
 title: Use ChatGPT to Learn and NeoVIM to Take Note
 publishDate: 2025-04-24
+published: true
 excerpt: "Introducing Parley.nvim: a Neovim plugin that turns chatting with an LLM into a living, editable transcript. Trees of follow-up questions, annotations, and context compaction via assistant-summarized lines — built collaboratively with Claude Code."
 tags:
   - tech
 ---
-
 Introducing [Parley.nvim](https://github.com/xianxu/parley.nvim)[^disclaimer], the NeoVIM plugin I wrote with help from [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)[^claude], that provides you with a live transcript of your talk with an LLM. 
 
 I have been chatting with ChatGPT avidly ever since its inception. One big class of my chat is about learning new topics and domains. For example, you can think of understanding the Establishment Clause's contour, history, and current holdings[^legal_geek]. And as such, oftentimes, I'm not familiar with that domain, which means a couple of things: 

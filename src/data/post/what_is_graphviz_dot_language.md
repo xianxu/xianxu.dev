@@ -1,6 +1,7 @@
 ---
 title: "what is \"Graphviz (DOT language)\""
 publishDate: 2026-04-03
+published: true
 hidden: true
 excerpt: "A side-trip into Graphviz's DOT language: a declarative graph format from AT&T Labs where node width, color, and font size let you encode magnitude — exactly the dimension Mermaid lacks. The recommended pipeline: YAML domain model, Python script, DOT, SVG."
 ---

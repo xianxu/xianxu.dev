@@ -1,11 +1,11 @@
 ---
 title: WhatsApp GDPR Fine
 publishDate: 2026-04-08
+published: true
 excerpt: "A close read of the EDPB's €225M WhatsApp fine. The fine is a catch-22 for technical companies, that you need to write your privacy notice concise and easy to understand enough for laymen, yet need to be comprehensive enough to cover all basis. An extremely bad example of regulatory overreach, lacking resemblance of proportionality"
 tags:
   - law
 ---
-
 <style>
 h1 { color: #1a365d; border-bottom: 3px solid #4299e1; padding-bottom: 0.3rem; }
 h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.3rem; }

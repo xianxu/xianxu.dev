@@ -1,11 +1,11 @@
 ---
 title: Designing a Fairer Electoral System
 publishDate: 2025-08-24
+published: true
 excerpt: "California's non-partisan commission produced a worse minority seat-to-vote ratio than Texas's partisan one in 2024. The deeper culprit isn't gerrymandering — it's winner-takes-all single-seat districts. Multi-seat districts with ranked-choice voting would do real work here."
 tags:
   - law
 ---
-
 In the news, Texas and California, the nation’s two largest states, are embroiled in a war over gerrymandering. California Governor Gavin Newsom responded to Texas’s mid-decade redistricting plan by proposing his own version. Fight fire with fire he announced. In both cases, the redistricting plans entrench the majority party’s power. I wanted to be an informed voter, so I did some research. It surely opened my eyes.
 
 ## What's gerrymandering?

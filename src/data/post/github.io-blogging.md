@@ -1,11 +1,11 @@
 ---
 title: Blogging With GitHub Gages, From A Private Repository
 publishDate: 2025-01-12
+published: true
 excerpt: "How to run a GitHub Pages blog from a private staging repo with a publish.sh script — drafts in private, posts in public, and an identity that's not trivially traceable back to you. A practical walk-through, not a manifesto."
 tags:
   - tech
 ---
-
 If you, like me, have decided that this is a good time to start blogging, the next question is where should you host it? There are many choices, like [Medium](https://medium.com/) or [Substack](https://substack.com/about). GitHub Pages is a good choice for something simple, that you have full control of, that uses the [Markdown](https://en.wikipedia.org/wiki/Markdown) format, and that you can easily quote code or write math formulas (like <span>$E=mc^2$</span>). The flip side is that you do need to be able to tinker to make this work well. The fact that you write in Markdown can also be both a feature and a bug. 
 
 Here's how to use GitHub to manage multiple blogs with separate identities. I hope to get the tinkering part out of your way so you can focus on writing. By *you*, I also meant my future self.

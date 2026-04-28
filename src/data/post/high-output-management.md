@@ -1,6 +1,7 @@
 ---
 title: Information as Leverage
 publishDate: 2025-10-17
+published: true
 excerpt: "Andrew Grove treats management as a production system, but the deeper claim is that information workers are managers — their raw material is information, their output is influence. In modern Big Tech, being \"a manager\" isn't a promotion. It's just different work."
 tags:
   - tech

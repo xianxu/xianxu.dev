@@ -1,6 +1,7 @@
 ---
 title: AI Workflow Evolved, One Year Jouney
 publishDate: 2026-03-28
+published: true
 excerpt: "Reflecting on a year of tinkering and adapting to the ever changing world of AI. After a year and 400+ commits on Parley.nvim, I'm convinced the future is humans setting up the environment, with full automation of the coding inside it. Here's my journey so far."
 tags:
   - tech

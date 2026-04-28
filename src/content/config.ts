@@ -51,7 +51,7 @@ const postCollection = defineCollection({
   schema: z.object({
     publishDate: z.date().optional(),
     updateDate: z.date().optional(),
-    draft: z.boolean().optional(),
+    published: z.boolean().optional(),
     highlight: z.boolean().optional(),
     hidden: z.boolean().optional(),
     comments: z.boolean().optional(),

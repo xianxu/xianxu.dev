@@ -1,11 +1,11 @@
 ---
 title: Dot Files and Mac Setup
 publishDate: 2025-01-04
+published: true
 excerpt: "A new-Mac setup checklist for the terminal-and-Neovim crowd: Ghostty, zsh, Oh My Zsh, yadm for dotfiles, Homebrew bundles, and the AI tools (Claude Code, Codex, Gemini CLI) now sitting alongside the classics."
 tags:
   - tech
 ---
-
 Being old-fashioned, I always want simplicity and speed. That's why I use the terminal and NeoVIM. Here's my setup on Mac. The key is I want to keep this deadly simple, thus when there's an OK default, I would use that instead of heavily customization. The biggest change over the years is the "defaults" are getting extremely well (`Oh-My-Zsh` and `Lazyvim` etc.), and the inclusion of AI-based tools, like Claude Code and ChatGPT.
 
 ## How to Set Up a New Mac

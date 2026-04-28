@@ -1,11 +1,11 @@
 ---
 title: Birthright Citizenship
 publishDate: 2025-05-11
+published: true
 excerpt: "From English jus soli through Dred Scott to Wong Kim Ark, gathering the historical context around Trump's executive order. The merits are less clear-cut than contemporary news suggests once you go back to the original sources."
 tags:
   - law
 ---
-
 Trump's executive order to end birthright citizenship is a controversial topic that raises questions about the interpretation of the 14th Amendment. Granted, readers might have already shut down this article, as there's a significant majority, both in the legal profession and the general public, that treat birthright citizenship as a settled law. After all, the Wong Kim Ark precedent is over 100 years old and has repeatedly been upheld. I'm writing this merely to gather the context around it, so the discussions can be more informed. Remember that the rule of law is just another form of politics, so everything's plausible.
 
 ## Early Colonial Times

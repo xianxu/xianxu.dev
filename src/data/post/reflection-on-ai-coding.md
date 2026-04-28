@@ -1,12 +1,12 @@
 ---
 title: Reflecting on AI Coding
 publishDate: 2025-04-29
+published: true
 excerpt: "Five days, ten thousand lines of Lua, no prior experience with the language. Claude Code is not auto-complete — it's a giant pattern-matching machine that needs grounding through tests and architecture. The 25x figure is cheeky, but the shift is real."
 tags:
   - tech
   - ai
 ---
-
 I have some time switching jobs, so I picked up AI coding tools and worked on a real project. The journey was a bit fortuitous but a pretty interesting and revealing experience. Here's my recount of it. Am I a Prompt Engineer now? Am I an AI engineer now? ¯\\\_(ツ)\_/¯
 
 ## About Me

@@ -5,7 +5,7 @@ import { cleanSlug, getPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
-const posts = (await getCollection('post')).filter((p) => !p.data.draft);
+const posts = (await getCollection('post')).filter((p) => p.data.published === true);
 
 const counts = new Map<string, number>();
 for (const post of posts) {

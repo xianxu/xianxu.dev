@@ -1,11 +1,11 @@
 ---
 title: Astrophotography
 publishDate: 2025-02-26
+published: true
 excerpt: "Notes from the Death Valley Dark Sky Festival — amino acids in meteorites, planets around every star, and the practical limits of a Leica Q2 capped at 8 seconds of exposure when you really want twenty."
 tags:
   - life
 ---
-
 We attended this year's [Dark Sky Festival](https://www.nps.gov/deva/planyourvisit/darkskyfestival.htm), in Death Valley. It was an exciting event, with invited talks from NASA labs like [JPL](https://www.jpl.nasa.gov/) and [Ames Research Center](https://www.nasa.gov/ames/) and amateur enthusiasts offering sky gazing with their telescopes set up nearby. Those were some impressive gears, and we were able to see some nebulae in Orion! The talks spanned topics from how to take astro-photos to the evolution of the universe (heat death). I also had a refresher course on the latest knowledge from the field, and it's pretty different from when I was a kid. By now, we have discovered many planets and, as a matter of fact, estimated that every star would have some planets orbiting, on average. We have also detected complex molecules like amino acids in meteorites, which was a shock to me. It seems to indicate that even in the harsh conditions of space, more complex molecules can form and stay, which seems to suggest that carbon-based biochemistries (and life forms) are more pervasive in this universe than not.
 
 Anyway, back to taking dark-sky photos. Here are some tips I remember from an introduction talk: 

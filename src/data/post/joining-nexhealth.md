@@ -1,6 +1,7 @@
 ---
 title: "Joining NexHealth: A New Chapter in My Career"
 publishDate: 2025-05-28
+published: true
 excerpt: "Joining NexHealth as Director of Engineering. Software and AI are eating the world — it's time they ate healthcare too. The mission: build the infrastructure layer that lets EHRs, doctors, developers, and patients actually exchange data."
 tags:
   - tech

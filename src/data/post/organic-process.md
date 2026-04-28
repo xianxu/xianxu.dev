@@ -1,11 +1,11 @@
 ---
 title: On Organic Process
 publishDate: 2025-11-24
+published: true
 excerpt: "Eight questions to ask before introducing a new process. People overestimate how much process helps, underestimate the cost of maintaining it, and assume it'll work just because it exists. And remember, processes rarely die on their own — the ritual often outlives the purpose. "
 tags:
   - philosophy
 ---
-
 I think most reasonable people would agree that neither too little nor too much process is ideal. But figuring out what “just enough” looks like is harder than it sounds. Here are some thoughts that might help frame it.
 
 There is always a cost to running a process, and there are benefits you hope to get from it. In principle, the benefits should outweigh the costs, ideally by a considerable margin. This sounds obvious, but in practice it’s trickier. People often overestimate how much a process will help, underestimate the cost of maintaining it, and assume it will succeed simply because it exists.

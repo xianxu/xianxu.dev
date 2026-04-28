@@ -1,12 +1,12 @@
 ---
 title: A Tale of Two Harnesses
 publishDate: 2026-04-16
+published: true
 excerpt: "Adding tool calls to Parley on a flight, watching Claude make a mess, then drawing the architecture boundary for Claude and watching it execute flawlessly within it. The eureka: Claude Code is the execution harness, Parley is the interface for human to inspect and influence — both running on the same shared filesystem state."
 tags:
   - ai
   - tech
 ---
-
 I've been building a Neovim plugin called [Parley](https://github.com/xianxu/parley.nvim) for the past year, mostly as a way to understand what this vibe coding is about, while making some tools I like to use in nvim. 29K lines of Lua, 700+ commits, all written by AI agents, steered by me. It started as a chat environment — a way to have AI conversations inside my editor without the limitations of ChatGPT's UI, a humble beginning. It has by now grown into a workbench/harness that forms a power tool for how I work.
 
 What happened in the past week in particular surprised me. I set out to build some rather complex feature: an AI harness in nvim, and ended up stumbling on the pattern of **one repo, multiple harnesses**.

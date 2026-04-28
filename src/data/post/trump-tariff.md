@@ -1,11 +1,11 @@
 ---
 title: Supreme Court on Trump Tariff
 publishDate: 2025-11-06
+published: true
 excerpt: "Notes from the IEEPA tariff oral arguments. \"Regulate importation\" can plausibly mean tariff — but the power to tax is squarely Congress's, the Major Questions and Non-Delegation Doctrines bite, and the one-way ratchet of presidential power makes this near-unanimous against the administration."
 tags:
   - law
 ---
-
 Trump invoked the International Emergency Economic Powers Act (IEEPA) to impose tariffs on all countries, upending the long-standing US policy of free trade. This was challenged in court. This is my notes after listening to the oral arguments in the Supreme Court. 
 
 ## Legal Doctrines in Supreme Court Decision-Making
