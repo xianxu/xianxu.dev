@@ -608,7 +608,7 @@ When the API returns 401, the client crashes instead of refreshing.
 - [ ] Verify no regression in existing auth tests
 ```
 
-**`<a href="{% post_url 2026-03-28-further_on_the_ideal_of_logmd %}" class="branch-inline">log.md</a>`** — Append-only. The agent writes here when something unexpected happens: a failed approach, a discovery, a decision that deviates from the plan. This is what makes resumability work — the next session reads this to understand *why* the plan looks the way it does.
+**`<a href="/2026/03/further_on_the_ideal_of_logmd" class="branch-inline">log.md</a>`** — Append-only. The agent writes here when something unexpected happens: a failed approach, a discovery, a decision that deviates from the plan. This is what makes resumability work — the next session reads this to understand *why* the plan looks the way it does.
 
 ```markdown
 ## 2025-06-28 14:30

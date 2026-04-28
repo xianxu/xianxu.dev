@@ -7,7 +7,7 @@ tags:
   - tech
 highlight: true
 ---
-Previously, I wrote about my understanding of current AI wave as [a new abstraction]({% post_url 2026-02-16-ai-as-new-abstraction %}). Over last weekend, I picked up the current generation of agentic coding, and I'm thoroughly impressed. My thinking had obviously evolved since the first time I tried `Claude Code` for something real, from [the initial shock and awe]({% post_url 2025-04-29-reflection-on-ai-coding %}), to a later, [more nuanced view]({% post_url 2025-05-14-ai-coding-take-2 %}). That was in May 2025, and the field of AI coding has matured at astonishing speed since then. 
+Previously, I wrote about my understanding of current AI wave as [a new abstraction](/2026/02/ai-as-new-abstraction). Over last weekend, I picked up the current generation of agentic coding, and I'm thoroughly impressed. My thinking had obviously evolved since the first time I tried `Claude Code` for something real, from [the initial shock and awe](/2025/04/reflection-on-ai-coding), to a later, [more nuanced view](/2025/05/ai-coding-take-2). That was in May 2025, and the field of AI coding has matured at astonishing speed since then. 
 
 ## A week full of news
 

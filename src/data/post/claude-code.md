@@ -16,7 +16,7 @@ It also doesn't seem to first try to identify the root cause of a bug before att
 
 With those caveats in mind, Claude Code is a competent tool everyone should leverage! Now I get a good sense of what it can do, and pitfalls, I feel I can leverage it to quickly create things. The [Parley](https://github.com/xianxu/parley.nvim) is a great example of it. 
 
-PS, code is [here](https://github.com/Robitx/gp.nvim/compare/main...xianxu:gp.nvim:feature?expand=1). It's more just for my own use as explained [here]({% post_url 2025-04-24-chatgpt-in-neovim-collab %}). 
+PS, code is [here](https://github.com/Robitx/gp.nvim/compare/main...xianxu:gp.nvim:feature?expand=1). It's more just for my own use as explained [here](/2025/04/chatgpt-in-neovim-collab). 
 PPS, yes, it does cost an arm and a leg. 
 PPPS, yes, it even has VIM mode! 
 

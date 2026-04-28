@@ -54,7 +54,7 @@ Mermaid is great for structure but weak for encoding **magnitude**. What you wan
 **Option A: Weighted node graphs (best fit)**
 
 - **D3.js force-directed graphs** — nodes can be sized by complexity (e.g., story points, estimated weeks, number of unknowns) and colored by domain (business vs. tech). Edges show dependencies. This is the most expressive option but requires some coding.
-- **<a href="{% post_url 2026-04-03-what_is_graphviz_dot_language %}" class="branch-inline">Graphviz (DOT language)</a>** — supports node sizing, shapes, colors, and cluster groupings. Less interactive but very precise. You can generate `.dot` files programmatically.
+- **<a href="/2026/04/what_is_graphviz_dot_language" class="branch-inline">Graphviz (DOT language)</a>** — supports node sizing, shapes, colors, and cluster groupings. Less interactive but very precise. You can generate `.dot` files programmatically.
 
 **Option B: Treemaps / Bubble charts**
 

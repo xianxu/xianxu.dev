@@ -30,6 +30,6 @@ Still a WIP, but already very useful! Have a try!
 
 ------
 
-[^disclaimer]: Parley's forked from [ChatGPT in NeoVIM]({% post_url 2025-04-18-chatgpt-in-neovim %})
-[^claude]: I talked about my early experience using Claude [here]({% post_url 2025-03-12-claude-code %})
+[^disclaimer]: Parley's forked from [ChatGPT in NeoVIM](/2025/04/chatgpt-in-neovim)
+[^claude]: I talked about my early experience using Claude [here](/2025/03/claude-code)
 [^legal_geek]: Right, I'm a legal geek, particularly around constitutional laws.

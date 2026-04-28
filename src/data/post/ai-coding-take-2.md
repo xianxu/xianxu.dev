@@ -7,7 +7,7 @@ tags:
   - ai
 ---
 
-As [previously mentioned]({% post_url 2025-04-28-reflection-on-ai-coding %}), I've been using `Claude Code`, an AI tool that assists coding, to create an `nvim` plugin called [Parley.nvim](https://github.com/xianxu/parley.nvim) that provides a live transcript to chat with LLMs from different providers. The tool is handy, and I've used it for many things since its creation. Now that I have more time under my belt working with `Claude Code` (and `OpenAI Codex`), I have a better understanding of them; thus, this is a take-2 on my experiences. Besides `Parley`, I also tinkered with AugmentCode's [vim plugin](https://github.com/augmentcode/augment.vim) and tried to convert it to `lua`, which is somewhat successful but not fully featured yet. 
+As [previously mentioned](/2025/04/reflection-on-ai-coding), I've been using `Claude Code`, an AI tool that assists coding, to create an `nvim` plugin called [Parley.nvim](https://github.com/xianxu/parley.nvim) that provides a live transcript to chat with LLMs from different providers. The tool is handy, and I've used it for many things since its creation. Now that I have more time under my belt working with `Claude Code` (and `OpenAI Codex`), I have a better understanding of them; thus, this is a take-2 on my experiences. Besides `Parley`, I also tinkered with AugmentCode's [vim plugin](https://github.com/augmentcode/augment.vim) and tried to convert it to `lua`, which is somewhat successful but not fully featured yet. 
 
 ## Experience Updated
 Overall, after more pair coding with `Claude Code,` my initial awe wore off, and I now have a clearer view of its strengths and weaknesses. Let's start with the overall experience, then some concrete examples, to give you some concrete examples to evaluate its capability. 
@@ -20,7 +20,7 @@ Overall, after more pair coding with `Claude Code,` my initial awe wore off, and
 
 ### The Bad
 
-1. Things are much less rosy as I gained more experience and put more of a "can I use this in real production" hat on. **You can even say that Claude Code's generated code is sometimes ridiculous.** It works, but it is ridiculously complex and redundant. In terms of code quality, it's below the hiring bar for entry-level college new grads. So the 25x efficiency gain I cheekily declared in the [first post]({% post_url 2025-04-28-reflection-on-ai-coding %}) must be adjusted. 
+1. Things are much less rosy as I gained more experience and put more of a "can I use this in real production" hat on. **You can even say that Claude Code's generated code is sometimes ridiculous.** It works, but it is ridiculously complex and redundant. In terms of code quality, it's below the hiring bar for entry-level college new grads. So the 25x efficiency gain I cheekily declared in the [first post](/2025/04/reflection-on-ai-coding) must be adjusted. 
 2. I also took on one task to treat "diff review" round as real: I'm not willing to turn a blind eye to something ugly, but it's working. The main sin of `Claude Code` is code repetition, in one extreme, leaving over useless old code when the output of a function is assigned to a variable that is never used. This process is a lot slower than just letting AI write crappy but working code. 
 
 ### Examples of The Bad

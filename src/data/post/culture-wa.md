@@ -8,7 +8,7 @@ tags:
   - philosophy
 highlight: true
 ---
-I have been fortunate to work for WhatsApp and have always wanted to write about its distinctive culture and the differences between it and its parent company, Facebook/Meta. In [another post]({% post_url 2025-05-02-facebook-move-on %}), I shall discuss Facebook culture, more precisely, the Facebook of then and the Meta of now. As you have probably guessed, the six years I worked at WhatsApp were my happiest days during my tenure at Facebook/Meta.
+I have been fortunate to work for WhatsApp and have always wanted to write about its distinctive culture and the differences between it and its parent company, Facebook/Meta. In [another post](/2025/05/facebook-move-on), I shall discuss Facebook culture, more precisely, the Facebook of then and the Meta of now. As you have probably guessed, the six years I worked at WhatsApp were my happiest days during my tenure at Facebook/Meta.
 
 So, what do I remember most about WhatsApp? Their motto: **Keep it Simple** and **The F word is Focus**. 
 
@@ -56,5 +56,5 @@ If we look at WhatsApp's competitors, both inside and outside Facebook, such as 
 
 As I embark on a new journey in startup world, I wrote this down as a reminder to keep things real. **Keep it Simple, and Stay Focused**. Until the next time when I will talk about Facebook culture. 
 
-[^wa-system]: Read more about [WhatsApp Architecture]({% post_url 2025-09-13-whatsapp-architecture %}).
+[^wa-system]: Read more about [WhatsApp Architecture](/2025/09/whatsapp-architecture).
 [^pure]: Did you detect the pun? Functional programming language, PURE bliss? I hope so.

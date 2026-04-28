@@ -6,7 +6,7 @@ tags:
   - law
 ---
 
-The Trump administration [appealed to the Supreme Court](https://www.scotusblog.com/2025/09/trump-urges-supreme-court-to-decide-whether-to-end-birthright-citizenship/) ([filing](https://www.scotusblog.com/wp-content/uploads/2025/09/Trump-v.-Washington-with-appendix.pdf)), both on the merits and on further restriction of national injunctions yesterday (9/26). So they are, after all, serious about the issue on the merits. That prompted me to look deeper, to go back to the original sources. My impression from contemporary news was that the merits were clear-cut against the administration. But after digging in, the result is more interesting than I expected. (Previous installment on this topic: [Birthright Citizenship]({% post_url 2025-05-11-birthright-citizenship %})
+The Trump administration [appealed to the Supreme Court](https://www.scotusblog.com/2025/09/trump-urges-supreme-court-to-decide-whether-to-end-birthright-citizenship/) ([filing](https://www.scotusblog.com/wp-content/uploads/2025/09/Trump-v.-Washington-with-appendix.pdf)), both on the merits and on further restriction of national injunctions yesterday (9/26). So they are, after all, serious about the issue on the merits. That prompted me to look deeper, to go back to the original sources. My impression from contemporary news was that the merits were clear-cut against the administration. But after digging in, the result is more interesting than I expected. (Previous installment on this topic: [Birthright Citizenship](/2025/05/birthright-citizenship)
 
 
 ### The Holding

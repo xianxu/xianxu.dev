@@ -13,7 +13,7 @@ I have some time switching jobs, so I picked up AI coding tools and worked on a 
 
 First, some background about myself, to give you some context to evaluate this blog and the capabilities of `Claude Code`.
 
-I consider myself pretty technical. While I haven't written code for 5 years after moving into management, I was still thinking about architectural designs. I'm still the same language polymath, still like to learn new programming languages (latest being [Julia](https://julialang.org/)). I still maintain my good old [Neovim/terminal setup]({% post_url 2025-01-04-dot-files %}). It's just my fancy that I will pick it up again in time. 
+I consider myself pretty technical. While I haven't written code for 5 years after moving into management, I was still thinking about architectural designs. I'm still the same language polymath, still like to learn new programming languages (latest being [Julia](https://julialang.org/)). I still maintain my good old [Neovim/terminal setup](/2025/01/dot-files). It's just my fancy that I will pick it up again in time. 
 
 I've been fascinated by LLMs, just like everyone else. In the last two years, I gradually updated my outdated ML knowledge, completed many online courses, mostly on Coursera, and books, e.g., [LLM from scratch](https://github.com/rasbt/LLMs-from-scratch). My last gig at Meta forced me to go into GPU programming-related topics. 
 
