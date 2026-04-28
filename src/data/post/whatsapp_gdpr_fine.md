@@ -1,7 +1,7 @@
 ---
 title: WhatsApp GDPR Fine
 publishDate: 2026-04-08
-excerpt: "A close read of the EDPB's €225M WhatsApp fine. The penalty wasn't for what WhatsApp did with non-user contacts — the lossy hashing was actually privacy-conscious — but for how it described the practice. GDPR ends up rewarding legible privacy policies over privacy-preserving engineering."
+excerpt: "A close read of the EDPB's €225M WhatsApp fine. The fine is a catch-22 for technical companies, that you need to write your privacy notice concise and easy to understand enough for laymen, yet need to be comprehensive enough to cover all basis. An extremely bad example of regulatory overreach, lacking resemblance of proportionality"
 tags:
   - law
 ---

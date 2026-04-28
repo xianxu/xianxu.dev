@@ -1,7 +1,7 @@
 ---
 title: My AI Coding Workflow
 publishDate: 2026-03-08
-excerpt: "An iterative spec flow built on a small Makefile and a handful of markdown files — issue, todo, lessons, specs — cuts through the opaque magic of workflow tools. The trick is treating specs as sketches that bound the agent's search space, not exact behavior to confine it."
+excerpt: "An iterative spec flow built on a small Makefile and a handful of markdown files — issue, todo, lessons, specs — cuts through the opaque magic of workflow tools. The trick is treating specs as sketches that bound the agent's search space, not exact behavior to confine it. Let AI bringing in world's knowledge!"
 tags:
   - ai
   - tech

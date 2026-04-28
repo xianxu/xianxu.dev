@@ -1,7 +1,7 @@
 ---
 title: How to Parli
 publishDate: 2025-10-18
-excerpt: "Notes from judging a high school parliamentary debate. The opposing side isn't an adversary, it's a collaborator in a joint quest for truth — and the kitchen-sink approach loses every time. Logos seventy percent, ethos twenty, pathos ten."
+excerpt: "Notes from judging a high school parliamentary debate. The opposing side isn't an adversary, it's a collaborator in a joint quest for truth — and the kitchen-sink approach loses on me every time. Logos 70%, ethos 20%, pathos 10%."
 tags:
   - life
 ---

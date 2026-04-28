@@ -1,7 +1,7 @@
 ---
 title: A Tale of Two Harnesses
 publishDate: 2026-04-16
-excerpt: "Adding tool calls to Parley on a flight, watching Claude make a mess, then drawing the architecture by hand and watching it execute flawlessly within those lines. The eureka: Claude Code is the convergent execution harness, Parley the divergent thinking one — both running on the same shared filesystem state."
+excerpt: "Adding tool calls to Parley on a flight, watching Claude make a mess, then drawing the architecture boundary for Claude and watching it execute flawlessly within it. The eureka: Claude Code is the execution harness, Parley is the interface for human to inspect and influence — both running on the same shared filesystem state."
 tags:
   - ai
   - tech

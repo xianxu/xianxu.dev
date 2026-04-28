@@ -1,7 +1,7 @@
 ---
 title: On Organic Process
 publishDate: 2025-11-24
-excerpt: "Eight questions to ask before introducing a new process. People overestimate how much process helps, underestimate the cost of maintaining it, and assume it'll work just because it exists. Processes rarely die on their own — the ritual outlives the purpose."
+excerpt: "Eight questions to ask before introducing a new process. People overestimate how much process helps, underestimate the cost of maintaining it, and assume it'll work just because it exists. And remember, processes rarely die on their own — the ritual often outlives the purpose. "
 tags:
   - philosophy
 ---

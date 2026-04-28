@@ -1,7 +1,7 @@
 ---
 title: "Data vs. Anecdotes: Which to Trust?"
 publishDate: 2026-02-04
-excerpt: "Two quotes about data and intuition. \"I trust your data, and my intuition\" subtly inverts the knowledge hierarchy and demotes domain expertise to authority. Bezos's version — when anecdotes disagree with data, investigate the measurement — is the better instinct."
+excerpt: "Two quotes about data and intuition. \"I trust your data, and my intuition\" subtly inverts the knowledge hierarchy and subjugates domain expertise to authority. Bezos's version — when anecdotes disagree with data, investigate the measurement — is the better instinct."
 tags:
   - philosophy
 ---

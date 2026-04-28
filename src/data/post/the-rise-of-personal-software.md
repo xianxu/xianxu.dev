@@ -1,7 +1,7 @@
 ---
 title: Personalized Software
 publishDate: 2026-03-19
-excerpt: "When agentic coding lets a vim user write a custom mouse-aware floating picker because Telescope didn't fit, software development merges with product management. The implication for SaaS: programmability stops being a nice-to-have, it becomes the moat."
+excerpt: "When agentic coding lets a vim user write a custom mouse-aware floating picker because Telescope couldn't do that. The implication for SaaS: programmability stops being a nice-to-have, it becomes the moat."
 tags:
   - ai
   - tech
