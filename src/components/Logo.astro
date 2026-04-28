@@ -17,8 +17,20 @@ import favIcon from '~/assets/favicons/favicon.png';
 </span>
 
 <script>
-  // Each frame: [symbol, hold time in ms]. The token "FAVICON" swaps in the
-  // site favicon as a frame. Story: thinking → idea (favicon) → writing.
+  // Animation runs only on the home page. Re-evaluated on every astro:page-load
+  // because the site uses ClientRouter (SPA navigation), so scripts don't re-run
+  // on plain navigation.
+  type Mode = 'main' | 'pausing' | 'paused' | 'resuming';
+
+  type LogoState = {
+    timer: number | null;
+    scrollHandler: (() => void) | null;
+  };
+
+  // Single shared state stashed on window so successive page-load handlers
+  // can clean up whatever the previous page started.
+  const w = window as unknown as { __logoState?: LogoState };
+
   const FRAMES: [string, number][] = [
     ['?', 700],
     [':', 700],
@@ -34,20 +46,10 @@ import favIcon from '~/assets/favicons/favicon.png';
     ['⠼', 30], ['⠸', 30], ['⠹', 30], ['⠙', 30], ['⠋', 30],
     ['✍️', 1500],
   ];
-
-  // Animation only earns its keep at the top of the page. When the reader
-  // scrolls down, run a short spinner transition then settle on the favicon.
-  // When they scroll back up, play the spinner again, then loop the main story.
   const SCROLL_PAUSE_THRESHOLD = 50;
   const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
   const SPINNER_DELAY = 30;
-  const TRANSITION_FRAMES = [...SPINNER, ...SPINNER]; // two rounds
-
-  type Mode = 'main' | 'pausing' | 'paused' | 'resuming';
-  let mode: Mode = 'main';
-  let mainIdx = 0;
-  let transIdx = 0;
-  let timer: number | null = null;
+  const TRANSITION_FRAMES = [...SPINNER, ...SPINNER];
 
   const renderFrame = (symbol: string) => {
     document.querySelectorAll<HTMLElement>('.logo-symbol').forEach((el) => {
@@ -60,52 +62,84 @@ import favIcon from '~/assets/favicons/favicon.png';
     });
   };
 
-  const tick = () => {
-    if (mode === 'paused') return;
-
-    if (mode === 'main') {
-      const [symbol, delay] = FRAMES[mainIdx];
-      renderFrame(symbol);
-      mainIdx = (mainIdx + 1) % FRAMES.length;
-      timer = window.setTimeout(tick, delay);
-      return;
+  const teardown = () => {
+    const state = w.__logoState;
+    if (!state) return;
+    if (state.timer !== null) {
+      clearTimeout(state.timer);
+      state.timer = null;
     }
-
-    // 'pausing' or 'resuming' — both play through TRANSITION_FRAMES
-    if (transIdx < TRANSITION_FRAMES.length) {
-      renderFrame(TRANSITION_FRAMES[transIdx]);
-      transIdx += 1;
-      timer = window.setTimeout(tick, SPINNER_DELAY);
-      return;
+    if (state.scrollHandler) {
+      window.removeEventListener('scroll', state.scrollHandler);
+      state.scrollHandler = null;
     }
+  };
 
-    // Transition complete
-    if (mode === 'pausing') {
-      mode = 'paused';
+  const setup = () => {
+    teardown();
+    if (window.location.pathname !== '/') {
       renderFrame('FAVICON');
-    } else {
-      // resuming
-      mode = 'main';
-      mainIdx = 0;
-      tick();
+      return;
     }
+
+    const state: LogoState = { timer: null, scrollHandler: null };
+    w.__logoState = state;
+
+    let mode: Mode = 'main';
+    let mainIdx = 0;
+    let transIdx = 0;
+
+    const tick = () => {
+      if (mode === 'paused') return;
+
+      if (mode === 'main') {
+        const [symbol, delay] = FRAMES[mainIdx];
+        renderFrame(symbol);
+        mainIdx = (mainIdx + 1) % FRAMES.length;
+        state.timer = window.setTimeout(tick, delay);
+        return;
+      }
+
+      // 'pausing' or 'resuming' — both play through TRANSITION_FRAMES
+      if (transIdx < TRANSITION_FRAMES.length) {
+        renderFrame(TRANSITION_FRAMES[transIdx]);
+        transIdx += 1;
+        state.timer = window.setTimeout(tick, SPINNER_DELAY);
+        return;
+      }
+
+      if (mode === 'pausing') {
+        mode = 'paused';
+        renderFrame('FAVICON');
+      } else {
+        mode = 'main';
+        mainIdx = 0;
+        tick();
+      }
+    };
+
+    const updatePause = () => {
+      const shouldPause = window.scrollY > SCROLL_PAUSE_THRESHOLD;
+      if (shouldPause && (mode === 'main' || mode === 'resuming')) {
+        if (state.timer !== null) clearTimeout(state.timer);
+        mode = 'pausing';
+        transIdx = 0;
+        tick();
+      } else if (!shouldPause && (mode === 'paused' || mode === 'pausing')) {
+        if (state.timer !== null) clearTimeout(state.timer);
+        mode = 'resuming';
+        transIdx = 0;
+        tick();
+      }
+    };
+
+    state.scrollHandler = updatePause;
+    window.addEventListener('scroll', updatePause, { passive: true });
+    tick();
   };
 
-  const updatePause = () => {
-    const shouldPause = window.scrollY > SCROLL_PAUSE_THRESHOLD;
-    if (shouldPause && (mode === 'main' || mode === 'resuming')) {
-      if (timer !== null) clearTimeout(timer);
-      mode = 'pausing';
-      transIdx = 0;
-      tick();
-    } else if (!shouldPause && (mode === 'paused' || mode === 'pausing')) {
-      if (timer !== null) clearTimeout(timer);
-      mode = 'resuming';
-      transIdx = 0;
-      tick();
-    }
-  };
-
-  window.addEventListener('scroll', updatePause, { passive: true });
-  tick();
+  // Run on first load and after every SPA navigation
+  setup();
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-swap', teardown);
 </script>
