@@ -1,5 +1,6 @@
 ---
 import { SITE } from 'astrowind:config';
+import favIcon from '~/assets/favicons/favicon.png';
 ---
 
 <span
@@ -7,16 +8,16 @@ import { SITE } from 'astrowind:config';
   aria-label={`${SITE?.name} logo`}
 >
   <span
-    class="logo-symbol inline-block text-center font-normal opacity-70"
-    style="width: 1.4em;"
+    class="logo-symbol inline-flex items-center justify-center font-normal"
+    style="width: 1.4em; height: 1.4em;"
     aria-hidden="true"
-  >?</span>
+    data-favicon={favIcon.src}>?</span>
   <span class="tracking-tight">{SITE?.name}</span>
 </span>
 
 <script>
-  // Each frame: [symbol, hold time in ms]. Spinner frames spin fast; narrative
-  // beats hold longer. Story: thinking → idea → writing — the writer's loop.
+  // Each frame: [symbol, hold time in ms]. The token "FAVICON" swaps in the
+  // site favicon as a frame. Story: thinking → idea (favicon) → writing.
   const FRAMES: [string, number][] = [
     ['?', 700],
     [':', 700],
@@ -25,7 +26,7 @@ import { SITE } from 'astrowind:config';
     ['⠴', 30], ['⠦', 30], ['⠧', 30], ['⠇', 30], ['⠏', 30],
     ['⠋', 30], ['⠙', 30], ['⠹', 30], ['⠸', 30], ['⠼', 30],
     ['⠴', 30], ['⠦', 30], ['⠧', 30], ['⠇', 30], ['⠏', 30],
-    ['💡', 1500],
+    ['FAVICON', 2000],
     ['⠏', 30], ['⠇', 30], ['⠧', 30], ['⠦', 30], ['⠴', 30],
     ['⠼', 30], ['⠸', 30], ['⠹', 30], ['⠙', 30], ['⠋', 30],
     ['⠏', 30], ['⠇', 30], ['⠧', 30], ['⠦', 30], ['⠴', 30],
@@ -37,7 +38,12 @@ import { SITE } from 'astrowind:config';
   const tick = () => {
     const [symbol, delay] = FRAMES[i];
     document.querySelectorAll<HTMLElement>('.logo-symbol').forEach((el) => {
-      el.textContent = symbol;
+      if (symbol === 'FAVICON') {
+        const src = el.dataset.favicon || '';
+        el.innerHTML = `<img src="${src}" alt="" style="width:75%;height:75%;object-fit:contain;display:inline-block" />`;
+      } else {
+        el.textContent = symbol;
+      }
     });
     i = (i + 1) % FRAMES.length;
     setTimeout(tick, delay);
