@@ -35,9 +35,21 @@ import favIcon from '~/assets/favicons/favicon.png';
     ['✍️', 1500],
   ];
 
-  let i = 0;
-  const tick = () => {
-    const [symbol, delay] = FRAMES[i];
+  // Animation only earns its keep at the top of the page. When the reader
+  // scrolls down, run a short spinner transition then settle on the favicon.
+  // When they scroll back up, play the spinner again, then loop the main story.
+  const SCROLL_PAUSE_THRESHOLD = 50;
+  const SPINNER = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+  const SPINNER_DELAY = 30;
+  const TRANSITION_FRAMES = [...SPINNER, ...SPINNER]; // two rounds
+
+  type Mode = 'main' | 'pausing' | 'paused' | 'resuming';
+  let mode: Mode = 'main';
+  let mainIdx = 0;
+  let transIdx = 0;
+  let timer: number | null = null;
+
+  const renderFrame = (symbol: string) => {
     document.querySelectorAll<HTMLElement>('.logo-symbol').forEach((el) => {
       if (symbol === 'FAVICON') {
         const src = el.dataset.favicon || '';
@@ -46,8 +58,54 @@ import favIcon from '~/assets/favicons/favicon.png';
         el.textContent = symbol;
       }
     });
-    i = (i + 1) % FRAMES.length;
-    setTimeout(tick, delay);
   };
+
+  const tick = () => {
+    if (mode === 'paused') return;
+
+    if (mode === 'main') {
+      const [symbol, delay] = FRAMES[mainIdx];
+      renderFrame(symbol);
+      mainIdx = (mainIdx + 1) % FRAMES.length;
+      timer = window.setTimeout(tick, delay);
+      return;
+    }
+
+    // 'pausing' or 'resuming' — both play through TRANSITION_FRAMES
+    if (transIdx < TRANSITION_FRAMES.length) {
+      renderFrame(TRANSITION_FRAMES[transIdx]);
+      transIdx += 1;
+      timer = window.setTimeout(tick, SPINNER_DELAY);
+      return;
+    }
+
+    // Transition complete
+    if (mode === 'pausing') {
+      mode = 'paused';
+      renderFrame('FAVICON');
+    } else {
+      // resuming
+      mode = 'main';
+      mainIdx = 0;
+      tick();
+    }
+  };
+
+  const updatePause = () => {
+    const shouldPause = window.scrollY > SCROLL_PAUSE_THRESHOLD;
+    if (shouldPause && (mode === 'main' || mode === 'resuming')) {
+      if (timer !== null) clearTimeout(timer);
+      mode = 'pausing';
+      transIdx = 0;
+      tick();
+    } else if (!shouldPause && (mode === 'paused' || mode === 'pausing')) {
+      if (timer !== null) clearTimeout(timer);
+      mode = 'resuming';
+      transIdx = 0;
+      tick();
+    }
+  };
+
+  window.addEventListener('scroll', updatePause, { passive: true });
   tick();
 </script>
