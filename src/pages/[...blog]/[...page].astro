@@ -39,6 +39,11 @@ const metadata = {
     <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading mb-3">Archive</h1>
     <p class="text-muted dark:text-slate-400 mb-12">All of my posts.</p>
     <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+    <Pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+    />
   </section>
 </Layout>

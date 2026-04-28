@@ -51,6 +51,8 @@ const isActive = (href?: string) => {
   if (href === currentPath) return true;
   // Post pages (/<year>/<month>/<slug>) → Archive (/blog) is active
   if (href === '/blog' && /^\/\d{4}\/\d{2}\//.test(currentPath)) return true;
+  // Paginated archive (/blog/2, /blog/3, ...) → Archive is active
+  if (href === '/blog' && currentPath.startsWith('/blog/')) return true;
   // Tag detail pages (/tag/<slug>) → Tags (/tags) is active
   if (href === '/tags' && currentPath.startsWith('/tag/')) return true;
   return false;
@@ -93,7 +95,7 @@ const isActive = (href?: string) => {
       aria-label="Main navigation"
     >
       <ul
-        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
+        class="flex flex-col md:flex-row md:items-center md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
         {
           links.map(({ text, href, links }) => (
