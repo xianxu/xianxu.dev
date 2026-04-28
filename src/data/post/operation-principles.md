@@ -1,7 +1,7 @@
 ---
 title: My Operation Principles
 publishDate: 2025-09-20
-excerpt: "Four operating principles from a NexHealth panel: be serious but not too serious, be curious and build a shared mind, be radically transparent, move fast and break things. Take leadership's guidance seriously but not literally."
+excerpt: "My operating principles: be serious but not too serious, be curious and build a shared mind, be radically transparent, move fast and break things. "
 tags:
   - philosophy
 highlight: true

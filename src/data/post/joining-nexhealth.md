@@ -3,8 +3,8 @@ title: "Joining NexHealth: A New Chapter in My Career"
 publishDate: 2025-05-28
 excerpt: "Joining NexHealth as Director of Engineering. Software and AI are eating the world — it's time they ate healthcare too. The mission: build the infrastructure layer that lets EHRs, doctors, developers, and patients actually exchange data."
 tags:
-  - nexhealth
-highlight: true
+  - tech
+highlight: false
 ---
 Have you ever thought about what it takes to build the infrastructure layer of the U.S. healthcare system, one that enables hundreds of different EHRs (Electronic Health Record systems), whether running in the cloud or under desks in doctors’ offices, to exchange health records seamlessly?
 

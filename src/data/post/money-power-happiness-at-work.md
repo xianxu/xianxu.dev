@@ -2,7 +2,7 @@
 title: Happiness @ Work
 publishDate: 2025-02-16
 comments: false
-excerpt: "Five aspects worth weighing when picking a career or changing teams: money, power, domain, people, growth. And one last gut check — are you having fun? If Mondays don't energize you more often than not, you're probably in the wrong place."
+excerpt: "Five aspects worth weighing when picking a career or changing jobs: money, power, domain, people, growth. And one last gut check — are you having fun? If Mondays don't energize you more often than not, you're probably in the wrong place."
 tags:
   - philosophy
 highlight: true

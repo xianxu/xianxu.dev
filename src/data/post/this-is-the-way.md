@@ -2,9 +2,9 @@
 title: This is the Way
 publishDate: 2025-09-24
 comments: false
-excerpt: "Healthcare's fragmentation isn't an accident — it's federalism plus misaligned incentives, where EHR vendors profit by locking customers in. NexHealth's Synchronizer attacks the problem at the technical layer, with the law (and a recent 4th Circuit ruling) on its side."
+excerpt: "Healthcare's fragmentation isn't an accident — it's federalism plus misaligned incentives, where EHR vendors profit by locking customers in. NexHealth's Synchronizer attacks the problem at the technical layer, with the law (and a recent 4th Circuit ruling) on its side, eventually."
 tags:
-  - nexhealth
+  - tech
 ---
 `"Show me the incentive, and I will show you the outcome." - Charlie Munger`
 

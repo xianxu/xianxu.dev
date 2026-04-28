@@ -1,7 +1,7 @@
 ---
 title: AI Workflow Evolved, One Year Jouney
 publishDate: 2026-03-28
-excerpt: "A year of Parley.nvim and the workflow has gone through six rewrites — from raw Claude prompts, through Conductor and Vibe Kanban, to a Makefile, then repo-tracked issues, then OpenShell sandboxes. The lesson: most workflow tools are thin wrappers over the model's own capabilities."
+excerpt: "Reflecting on a year of tinkering and adapting to the ever changing world of AI. After a year and 400+ commits on Parley.nvim, I'm convinced the future is humans setting up the environment, with full automation of the coding inside it. Here's my journey so far."
 tags:
   - tech
   - ai

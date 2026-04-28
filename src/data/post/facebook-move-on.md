@@ -1,7 +1,7 @@
 ---
 title: "Moving On [Meta]"
 publishDate: 2025-05-04
-excerpt: "Leaving Meta after a decade. The Facebook of the Red Culture Book — \"What would you do if you were not afraid?\" — is not the Meta of muscular energy and top-down Metaverse. A goodbye, and a question worth carrying into the next chapter."
+excerpt: "Leaving Meta after a decade. The Facebook of the Red Culture Book — \"What would you do if you were not afraid?\" — is not the Meta of muscular energy and top-down NFT, Messaging Interop, and Metaverse. A goodbye, and a question worth carrying into the next chapter."
 tags:
   - life
   - tech

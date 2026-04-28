@@ -1,7 +1,7 @@
 ---
 title: A Glass Half Full
 publishDate: 2025-08-21
-excerpt: "A short verse on the choice between half-full and half-empty — not as workplace advice, but as a fundamental orientation toward life. Complaining feels easy, but never solves problems, and problems grow when you lack the will to face them."
+excerpt: "A short verse on the choice between half-full and half-empty — I think it is a very important choice. It is a fundamental choice. It affects you more in your life, Much more than in your work. "
 tags:
   - philosophy
   - life

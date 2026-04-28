@@ -1,7 +1,7 @@
 ---
 title: AI as the Next Abstraction Layer
 publishDate: 2026-02-16
-excerpt: "Foundation models are stochastic at their core, but task-independent enough to act as crude world models. The next phase is grounding them — a deterministic shell around coding, direct application in already-stochastic domains like marketing and recruiting."
+excerpt: "LLMs are fundamentally stochastic, but that's not new — the whole ML field always was, and it worked. The interesting question is how to ground stochastic computation in deterministic domains. Two paths: build a deterministic shell around the model (coding), or apply it directly where the domain itself tolerates noise (recruiting, marketing, design)."
 tags:
   - tech
   - ai
