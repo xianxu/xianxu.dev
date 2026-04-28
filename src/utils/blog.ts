@@ -192,23 +192,43 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
   return posts ? posts.filter((p) => !p.hidden).slice(0, _count) : [];
 };
 
+/** Page sizes the Archive page supports. The first is the default.
+ *  `slug` appears in the URL; `label` is what the UI shows. */
+export const ARCHIVE_PAGE_SIZES = [
+  { slug: '10', size: 10, label: '10' },
+  { slug: '25', size: 25, label: '25' },
+  { slug: '50', size: 50, label: '50' },
+  { slug: 'all', size: Infinity, label: '∞' },
+] as const;
+
+export type ArchiveSizeSlug = (typeof ARCHIVE_PAGE_SIZES)[number]['slug'];
+
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
   const all = await fetchPosts();
   const visible = all.filter((p) => !p.hidden);
-  return [
-    ...paginate(visible, {
-      params: { blog: BLOG_BASE || undefined },
-      pageSize: blogPostsPerPage,
-      props: { showHidden: false },
-    }),
-    ...paginate(all, {
-      params: { blog: `${BLOG_BASE}/all` },
-      pageSize: blogPostsPerPage,
-      props: { showHidden: true },
-    }),
-  ];
+  const out: ReturnType<PaginateFunction>[] = [];
+  for (const opt of ARCHIVE_PAGE_SIZES) {
+    const isDefault = opt === ARCHIVE_PAGE_SIZES[0];
+    const visibleSize = Number.isFinite(opt.size) ? (opt.size as number) : Math.max(1, visible.length);
+    const allSize = Number.isFinite(opt.size) ? (opt.size as number) : Math.max(1, all.length);
+    out.push(
+      paginate(visible, {
+        params: { blog: isDefault ? BLOG_BASE || undefined : `${BLOG_BASE}/per/${opt.slug}` },
+        pageSize: visibleSize,
+        props: { showHidden: false, sizeSlug: opt.slug },
+      })
+    );
+    out.push(
+      paginate(all, {
+        params: { blog: isDefault ? `${BLOG_BASE}/all` : `${BLOG_BASE}/all/per/${opt.slug}` },
+        pageSize: allSize,
+        props: { showHidden: true, sizeSlug: opt.slug },
+      })
+    );
+  }
+  return out.flat();
 };
 
 /** */

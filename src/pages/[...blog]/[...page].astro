@@ -6,7 +6,7 @@ import BlogList from '~/components/blog/List.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 import { Icon } from 'astro-icon/components';
 
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { ARCHIVE_PAGE_SIZES, blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -16,16 +16,21 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { page, showHidden } = Astro.props as Props;
+const { page, showHidden, sizeSlug } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-const baseHref = showHidden ? '/blog/all' : '/blog';
-const oppositeHref = showHidden ? '/blog' : '/blog/all';
+const defaultSlug = ARCHIVE_PAGE_SIZES[0].slug;
+const modeBase = showHidden ? '/blog/all' : '/blog';
+const baseHref = sizeSlug === defaultSlug ? modeBase : `${modeBase}/per/${sizeSlug}`;
+const oppositeBase = showHidden ? '/blog' : '/blog/all';
+const oppositeHref = sizeSlug === defaultSlug ? oppositeBase : `${oppositeBase}/per/${sizeSlug}`;
+
+const sizeLink = (slug: string) => (slug === defaultSlug ? modeBase : `${modeBase}/per/${slug}`);
 
 const metadata = {
   title: `Archive${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
   robots: {
-    index: blogListRobots?.index && currentPage === 1 && !showHidden,
+    index: blogListRobots?.index && currentPage === 1 && !showHidden && sizeSlug === defaultSlug,
     follow: blogListRobots?.follow,
   },
   openGraph: {
@@ -37,16 +42,8 @@ const metadata = {
 <Layout metadata={metadata}>
   <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading mb-3">Archive</h1>
-    <p class="text-muted dark:text-slate-400 mb-12 flex items-center gap-2">
-      <span>{showHidden ? 'All posts, including hidden.' : 'All of my posts.'}</span>
-      <a
-        href={oppositeHref}
-        class="opacity-30 hover:opacity-100 transition-opacity"
-        aria-label={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
-        title={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
-      >
-        <Icon name={showHidden ? 'tabler:eye-off' : 'tabler:eye'} class="w-4 h-4" />
-      </a>
+    <p class="text-muted dark:text-slate-400 mb-12">
+      {showHidden ? 'All posts, including hidden.' : 'All of my posts.'}
     </p>
     <BlogList posts={page.data} />
     <Pagination
@@ -56,5 +53,28 @@ const metadata = {
       lastPage={page.lastPage}
       pageBase={baseHref}
     />
+    <div class="mt-6 w-full flex justify-center">
+      <div class="text-xs text-muted dark:text-slate-500 opacity-60 hover:opacity-100 transition-opacity inline-flex items-center gap-2">
+        <a
+          href={oppositeHref}
+          aria-label={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
+          title={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
+        >
+          <Icon name={showHidden ? 'tabler:eye-off' : 'tabler:eye'} class="w-3.5 h-3.5" />
+        </a>
+        <span class="opacity-50">·</span>
+        <Icon name="tabler:layout-rows" class="w-3.5 h-3.5" aria-label="Posts per page" />
+        {ARCHIVE_PAGE_SIZES.map((opt) => (
+          <>
+            <span class="opacity-50">·</span>
+            {opt.slug === sizeSlug ? (
+              <span class="font-semibold">{opt.label}</span>
+            ) : (
+              <a href={sizeLink(opt.slug)} class="hover:underline">{opt.label}</a>
+            )}
+          </>
+        ))}
+      </div>
+    </div>
   </section>
 </Layout>
