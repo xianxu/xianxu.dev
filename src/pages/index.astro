@@ -1,0 +1,18 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+
+const metadata = {
+  title: 'Xian Xu — personal blog',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <BlogLatestPosts
+    title="Latest posts"
+    information=""
+    count={8}
+  />
+</Layout>

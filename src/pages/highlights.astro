@@ -1,0 +1,26 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import List from '~/components/blog/List.astro';
+import { fetchPosts } from '~/utils/blog';
+
+export const prerender = true;
+
+const posts = (await fetchPosts()).filter((p) => p.highlight === true);
+
+const metadata = {
+  title: 'Highlights',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-7xl">
+    <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading mb-3">Highlights</h1>
+    <p class="text-muted dark:text-slate-400 mb-12">A handful of posts I think are worth a second look.</p>
+
+    {posts.length === 0 ? (
+      <p class="text-muted">No highlighted posts yet.</p>
+    ) : (
+      <List posts={posts} />
+    )}
+  </section>
+</Layout>

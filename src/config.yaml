@@ -1,0 +1,66 @@
+site:
+  name: Xian Xu
+  site: 'https://xianxu.dev'
+  base: '/'
+  trailingSlash: false
+
+# Default SEO metadata
+metadata:
+  title:
+    default: Xian Xu
+    template: '%s — Xian Xu'
+  description: "Personal thoughts on current events, society and technology."
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: Xian Xu
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+
+i18n:
+  language: en
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 10
+
+    post:
+      isEnabled: true
+      permalink: '/%year%/%month%/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'blog'
+      robots:
+        index: true
+
+    category:
+      isEnabled: true
+      pathname: 'category'
+      robots:
+        index: true
+
+    tag:
+      isEnabled: true
+      pathname: 'tag'
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: false
+    relatedPostsCount: 4
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: G-CY33L153PE
+
+ui:
+  theme: 'system'

@@ -1,0 +1,46 @@
+---
+import { SITE } from 'astrowind:config';
+---
+
+<span
+  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-3xl font-bold text-gray-900 whitespace-nowrap dark:text-white tracking-tight inline-flex items-center gap-1"
+  aria-label={`${SITE?.name} logo`}
+>
+  <span
+    class="logo-symbol inline-block text-center font-normal opacity-70"
+    style="width: 1.4em;"
+    aria-hidden="true"
+  >?</span>
+  <span class="tracking-tight">{SITE?.name}</span>
+</span>
+
+<script>
+  // Each frame: [symbol, hold time in ms]. Spinner frames spin fast; narrative
+  // beats hold longer. Story: thinking → idea → writing — the writer's loop.
+  const FRAMES: [string, number][] = [
+    ['?', 700],
+    [':', 700],
+    ['🤔', 800],
+    ['⠋', 30], ['⠙', 30], ['⠹', 30], ['⠸', 30], ['⠼', 30],
+    ['⠴', 30], ['⠦', 30], ['⠧', 30], ['⠇', 30], ['⠏', 30],
+    ['⠋', 30], ['⠙', 30], ['⠹', 30], ['⠸', 30], ['⠼', 30],
+    ['⠴', 30], ['⠦', 30], ['⠧', 30], ['⠇', 30], ['⠏', 30],
+    ['💡', 1500],
+    ['⠏', 30], ['⠇', 30], ['⠧', 30], ['⠦', 30], ['⠴', 30],
+    ['⠼', 30], ['⠸', 30], ['⠹', 30], ['⠙', 30], ['⠋', 30],
+    ['⠏', 30], ['⠇', 30], ['⠧', 30], ['⠦', 30], ['⠴', 30],
+    ['⠼', 30], ['⠸', 30], ['⠹', 30], ['⠙', 30], ['⠋', 30],
+    ['✍️', 1500],
+  ];
+
+  let i = 0;
+  const tick = () => {
+    const [symbol, delay] = FRAMES[i];
+    document.querySelectorAll<HTMLElement>('.logo-symbol').forEach((el) => {
+      el.textContent = symbol;
+    });
+    i = (i + 1) % FRAMES.length;
+    setTimeout(tick, delay);
+  };
+  tick();
+</script>

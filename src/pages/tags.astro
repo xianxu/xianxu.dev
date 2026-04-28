@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/PageLayout.astro';
+import { cleanSlug } from '~/utils/permalinks';
+import { getPermalink } from '~/utils/permalinks';
+
+export const prerender = true;
+
+const posts = (await getCollection('post')).filter((p) => !p.data.draft);
+
+const counts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags ?? []) {
+    const slug = cleanSlug(tag);
+    counts.set(slug, (counts.get(slug) ?? 0) + 1);
+  }
+}
+
+const tags = [...counts.entries()]
+  .map(([slug, count]) => ({ slug, count }))
+  .sort((a, b) => b.count - a.count || a.slug.localeCompare(b.slug));
+
+const metadata = {
+  title: 'Tags',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    {tags.length === 0 ? (
+      <p class="text-center text-muted">No tags yet.</p>
+    ) : (
+      <ul class="flex flex-wrap justify-center gap-3">
+        {tags.map(({ slug, count }) => (
+          <li>
+            <a
+              href={getPermalink(slug, 'tag')}
+              class="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-slate-700 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-slate-800 transition"
+            >
+              <span>{slug}</span>
+              <span class="text-xs text-muted">{count}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Layout>
