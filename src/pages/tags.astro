@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
-import { cleanSlug } from '~/utils/permalinks';
-import { getPermalink } from '~/utils/permalinks';
+import { cleanSlug, getPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
@@ -26,19 +25,22 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+  <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading mb-3">Tags</h1>
+    <p class="text-muted dark:text-slate-400 mb-12">Browse posts by tag.</p>
+
     {tags.length === 0 ? (
-      <p class="text-center text-muted">No tags yet.</p>
+      <p class="text-muted">No tags yet.</p>
     ) : (
-      <ul class="flex flex-wrap justify-center gap-3">
+      <ul class="text-sm">
         {tags.map(({ slug, count }) => (
-          <li>
+          <li class="bg-gray-100 dark:bg-slate-700 inline-block mr-2 mb-2 py-0.5 px-2 lowercase font-medium">
             <a
               href={getPermalink(slug, 'tag')}
-              class="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-slate-700 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-slate-800 transition"
+              class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
             >
-              <span>{slug}</span>
-              <span class="text-xs text-muted">{count}</span>
+              {slug}
+              <span class="ml-1 opacity-60">({count})</span>
             </a>
           </li>
         ))}
