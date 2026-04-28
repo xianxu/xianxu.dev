@@ -1,0 +1,34 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import List from '~/components/blog/List.astro';
+import { fetchDrafts } from '~/utils/blog';
+
+export const prerender = true;
+
+const drafts = await fetchDrafts();
+
+const metadata = {
+  title: 'Drafts',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading mb-3">
+      Drafts <span class="ml-2 align-middle inline-block bg-yellow-400 text-yellow-900 text-xs font-semibold px-2 py-0.5 rounded">DEV</span>
+    </h1>
+    <p class="text-muted dark:text-slate-400 mb-12">
+      Posts without <code>published: true</code>. Visible only in dev — not in production builds, sitemap, or RSS.
+    </p>
+
+    {drafts.length === 0 ? (
+      <p class="text-muted">No drafts. Set <code>published: true</code> in a post's frontmatter to publish it; everything else lands here.</p>
+    ) : (
+      <List posts={drafts} />
+    )}
+  </section>
+</Layout>
