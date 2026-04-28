@@ -2,7 +2,7 @@
 title: A New Home
 publishDate: 2026-04-28
 published: true
-excerpt: "Moving to an Astro based new home for my personal blog, based on AstroWind."
+excerpt: "Moving to an Astro based new home for my personal blog. And a new location."
 tags:
   - life
 ---
