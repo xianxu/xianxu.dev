@@ -15,6 +15,7 @@ import astrowind from './vendor/integration';
 
 import {
   readingTimeRemarkPlugin,
+  relativePostLinksRemarkPlugin,
   responsiveTablesRehypePlugin,
   lazyImagesRehypePlugin,
   anchorLinksRehypePlugin,
@@ -81,7 +82,7 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin],
+    remarkPlugins: [readingTimeRemarkPlugin, relativePostLinksRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin, anchorLinksRehypePlugin],
   },
 

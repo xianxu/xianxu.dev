@@ -1,6 +1,9 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import getReadingTime from 'reading-time';
 import { toString } from 'mdast-util-to-string';
 import { visit } from 'unist-util-visit';
+import yaml from 'js-yaml';
 import limax from 'limax';
 import type { RehypePlugin, RemarkPlugin } from '@astrojs/markdown-remark';
 
@@ -12,6 +15,79 @@ export const readingTimeRemarkPlugin: RemarkPlugin = () => {
     if (typeof file?.data?.astro?.frontmatter !== 'undefined') {
       file.data.astro.frontmatter.readingTime = readingTime;
     }
+  };
+};
+
+const trimSlash = (s: string) => s.replace(/^\/+|\/+$/g, '');
+
+const loadPostPermalinkPattern = (): string => {
+  const cfg = yaml.load(fs.readFileSync(path.resolve('./src/config.yaml'), 'utf-8')) as {
+    apps?: { blog?: { post?: { permalink?: string } } };
+  };
+  return trimSlash(cfg?.apps?.blog?.post?.permalink || '/%slug%');
+};
+
+const renderPermalink = (pattern: string, slug: string, publishDate: Date): string => {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return (
+    '/' +
+    pattern
+      .replace('%slug%', slug)
+      .replace('%year%', String(publishDate.getFullYear()))
+      .replace('%month%', pad(publishDate.getMonth() + 1))
+      .replace('%day%', pad(publishDate.getDate()))
+      .replace('%hour%', pad(publishDate.getHours()))
+      .replace('%minute%', pad(publishDate.getMinutes()))
+      .replace('%second%', pad(publishDate.getSeconds()))
+      .replace('%category%', '')
+  );
+};
+
+// Cache parsed frontmatter per absolute path so we don't re-read the same file
+// repeatedly during a build.
+const frontmatterCache = new Map<string, { publishDate: Date } | null>();
+const readPostFrontmatter = (absPath: string): { publishDate: Date } | null => {
+  if (frontmatterCache.has(absPath)) return frontmatterCache.get(absPath)!;
+  let result: { publishDate: Date } | null = null;
+  try {
+    const raw = fs.readFileSync(absPath, 'utf-8');
+    const match = raw.match(/^---\n([\s\S]*?)\n---/);
+    if (match) {
+      const fm = yaml.load(match[1]) as { publishDate?: string | Date };
+      if (fm?.publishDate) result = { publishDate: new Date(fm.publishDate) };
+    }
+  } catch {
+    result = null;
+  }
+  frontmatterCache.set(absPath, result);
+  return result;
+};
+
+// Rewrites relative `.md` links between posts (e.g. `./mining-my-own-mind.md`)
+// to the post's actual permalink computed from its frontmatter and the global
+// permalink pattern. Lets posts cross-link in a way that's also navigable as
+// raw markdown (in editors, on GitHub, etc.).
+export const relativePostLinksRemarkPlugin: RemarkPlugin = () => {
+  const pattern = loadPostPermalinkPattern();
+  return (tree, file) => {
+    const sourcePath = file.history?.[0] || file.path;
+    if (!sourcePath) return;
+    const sourceDir = path.dirname(sourcePath);
+
+    visit(tree, 'link', (node: { url: string }) => {
+      const url = node.url;
+      if (!url || !/^\.\.?\//.test(url)) return;
+      const [pathPart, hash = ''] = url.split('#');
+      if (!/\.md$/i.test(pathPart)) return;
+
+      const targetAbs = path.resolve(sourceDir, pathPart);
+      const fm = readPostFrontmatter(targetAbs);
+      if (!fm) return;
+
+      const slug = path.basename(targetAbs, path.extname(targetAbs));
+      const permalink = renderPermalink(pattern, slug, fm.publishDate);
+      node.url = hash ? `${permalink}#${hash}` : permalink;
+    });
   };
 };
 
