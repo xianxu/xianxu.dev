@@ -1,19 +1,21 @@
 ---
-title: Pair — A Better Claude Input Interface
+title: A Saturday in Claude Code
 publishDate: 2026-05-02
 published: true
 excerpt: "Saturday morning, before exercise, I asked Claude one stray question. By afternoon there was a new repo, a pensive, four issues, and a working tool I'm using to write this post."
 tags:
   - tech
   - ai
-highlight: true
+highlight: false
 ---
 
 Saturday morning, before exercise, I asked Claude:
 
 > is there a way for external process to inject text into TUI (say claude code's input window)?
 
-This started the creation of [pair](https://github.com/xianxu/pair), a small tool that makes Claude Code's input box better. It actually works for any TUI program. Writing this down for people curious about what "agentic coding" is. Full transcript of this coding session is available [here](./saturday-pair-transcript.md), extracted by the same process that created `pair` and wrote the initial draft of this blog post. It's *recursion* all the way down!
+This started the creation of [pair](https://github.com/xianxu/pair), a small tool that makes Claude Code's input box better. It actually works for any TUI program. Writing this down for people curious about what "agentic coding" is. Full transcript of this coding session is available [here](./saturday-pair-transcript.md), extracted by the same process that created `pair`. The transcript took **49 rounds of exchanges**. See? It's not one shot or a few shots. Agent is your knowledge base and your execution engine. But you define its purpose through those exchanges.
+
+And the initial draft of this blog post was done as the last prompt to the agent — *recursion* all the way down!
 
 ## How it started
 
@@ -25,7 +27,7 @@ Pure curiosity. Claude Code's input box had been irritating me for a while now:
 
 I want to make my workflow better.
 
-By the afternoon there was a new repo named `pair`, a [pensive](https://github.com/xianxu/brain) committed to my notes, four issues filed, a `lessons.md` entry, an `atlas/architecture.md`, and a working tool I'm using to type this post.
+By the afternoon there was a new repo named `pair`, a [pensive](https://github.com/xianxu/brain) committed to my notes, four issues filed, a `lessons.md` entry, an `atlas/architecture.md`. By dinner, there was homebrew set up for it.
 
 This is the story of how that happened, and an example of how far personalized software can go.
 
@@ -35,7 +37,7 @@ The first half hour was just back-and-forth on terminal mechanics with Claude, m
 
 > `tmux send-keys` works. zellij has `zellij action write-chars`. TIOCSTI is dying (Linux moved it behind a flag, OpenBSD removed it). OSC52 is mostly write-only. The pieces are there if you compose them right.
 
-About 90 minutes in, the design had assembled itself in my head and the agent's context:
+About 60 minutes in, the design had assembled itself in my head and the agent's context:
 
 - Run `zellij` with a horizontal split.
 - Top pane: `claude` (or `codex`, or `gemini` — same plumbing works for any TUI agent).
@@ -75,11 +77,11 @@ Normal back-and-forth: test what's implemented, notice ergonomics that can be im
 
 This is the part I want to point at.
 
-While building issue `#000001`, several side concerns surfaced. Each became its own issue:
+While building issue `#000001`, several side concerns surfaced. Each became its own issue. Some examples:
 
-- **[#000002](https://github.com/xianxu/pair/blob/main/workshop/history/000002-each-pair-session-may-have-a-name.md)** — each pair session may have a name. Started as a `-n NAME` flag idea. Iterating in conversation, the design settled on an interactive prompt with the auto-generated name as the default. Implemented same session.
-- **[#000003](https://github.com/xianxu/pair/blob/main/workshop/issues/000003-make-a-blog-post.md)** — make a blog post (this one).
-- **[#000004](https://github.com/xianxu/pair/blob/main/workshop/history/000004-always-picker-no-auto-attach.md)** — *Claude filed this one on its own*, while I was complaining that the auto-attach behavior was surprising in a long-lived-session world. The agent recognized the design change was non-trivial enough to deserve its own issue, filed it, set it to `working`, ran `make issue-sync`, and then implemented the rewrite. I did not ask for the bookkeeping. I would not have remembered to do it.
+- **[#000002](https://github.com/xianxu/pair/blob/main/workshop/history/000002-each-pair-session-may-have-a-name.md)** — each pair session may have a customized name. 
+- **[#000003](https://github.com/xianxu/pair/blob/main/workshop/issues/000003-make-a-blog-post.md)** — make a blog post (this one) about how this was made.
+- **[#000004](https://github.com/xianxu/pair/blob/main/workshop/history/000004-always-picker-no-auto-attach.md)** — *Claude filed this one on its own*, while I was complaining that the auto-attach behavior was surprising in a long-lived-session world.
 
 As you can see, AI is great at tracking things, if you give it some structure for how things should be tracked. All of that is in the `ariadne` layer. You might wonder why I put all these processes inside a single repo. This design originated from my strong desire to remove the chrome, the incidental complexities. Everything is a file (with processes around it), carrying its full history, in a uniform way. Plain and simple.
 
@@ -91,6 +93,6 @@ A few hours, a few breaks. Artifacts:
 - A new repo `pair` with seven files of code and config, a README, an architecture atlas, four issues, a `lessons.md` entry, ~30 commits to main.
 - A working tool that's `homebrew` installable, by the time of this writing.
 
-Most of those artifacts I would not have produced on my own. I have no idea about those terminals and how they behave. But I have a clear view of what I want, and this vision gave the AI its purpose. The result's quite magical.
+Most of those artifacts I would not have produced on my own. I have no idea about those terminals and how they behave. But I have a clear view of what I want, and this vision gave the AI its purpose.
 
 This is the magic of "agentic coding"!
