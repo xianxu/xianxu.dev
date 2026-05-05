@@ -57,6 +57,7 @@ analytics:
   vendors:
     googleAnalytics:
       id: G-CY33L153PE
+      partytown: false
 
 ui:
   theme: 'system'
