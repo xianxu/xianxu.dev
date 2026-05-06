@@ -2,6 +2,7 @@
 title: "AI Native Company"
 publishDate: 2026-05-01
 published: true
+highlight: true
 excerpt: "What is an AI Native Company?"
 tags:
   - tech
