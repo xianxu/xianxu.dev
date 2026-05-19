@@ -16,19 +16,19 @@ Consider what makes you happy. In your pursuit of happiness at work, whether you
 
 This does not matter for internal transfers, as they are often lateral moves.
 
-Looking outside (of Big Tech) in Silicon Valley, people fantasize about startups and sudden riches. On the other hand, statistically speaking, the few top tech companies often pay (much) better in terms of expected value than typical startups. Think about your whole family situation. Does your spouse bring in big checks, giving you more flexibility? How stable are their job?
+Looking outside (of Big Tech) in Silicon Valley, people fantasize about startups and sudden riches. On the other hand, statistically speaking, the few top tech companies often pay better in terms of expected value than typical startups. Think about your whole family situation. Does your spouse bring in bread as well, giving you more flexibility? How stable is their job?
 
 For people with the benefit of a good cushion, remember to ask: **what would you do if you were not afraid (about money)?**
 
-There’s also the famous saying that **when offered a seat on a rocket ship, you don't ask which seat.**
+There’s also the famous saying that **when offered a seat on a rocket ship, you don't ask which seat.** [^seat]
 
 ## Power, the sense of control
 
-How much influence do you have in an organization and across the company?
+How much influence do you have in an organization and in a company?
 
 How much autonomy do you have working on things you enjoy? That gives more energy than it consumes.
 
-Do the decisions you make move the needle? Do you have the space to change the system itself?
+Do the decisions you make move the needle? Do you have the space to evolve the system itself?
 
 ## Domain, the type of things we work on
 
@@ -56,3 +56,6 @@ Is your organization's mission exciting and inspiring so that you can learn and 
 
 To have fun at work, it needs to be energy-positive. Work itself should not be a net drain on your creative energy. Do you feel well-rested and energized to return to work on a Monday morning? That's often the tell-tale sign of whether you are in the right place. Not saying that every Monday is fun, but overall, you should feel excited about going to work after a restful weekend, more often than not. 
 
+---
+
+[^seat]: From Sheryl Sandberg [Youtube](https://www.youtube.com/watch?v=2Db0_RafutM&t=282s)
