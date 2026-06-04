@@ -8,7 +8,7 @@ tags:
   - ai
 ---
 
-#### Your personal data is becoming more useful to you
+### Your personal data is becoming more useful to you
 
 I came to an epiphany recently, that your personal data is becoming a lot more valuable to you in the AI era, i.e. if you know how to leverage it. Hear me out.  
 
@@ -24,23 +24,23 @@ How? Roughly I think we need the following:
 2. have tools to help construct a mental model of the backbone of the data you have. 
 3. and become AI literate and leverage AI on such personal archive.
 
-#### Keep it yours 
+### Keep it yours 
 
 Historically speaking, people's data is scattered in many different services and devices. The irony is while we have plenty of services to organize the world's information; there's a scarcity of products that you can use to organize all your information. The first step of making your data useful to you, is to have it first in a single place that really belongs to you, not some big corporations. 
 
 And with all your information in a single place, the need to keep it secure and private should be built from day one. 
 
-#### Keep it legible
+### Keep it legible
 
 Data needs to be organized to be useful. When it comes to personal data, getting organized means to help the user form a coherent mental model of what data they have, and help them organize, distill, synthesize, enrich their data. In practice: you dump information in freeform, the AI keeps it organized and cross-linked, and you only hold the *index* in your head — a rough sense of what's in there. The structure stays under your guidance, evolving as your understanding does.  
 
-#### Leverage AI to do both
+### Leverage AI to do both
 
-Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down. Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal. 🤖~the creation of `ariadne`, `nous`, `pair`, and `parley.nvim` are the living examples; all of those were created by the same workflow.~{`ariadne`, `nous`, `pair`, and `parley.nvim` are living examples — all built with the same workflow.} The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
+Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down. Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal. `ariadne`, `nous`, `pair`, and `parley.nvim` are living examples — all built with the same workflow. The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
 
-#### What's to come
+### What's to come
 Combine those three, you have an extended brain, that knows your thoughts, and can fact check them on your behalf, that works with you to further your understanding of your life, or any topics you care about. 
 
-I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! For example, the other day I used this stack to understand who to vote for, resulting in [you-decide](https://github.com/xianxu/you-decide), which helped 🤖~in the Tuesday's primary vote~{me in Tuesday's primary}. 
+I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! For example, the other day I used this stack to understand who to vote for, resulting in [you-decide](https://github.com/xianxu/you-decide), which helped me in Tuesday's primary. 
 
 Stay tuned, more to come. This is the first in a series to show you what I have built. 
