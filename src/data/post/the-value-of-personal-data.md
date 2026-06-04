@@ -8,7 +8,7 @@ tags:
   - ai
 ---
 
-### Your personal data is becoming more useful to you
+### Your personal data is becoming more useful to you 🤖{Heading levels are uneven: this opener is ###, the three body sections are ####, "What's to come" is ###. Pick one scheme (e.g. all body sections ####, opener + closer ###) so the hierarchy reads intentionally.}
 
 I came to an epiphany recently, that your personal data is becoming a lot more valuable to you in the AI era, i.e. if you know how to leverage it. Hear me out.  
 
@@ -32,15 +32,15 @@ And with all your information in a single place, the need to keep it secure and 
 
 #### Keep it legible
 
-Data needs to be organized to be useful. When it comes to personal data, getting organized means to help the user form a coherent mental model of what data they have, and help them organize, distill, synthesize, enrich their data. This means free form input with AI help keeping track and organize, with human remembering the index of those information. This means keeping human guided evolution of how the data is structured. 
+Data needs to be organized to be useful. When it comes to personal data, getting organized means to help the user form a coherent mental model of what data they have, and help them organize, distill, synthesize, enrich their data. 🤖~This means free form input with AI help keeping track and organize, with human remembering the index of those information. This means keeping human guided evolution of how the data is structured.~{In practice: you dump information in freeform, the AI keeps it organized and cross-linked, and you only hold the *index* in your head — a rough sense of what's in there. The structure stays under your guidance, evolving as your understanding does.} 🤖{This "you hold the index, the AI holds the content" split is the strongest idea in the piece — but it's still stated abstractly. One concrete example (e.g. "I remember there's *something* about Q3 planning; nous pulls the note and everything linked to it") would make it land.} 
 
 #### Leverage AI to do both
 
-Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down.  Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal. The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
+Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down.  Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal. 🤖{The concrete proof here is *your own work*: you built nous, brain, and ariadne largely solo, with AI as the dev team. Naming that — even one line — turns this from a general claim into lived evidence, and seeds the series.} The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
 
 ### What's to come
 Combine those three, you have an extended brain, that knows your thoughts, and can fact check them on your behalf, that works with you to further your understanding of your life, or any topics you care about. 
 
-I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! 
+I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! 🤖{Still names the tools without showing them. One concrete daily use — "this morning nous reminded me what I'd concluded about X three months ago, with the sources" — would make the payoff land instead of just promising it. Even a one-line teaser of a real use (saving the full demos for the series) would help here.}
 
 Stay tuned, more to come. This is the first in a series to show you what I have built. 
