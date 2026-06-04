@@ -21,4 +21,9 @@ pnpm-debug.log*
 
 pnpm-lock.yaml
 
+.astro.goto
+.openshell/.bootstrap/
+.openshell/.base-image-digest
+bin/
+
 .astro
