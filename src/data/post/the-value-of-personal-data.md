@@ -8,7 +8,7 @@ tags:
   - ai
 ---
 
-### Your personal data is becoming more useful to you 🤖{Heading levels are uneven: this opener is ###, the three body sections are ####, "What's to come" is ###. Pick one scheme (e.g. all body sections ####, opener + closer ###) so the hierarchy reads intentionally.}[yes, based on the looks of the rendered html, feels ## here as too large, same as the title.]
+#### Your personal data is becoming more useful to you
 
 I came to an epiphany recently, that your personal data is becoming a lot more valuable to you in the AI era, i.e. if you know how to leverage it. Hear me out.  
 
@@ -36,11 +36,11 @@ Data needs to be organized to be useful. When it comes to personal data, getting
 
 #### Leverage AI to do both
 
-Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down. Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal, the creation of `ariadne`, `nous`, `pair`, and `parley.nvim` are the living examples; all of those were created by the same workflow. The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
+Part of the reason why only Big Tech is leveraging the power of your personal data for their benefit, is that organizing and improving your data is a complex endeavor and costs a lot of money. With the advances in AI, the traditional software cost model is breaking down. Now, it's very possible for any reasonably technical person to have the power of a full development team at their disposal. 🤖~the creation of `ariadne`, `nous`, `pair`, and `parley.nvim` are the living examples; all of those were created by the same workflow.~{`ariadne`, `nous`, `pair`, and `parley.nvim` are living examples — all built with the same workflow.} The work is shifting from highly trained professionals to people who are AI-literate and able to leverage tools to their advantage. 
 
-### What's to come
+#### What's to come
 Combine those three, you have an extended brain, that knows your thoughts, and can fact check them on your behalf, that works with you to further your understanding of your life, or any topics you care about. 
 
-I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! For example, the other day I used this stack to understand who to vote for, resulting in [you-decide](https://github.com/xianxu/you-decide), which helped in the Tuesday's primary vote. 
+I've been tinkering about this in the last couple months. I have a rough setup now that I use daily, it's the extension of my brain. Heck, I even named it `nous` (a Greek word for mind/intellect), and `brain`! For example, the other day I used this stack to understand who to vote for, resulting in [you-decide](https://github.com/xianxu/you-decide), which helped 🤖~in the Tuesday's primary vote~{me in Tuesday's primary}. 
 
 Stay tuned, more to come. This is the first in a series to show you what I have built. 
