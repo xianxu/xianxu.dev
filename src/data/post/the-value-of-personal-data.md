@@ -1,7 +1,7 @@
 ---
 title: Your data, finally for you!
 publishDate: 2026-06-02
-published: false
+published: true
 excerpt: "In the era of AI, your personal data can be a lot more valuable to you, as an individual"
 tags:
   - life
