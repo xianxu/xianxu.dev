@@ -268,13 +268,20 @@ export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: Pagin
   );
 };
 
-/** */
+/** Tag listings carry the same visibility + page-size matrix as the Archive.
+ *  The mode (`all`) and size (`per/<slug>`) live in the `[...page]` rest param —
+ *  one route renders /tag/<slug>, /tag/<slug>/all, /tag/<slug>/per/25,
+ *  /tag/<slug>/all/per/25, each paginated. Mirrors getStaticPathsBlogList.
+ *  (Also fixes a latent leak: the old version paginated fetchPosts() unfiltered,
+ *  so hidden posts showed on public tag pages.) */
 export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const all = await fetchPosts();
+  const visible = all.filter((p) => !p.hidden);
+
   const tags = {};
-  posts.map((post) => {
+  all.map((post) => {
     if (Array.isArray(post.tags)) {
       post.tags.map((tag) => {
         tags[tag?.slug] = tag;
@@ -282,16 +289,40 @@ export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFu
     }
   });
 
-  return Array.from(Object.keys(tags)).flatMap((tagSlug) =>
-    paginate(
-      posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.slug === tagSlug)),
-      {
-        params: { tag: tagSlug, blog: TAG_BASE || undefined },
-        pageSize: blogPostsPerPage,
-        props: { tag: tags[tagSlug] },
-      }
-    )
-  );
+  const hasTag = (post, tagSlug) => Array.isArray(post.tags) && post.tags.find((elem) => elem.slug === tagSlug);
+
+  // Fold the mode (`all`) + size (`per/<slug>`) prefix into the page rest-param
+  // paginate produced (undefined | '2' | '3' …) so one route serves the matrix.
+  const prefixed = (entries, prefix, extraProps) =>
+    entries.map((entry) => ({
+      ...entry,
+      params: { ...entry.params, page: [prefix, entry.params.page].filter(Boolean).join('/') || undefined },
+      props: { ...entry.props, ...extraProps },
+    }));
+
+  return Array.from(Object.keys(tags)).flatMap((tagSlug) => {
+    const allForTag = all.filter((post) => hasTag(post, tagSlug));
+    const visibleForTag = visible.filter((post) => hasTag(post, tagSlug));
+    const baseParams = { tag: tagSlug, blog: TAG_BASE || undefined };
+    return ARCHIVE_PAGE_SIZES.flatMap((opt) => {
+      const isDefault = opt === ARCHIVE_PAGE_SIZES[0];
+      const sizePrefix = isDefault ? '' : `per/${opt.slug}`;
+      const visibleSize = Number.isFinite(opt.size) ? (opt.size as number) : Math.max(1, visibleForTag.length);
+      const allSize = Number.isFinite(opt.size) ? (opt.size as number) : Math.max(1, allForTag.length);
+      return [
+        ...prefixed(
+          paginate(visibleForTag, { params: baseParams, pageSize: visibleSize, props: { tag: tags[tagSlug] } }),
+          sizePrefix,
+          { showHidden: false, sizeSlug: opt.slug }
+        ),
+        ...prefixed(
+          paginate(allForTag, { params: baseParams, pageSize: allSize, props: { tag: tags[tagSlug] } }),
+          ['all', sizePrefix].filter(Boolean).join('/'),
+          { showHidden: true, sizeSlug: opt.slug }
+        ),
+      ];
+    });
+  });
 };
 
 /** */

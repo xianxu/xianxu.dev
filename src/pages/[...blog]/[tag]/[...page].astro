@@ -1,11 +1,14 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { blogTagRobots, getStaticPathsBlogTag } from '~/utils/blog';
+import type { GetStaticPaths, Page } from 'astro';
+import type { Post } from '~/types';
+import { ARCHIVE_PAGE_SIZES, blogTagRobots, getStaticPathsBlogTag } from '~/utils/blog';
+import { TAG_BASE } from '~/utils/permalinks';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
+import { Icon } from 'astro-icon/components';
 
 export const prerender = true;
 
@@ -13,16 +16,36 @@ export const getStaticPaths = (async ({ paginate }) => {
   return await getStaticPathsBlogTag({ paginate });
 }) satisfies GetStaticPaths;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+type Props = {
+  page: Page<Post>;
+  tag: { slug: string; title: string };
+  showHidden: boolean;
+  sizeSlug: string;
+};
 
-const { page, tag } = Astro.props as Props;
-
+const { page, tag, showHidden, sizeSlug } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
+const lastPage = page.lastPage ?? 1;
+
+const defaultSlug = ARCHIVE_PAGE_SIZES[0].slug;
+const tagRoot = `/${TAG_BASE}/${tag.slug}`;
+const modeBase = showHidden ? `${tagRoot}/all` : tagRoot;
+const baseHref = sizeSlug === defaultSlug ? modeBase : `${modeBase}/per/${sizeSlug}`;
+const oppositeBase = showHidden ? tagRoot : `${tagRoot}/all`;
+const oppositeHref = sizeSlug === defaultSlug ? oppositeBase : `${oppositeBase}/per/${sizeSlug}`;
+
+const sizeLink = (slug: string) => (slug === defaultSlug ? modeBase : `${modeBase}/per/${slug}`);
+
+// Page links derive from baseHref so they keep the mode/size context (paginate's
+// own page.url.prev/next don't carry the /all and /per/<n> prefixes).
+const pageHref = (n: number) => (n === 1 ? baseHref : `${baseHref}/${n}`);
+const prevUrl = currentPage > 1 ? pageHref(currentPage - 1) : undefined;
+const nextUrl = currentPage < lastPage ? pageHref(currentPage + 1) : undefined;
 
 const metadata = {
-  title: `Posts by tag '${tag.title}'${currentPage > 1 ? ` — Page ${currentPage} ` : ''}`,
+  title: `Posts by tag '${tag.title}'${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
   robots: {
-    index: blogTagRobots?.index,
+    index: blogTagRobots?.index && currentPage === 1 && !showHidden && sizeSlug === defaultSlug,
     follow: blogTagRobots?.follow,
   },
 };
@@ -32,6 +55,35 @@ const metadata = {
   <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline>Tag: {tag.title}</Headline>
     <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+    <Pagination prevUrl={prevUrl} nextUrl={nextUrl} currentPage={currentPage} lastPage={lastPage} pageBase={baseHref} />
+    <div class="mt-6 w-full flex justify-center">
+      <div
+        class="text-xs text-muted dark:text-slate-500 opacity-60 hover:opacity-100 transition-opacity inline-flex items-center gap-2"
+      >
+        <a
+          href={oppositeHref}
+          aria-label={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
+          title={showHidden ? 'Hide hidden posts' : 'Show hidden posts'}
+        >
+          <Icon name={showHidden ? 'tabler:eye-off' : 'tabler:eye'} class="w-3.5 h-3.5" />
+        </a>
+        <span class="opacity-50">·</span>
+        <Icon name="tabler:layout-rows" class="w-3.5 h-3.5" aria-label="Posts per page" />
+        {
+          ARCHIVE_PAGE_SIZES.map((opt) => (
+            <>
+              <span class="opacity-50">·</span>
+              {opt.slug === sizeSlug ? (
+                <span class="font-semibold">{opt.label}</span>
+              ) : (
+                <a href={sizeLink(opt.slug)} class="hover:underline">
+                  {opt.label}
+                </a>
+              )}
+            </>
+          ))
+        }
+      </div>
+    </div>
   </section>
 </Layout>
