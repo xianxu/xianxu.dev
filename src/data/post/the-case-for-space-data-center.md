@@ -58,7 +58,7 @@ That, in one number, is the whole GPU-in-space problem: how to get that 800W rad
 
 The trick is to use **heat pipe**, a decades-old design in spaceflight.  
 
-A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one). Using ISS number, it's about 280W each m² of radiator surface, our 800W would need 2.8m², not too far off from the space we have: 2m². 🤖[using ISS number though, each m² can dissipate 280W, so we need a bit more for our GPU case, well, but close I guess?]
+A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one). Scaled down, that's ~280 W rejected per m² of radiator — a *real-world* yardstick that already bakes in operating losses (the radiator also soaks up Earth's own infrared glow, surfaces aren't perfect emitters, and margin is kept). By that number our 800W chip wants ~2.8 m² of radiator, a bit more than the 2 m² it rides on. So let's be honest: the idealized figure we compute in a moment is on the optimistic side, and 2 m² is *marginal* — in practice you'd size the radiator a little larger, or let it run a little warmer. Right ballpark, but tight.
 
 So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
 
@@ -68,7 +68,23 @@ $$
 T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{800}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 297\ \mathrm{K} \approx 24\,^\circ\mathrm{C}
 $$
 
-That's just 400 W/m², a light load, so the radiator sits at a cool ~24°C and the GPU — one heat-pipe hop away — lands at roughly **35–55°C**. Comfortable, with margin to spare. (One honest caveat: this assumes the cool back radiator is thermally separated from the hot sun-facing front. If the whole slab is instead one big lump of conductor, front and back average out toward the ~58°C we found earlier, and the GPU rides at ~70–85°C 🤖[how did you compute this? we should expand into a v3 model, where you have solar on one side, GPU on the other side occupying 0.1 m² and we should run two scenarios, with or without isulation between solar front side and GPU back side] — still perfectly fine. Either way, the heat pipe turns the scary "concentrated heat" problem into a non-issue.)
+That's just 400 W/m², a light load, so the radiator sits at a cool ~24°C and the GPU — one heat-pipe hop away — lands at roughly **35–55°C**. Comfortable, with margin to spare. But that ~24°C quietly assumed one thing: that the cool back radiator only has to handle the GPU, kept apart from the sun-baked front. Front and back are two sides of the same slab, though — so whether we put a thermal break between them matters. Let's model it.
+
+### Model v3: solar in front, GPU in back — to insulate or not?
+
+Same 2 m² slab: the front absorbs ~2722W of sunlight and ships ~800W of it to the GPU as electricity. The question is whether the front (solar) and back (radiator + GPU) layers are thermally **insulated** from each other.
+
+**Scenario A — insulated.** Each side fends for itself. The back radiates only the GPU's 800W → the ~24°C we just found, so the **GPU sits at 35–55°C**. But the front must now dump its leftover ~1922W (the 70% it didn't convert to electricity) from its *front face alone*:
+
+$$
+T_\text{front} = \left(\frac{1922}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 370\ \mathrm{K} \approx 97\,^\circ\mathrm{C}
+$$
+
+The cells run at ~97°C — they survive, but lose roughly ~10% of their efficiency to the heat.
+
+**Scenario B — no insulation.** The whole slab is one conductive sheet, so it settles at a single temperature, radiating the full 2722W from *both* faces — which is exactly base model v0: **~58°C**. The cells enjoy that cool 58°C, and the GPU sits one heat-pipe hop above → **~70–85°C** (that's where that number came from: the 58°C slab plus the 10–30°C pipe penalty).
+
+So insulation is a real trade, not a free win: it buys a cooler **GPU** (35–55°C) at the price of **hotter, less efficient solar cells** (97°C). Skip it, and the heat budget is shared — cells at a comfortable 58°C, GPU at a perfectly safe 70–85°C, and the slab is simpler to build. For a data center where generated watts are the whole point, the **plain uninsulated slab is probably the sweet spot**. Either way the chip stays well inside silicon's limits — the heat pipe has turned the scary "concentrated heat" problem into a non-issue.
 
 ## Debunking #3: "Hardware fails and you can't send a technician"
 
