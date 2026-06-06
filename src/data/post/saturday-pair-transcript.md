@@ -7,10 +7,6 @@ excerpt: "The raw chat transcript that produced pair v1 — from 'can you inject
 tags:
   - tech
   - ai
-  - pair  
-  - zellij
-  - nvim
-  - claude-code
 ---
 
 > Reconstructed transcript from the Claude Code chat session that produced pair v1. User turns are verbatim; assistant turns reproduce the actual code shipped and the substance of the explanations, but long prose is condensed where it doesn't add to the record.

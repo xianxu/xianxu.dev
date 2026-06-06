@@ -13,6 +13,9 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+
 import {
   readingTimeRemarkPlugin,
   relativePostLinksRemarkPlugin,
@@ -82,8 +85,8 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin, relativePostLinksRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin, anchorLinksRehypePlugin],
+    remarkPlugins: [readingTimeRemarkPlugin, relativePostLinksRemarkPlugin, remarkMath],
+    rehypePlugins: [rehypeKatex, responsiveTablesRehypePlugin, lazyImagesRehypePlugin, anchorLinksRehypePlugin],
   },
 
   vite: {
