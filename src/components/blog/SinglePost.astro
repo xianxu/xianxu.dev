@@ -105,3 +105,25 @@ const { post, url } = Astro.props;
     {post.comments !== false && <Comments />}
   </article>
 </section>
+
+<style is:global>
+  /* Footnotes render subdued — smaller and muted vs. the body copy */
+  .prose .footnotes {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: rgb(100 116 139); /* slate-500 */
+  }
+  .dark .prose .footnotes {
+    color: rgb(148 163 184); /* slate-400 */
+  }
+  .prose .footnotes p {
+    margin-block: 0.4rem;
+  }
+  .prose .footnotes a {
+    color: inherit;
+    text-underline-offset: 2px;
+  }
+  .prose .footnotes a.data-footnote-backref {
+    text-decoration: none;
+  }
+</style>
