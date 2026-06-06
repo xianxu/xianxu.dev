@@ -2,23 +2,22 @@
 title: The Case for Space Data Centers
 publishDate: 2026-06-05
 published: false
-excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it's a matter of time before we run data centers in space — and that you really DO need Starship to pull it off. (Maybe buy the stock.)"
+excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it's a matter of time before we run data centers in space, and that you really DO need Starship to pull it off. That is, if we look at the problem in the time frame of decades."
 tags:
   - tech
   - ai
 highlight: true
 ---
 
-Is space data center a great idea, a stupid idea, or something in between? 
-I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, too expensive to launch data centers into space, etc._ All sound reasonable on surface. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. With one real catch: the whole thing hinges on launch cost — so you *do* need Starship to make it pencil out. (Maybe buy the stock.)
+Is space data center a great idea, a stupid idea, or something in between? I haven't heard about why it would work much, but plenty of naysayers, for example, there's no air to cool things off in space. With SpaceX going IPO, I decide to take a closer look, and it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems left. Let's take a look at the feasibility and cost perspective. 
 
-> This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency and intent). I did author this post myself in an AI assisted flow I'll make another post about. 
+> This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency, intent, compare to terrestrial data centers etc.). I did author this post myself in an AI assisted flow I'll make another post about. 
 
 ---
 
 ## The nice things about space
 
-First of all, the allure of space is the eternal sun-shine, 24/7, without atmosphere (thus stronger), without cloudy days, without hurricanes, and most important: without nights. So a space data center can be powered largely for free, probably not even need much battery backups for its operation. It's like the perfect environment for silicon lives! 
+First of all, the allure of space is the eternal sun-shine, 24/7 (if we go with sun-synchronous orbit [^SSO]), without atmosphere (thus more energy), without cloudy days, without hurricanes, and most important: without nights. So a space data center can be powered largely for free. It's like the perfect environment for silicon "lives"! 
 
 Now, the question is, can we engineer our way out of the other engineering and economical issues, to really put data center in space. Let's take a look.
 
@@ -26,9 +25,9 @@ Now, the question is, can we engineer our way out of the other engineering and e
 
 Picture the simplest possible configuration: a slab of solar panel. Chips embedded on the backside of it, away from the sun. The sun-facing side captures the energy; and both sides radiate them away, leveraging the coldness of the space. That's it, just a slab, that looks like the solar panels on your roof, probably much larger, as large as rocket can send them up, without fancy folding etc, which would add complexity and cost. 
 
-## How do you cool things in space
+## How do you cool things in space without air?
 
-Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Let's do some math. 
+Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Intuitively, if you got ejected in space without a space suite, you'd imagine you freeze pretty fast? Let's do some math. 
 
 ### Model v0: a bare slab in the sun
 
@@ -52,11 +51,11 @@ $$
 
 The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up above ~100°C.
 
-That, in one number, is the whole GPU-in-space problem: how to get that 800W radiate out from that 0.1m² surface, and keep at silicon's operation temperature range.
+That, in one number, is the first GPU-in-space problem: how to get that 800W radiate out from that 0.1m² surface, and keep at silicon's operation temperature range.
 
-## How to move heat from GPU
+## Model v3, a slab with heat pipe
 
-The trick is to use **heat pipe**, a decades-old design in spaceflight.  
+It turns out this is solved by a decades-old design in spaceflight: heat pipe. 
 
 A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
 
@@ -69,23 +68,11 @@ $$
 T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{800}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 297\ \mathrm{K} \approx 24\,^\circ\mathrm{C}
 $$
 
-That's just 400 W/m², a light load, so the radiator sits at a cool ~24°C and the GPU — one heat-pipe hop away — lands at roughly **35–55°C**. Comfortable, with margin to spare. But that ~24°C quietly assumed one thing: that the cool back radiator only has to handle the GPU, kept apart from the sun-baked front. Front and back are two sides of the same slab, though — so whether we put a thermal break between them matters. Let's model it.
-
-### Model v3: solar in front, GPU in back, no insulation
-
-Same 2 m² slab: the front absorbs ~2722W of sunlight and ships ~800W of it to the GPU as electricity. In reality, they are the same slab and heat travels from front to the back. Let's see what happens when the whole slab is one conductive sheet, so it settles at a single temperature, radiating the full 2722W from *both* faces — which is exactly base model v0: **~58°C**. The cells enjoy that cool 58°C, and the GPU sits one heat-pipe hop above → **~70–85°C** (that's where that number came from: the 58°C slab plus the 10–30°C pipe penalty).
-
-## How to repair in space
-
-Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips, maybe even have automatic de-orbiting capabilities when certain keep-alive signals stops arriving at those orbiting slabs.
-
-What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. Two effects matter: *single-event upsets* (a stray particle flips a bit) and *total ionizing dose* (cumulative damage that slowly ages the silicon). The first is mostly a software problem — datacenter GPUs already ship with error-correcting memory, and you add watchdog resets and fleet-level redundancy. The second is the real lifecycle limiter, but in **low Earth orbit it's relatively mild**: Earth's magnetic field deflects most of the flux (it's why the ISS runs ordinary electronics), and a few millimeters of shielding plus the slab's own structure buys margin. Over a ~5-year life the chip is far likelier to hit *economic* obsolescence than radiation death — so it folds into the same "tolerate attrition, fly down the curve, then deorbit" model.
-
-I suspect there are a lot of software issues to be solved in a space oriented data center, a lot more automation's needed as human can't intervene physically. There are also different constraints and trade offs of where the data and computation capabilities is. 
+That's it, the same 2 m² slab: the front absorbs ~2722W of sunlight and ships ~800W of it to the GPU as electricity. In reality, they are the same slab and heat travels from front to the back. Let's see what happens when the whole slab is one conductive sheet, so it settles at a single temperature, radiating the full 2722W from *both* faces — which is exactly base model v0: **~58°C**. The cells enjoy that cool 58°C, and the GPU sits one heat-pipe hop above → **~70–85°C** (that's where that number came from: the 58°C slab plus the 10–30°C pipe penalty).
 
 ## How expensive is launching those data center slabs into space?
 
-Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A rough mass budget:
+First, we need to figure out how heavy are things. Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A rough mass budget:
 
 | Component | Mass |
 |---|---|
@@ -105,11 +92,9 @@ That's ~5× heavier than a bare solar array would suggest — dense compute, a r
 | Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~9× |
 | Starship, stated goal | ~$100/kg | **~$2,000** | ~0.6× |
 
-What's the right yardstick? Not the chip's $25k sticker — what you're really buying is ~5 years of *running* that GPU, which on the ground costs real money. Just the electricity for an 800W GPU over five years is ~35,000 kWh ≈ **$3,500** (nearer $5,000 with cooling, and use $0.1 per KW) — and in orbit the sun delivers it for free. That's the last column above: on Falcon 9, launch costs ~9–20× the energy it would save; only at **Starship's ~$100/kg does launch (~$2,000) drop *below* the five years of energy it replaces** — and that's before counting free cooling and skipping the multi-year grid-interconnect queue.
+What's the right yardstick? Not the chip's $25k sticker — what you're really buying is ~5 years of *running* that GPU, which on the ground costs real money. Just the electricity for an 800W GPU over five years is ~35,000 kWh ≈ **$3,500** (nearer $5,000 with cooling, and use $0.1 per KW) — and in orbit the sun delivers it for free. That's the last column above: on Falcon 9, launch costs ~9–20× the energy it would save; only at **Starship's ~$100/kg does launch (~$2,000) drop *below* the five years of energy it replaces**. 
 
-So the verdict flips from where we started, and the physics didn't lie: launch economics are the real gate. **You do need Starship** — and if it all works, maybe buy the stock.
-
-## Can we make it lighter?
+## Can we make the slab lighter?
 
 Launch is billed by the kilogram, so mass *is* the game — and a datacenter GPU's weight is mostly things space lets you throw away. On the ground a server is largely chassis, fans, finned heatsinks, and power supplies; in orbit the slab itself is the heatsink, there's nothing to fan, and solar power arrives as DC so you feed the chip almost directly — no heavy PSUs. Strip it to bare die on a vapor chamber with a minimal shared host. The same logic runs through every component:
 
@@ -124,35 +109,43 @@ Launch is billed by the kilogram, so mass *is* the game — and a datacenter GPU
 
 None of that needs new physics — it's mostly *deleting* terrestrial overhead and sharing one satellite bus across thousands of chips. Call it a ~3× cut, with a hard floor near ~5 kg (the HBM stack, the die, and the minimum panel and radiator can't vanish).
 
-And it pulls the launch math right back. At ~7 kg per chip:
+And it pulls the launch math right back. At ~7 kg per slab:
 
-- **Falcon 9, list price** (~$3,500/kg) → ~**$25k** — now roughly the price of the chip itself, instead of ~3× it.
-- **Starship goal** (~$100/kg) → ~**$700** — pocket change.
+- **Falcon 9, list price** (~$3,500/kg) → ~**$25k** — still 7x cost of terrestrial energy source. SpaceX's internal cost's probably bringing this down to 3x corresponding terrestrial cost.
+- **Starship goal** (~$100/kg) → ~**$700** — 20% of terrestrial energy cost.
 
-So lightweighting doesn't overturn the verdict — you still want Starship — but it moves Falcon 9 from "launch costs triple the chip" to "launch ≈ the chip," and makes the Starship case a slam-dunk. Mass is the highest-leverage knob in the whole design.
+So, somewhere between Falcon 9 and Starship, we will have total ownership energy cost of space data center beating terrestrial counter part. 
 
-## Well, there are still some real problems. 
+## How to repair in space
 
-Here's where intellectual honesty earns its keep. After every physical objection falls, two real constraints remain — and neither is the one people shout about.
+Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips, maybe even have automatic de-orbiting capabilities when certain keep-alive signals stops arriving at those orbiting slabs.
 
-**1. Obsolescence, made worse by the elegant design.** Chips obsolesce on a ~1–2 year generation cadence even though they physically run for ~5 years. On the ground, this is survivable because the _durable_ infrastructure — building, grid interconnect, cooling plant, 15–25 year lifespans — is **decoupled** from the fast-obsolescing servers. H100s drop into the same racks the A100s left. You refresh only the cheap layer and amortize the expensive layer across three or four generations. 🤖[this seems off, your H100 is much more expensive than the data center housing?]{You're right — H100 (~$25k) > facility share per GPU (~$12–18k). So the chip, not the building, is the dominant cost, and *both* space and ground re-buy that $25k chip every generation. Ground only saves the reused facility layer. I overstated the asymmetry; this whole "real problem" is weaker than I wrote — see your next two markers, which knock it down further. Will rewrite once we settle 1+2 together.}[also we haven't estimated the cost of solar slab, though it seems much cheaper than $12K-$18K, at scale?]
+What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. Two effects matter: *single-event upsets* (a stray particle flips a bit) and *total ionizing dose* (cumulative damage that slowly ages the silicon). The first is mostly a software problem — datacenter GPUs already ship with error-correcting memory, and you add watchdog resets and fleet-level redundancy. The second is the real lifecycle limiter, but in **low Earth orbit it's relatively mild**: Earth's magnetic field deflects most of the flux (it's why the ISS runs ordinary electronics), and a few millimeters of shielding plus the slab's own structure buys margin. Over a ~5-year life the chip is far likelier to hit *economic* obsolescence than radiation death — so it folds into the same "tolerate attrition, fly down the curve, then deorbit" model.
 
-In orbit, the integrated panel — the very thing that solved the thermal problem — **couples** them. You can't swap the chip without re-launching the solar array and the radiator, which have no obsolescence at all (a photon is a photon). So when the silicon ages out, you strand a perfectly good power-and-cooling system and re-pay the entire launch. The design's elegance is also its trap.
+I suspect there are a lot of software issues to be solved in a space oriented data center, a lot more automation's needed as human can't intervene physically. There are also different constraints and trade offs of where the data and computation capabilities is. 
 
-The way out is to break the coupling: make the array a reusable orbital **socket** you re-chip rather than re-launch — robotic swap, modular docking, a durable photon-handling layer that the obsolescing silicon plugs into. Solve that and space's free-power advantage dominates. Fail to, and you're re-flying 2 kg/m² every five years and the launch-cost math gets brutal again. 🤖[solar panel life's 25 years I think, so we are talking about a factor of 5x here?. the cost of solar panel is not that high, compared to the GPU, so likely ok]{Agreed, and this is the key deflation. You strand ~80% of a 25-yr array at the 5-yr chip swap (your 5x), but the array (~$3–8k) is cheap next to the $25k chip you'd re-buy anyway — so the wasted capital is minor. The "reusable socket" drops from make-or-break to a nice optimization. Net: obsolescence is NOT a real blocker. Propose cutting #1 down to a short "you waste some cheap hardware, no big deal" note.}
-
-**2. Serving availability.** This is the one genuinely inference-specific cost, and it's not latency or bandwidth — it's uptime. Inference is customer-facing 24/7; an eclipse gap or a node failure is a _serving outage._ Training just checkpoints and resumes — it doesn't care if a node drops for half an hour. So inference demands sun-synchronous orbits (no eclipse) plus constellation redundancy plus failover, which training can skip. That's why training is the easier _first_ workload — not because of data, but because of SLAs. 🤖[well we will have many of such thing flying, the reliability problem can be easily solved with software. ]{Largely agree — at constellation scale you route around eclipsed/failed nodes like any CDN, so availability becomes a distributed-systems problem, not a hardware blocker. One real caveat to keep: eclipse is *correlated* (a whole orbital plane darkens on schedule) and latency-bound inference needs a *nearby* lit node, so you size for spare capacity and inter-sat routing. Net: cost/engineering, not fundamental. Propose downgrading from "real constraint" to "a thing the constellation+software handles."}[is eclispse not avoiadable? I guess then you need battery during that interim? batter, if needed, would add to the cost and weight of the slab solar computer we are designing]
-
-## The part that's actually beautiful
+## The other part that works in favor of space data center: edge compute
 
 Set the problems aside for a second, because there's an upside the cost framing misses entirely.
 
-A LEO satellite is ~550 km straight up — which for most of humanity is **closer than the nearest big data center.** A well-connected user reaches a regional data center in 10–40 ms; someone in a remote region or mid-ocean is 80–200 ms away, if they can reach one at all. A compute node directly overhead is ~4 ms. Space compute is _edge_ compute, by default, for the entire planet. It serves the half of the world that terrestrial data centers can't reach in under 100 ms — maritime, aviation, remote regions, direct-to-handset anywhere.
+A LEO satellite is ~550 km straight up — which for most of humanity is **closer than the nearest big data center.** A well-connected user reaches a regional data center in 10–40 ms; someone in a remote region or mid-ocean is 80–200 ms away, if they can reach one at all. A compute node directly overhead is ~4 ms. Space compute is new edge compute, by default, for the entire planet. It serves the half of the world that terrestrial data centers can't reach in under 100 ms — maritime, aviation, remote regions, direct-to-handset anywhere.
 
-That flips the whole economic argument. Everything up to here was _defensive_ — at what launch price and electricity cost does space _match_ the ground? But coverage is _offensive_: space can serve latency and reach tiers the ground **physically cannot**, at which point you're not competing on cost-parity, you're addressing demand whose terrestrial price is infinity.
+This basically had already been demonstrated by SpaceX's Starlink system.
 
-And the pieces compose. The natural architecture is two tiers: a **bulk tier** in sun-synchronous or geostationary orbit running big arrays for training and batch and latency-tolerant inference; and an **edge tier** in LEO running smaller distributed nodes for real-time inference close to users. The edge tier reopens exactly the real-time slice the bulk tier had to give up. There's even a power-profile match: inference is a steady 24/7 load, and a sun-synchronous orbit is a steady 24/7 power supply — better matched than bursty training against constant sunlight. And it sidesteps the thing increasingly strangling terrestrial AI buildout: the multi-year grid-interconnection queue. "300 megawatts with no interconnection application" is a moat the launch-cost obsession never sees.
+## The civilizational competition: China vs USA
 
-## Civilizations challenge?
+If we are to believe that we need 1 billion H100s, sort of one for each of human, we need about 1TW of power, about 30% of all electricity human currently has. 
 
-If we are to believe that we need 1B H100s, sort of one for each of human, we need about 1TW of power, about 30% of all electricity human currently has. On one hand, merely increase power build out by 30% shouldn't be something dramatic, and China seems to be doing fine in that regards (they have 30 nuclear power plants under construction). On the other hand, the US seems can't muster political will to build it out on the ground, too many different interests, and projection of the future. This makes space data center uniquely alluring, as space is the new frontier, without too much regulatory hurdles. Though if we go by our 800W solar slab computer in space, we need to launch 1B of them, even with Starship, it's going to be a lot of launches! 
+On one hand, merely increase power build out by 30% shouldn't be something dramatic, and China seems to be doing fine in that regards (they have 30 nuclear power plants under construction). China has a strong central government that can marshal resources, if they decide to they need to build 1TW power supply, they will go build it. 
+
+On the other hand, the US seems simply can't muster political will to build it out on the ground, too many different interests, and different projection of the future needs. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. Space is the new frontier, the new West, without too much regulatory hurdles, property rights, NIMBY, etc.. It's very interesting to see how this competition plays out!
+
+--- 
+
+PS: fun fact of SSO, a diagram generated by AI, to really illustrate the power of joined development of this blog post. 
+
+🤖[insert an svg that works with astro that shows how a satellite orbit to aways face the sun. I think two aspect, one is the orbit to face the sun, then the problem of you need to keep up 1 degree rotation as earth rotate around the sun, then I think the budge iffect is harder to draw we can just talk about it.]
+
+---
+
+[^SSO]: Sun-synchronous orbit itself is a very clever trick.
