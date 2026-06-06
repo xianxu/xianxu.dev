@@ -56,19 +56,19 @@ That, in one number, is the whole GPU-in-space problem: how to get that 800W rad
 
 ## How to move heat from GPU
 
-The trick is to use **heat pipe**, a decade old design in spaceflight. 
+The trick is to use **heat pipe**, a decade old design in spaceflight. 🤖{heat pipes date to the 1960s — ~60 years, not "a decade." Suggest "a decades-old, flight-proven design."} 
 
-A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a wick draws 🤖[what do you mean a wick, how does this work, is it something mechanical, or purely passive] the liquid back to do it all over again. No pump, no moving parts, no maintenance. And this isn't exotic: it's how the International Space Station rejects its ~70+ kW of waste heat — ammonia loops carrying heat out to big radiator panels. 🤖[then how big is the heat pipe for ISS. that's a reference point of what works in practice?]
+A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one).
 
-So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. 🤖[verify numbers]
+So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
 
 Now the back panel just has to radiate those 800W into space from its one available face:
 
 $$
-T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{700}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 288\ \mathrm{K} \approx 15\,^\circ\mathrm{C}
-$$ 🤖[verify numbers, I changed from 700 to 800]
+T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{800}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 297\ \mathrm{K} \approx 24\,^\circ\mathrm{C}
+$$
 
-That's just 350 W/m², a light load, so the radiator sits at a chilly ~15°C and the GPU — one heat-pipe hop away — lands at roughly **25–45°C**. Comfortable, with margin to spare. (One honest caveat: this assumes the cool back radiator is thermally separated from the hot sun-facing front. If the whole slab is instead one big lump of conductor, front and back average out toward the ~58°C we found earlier, and the GPU rides at ~70–85°C — still perfectly fine. Either way, the heat pipe turns the scary "concentrated heat" problem into a non-issue.)
+That's just 400 W/m², a light load, so the radiator sits at a cool ~24°C and the GPU — one heat-pipe hop away — lands at roughly **35–55°C**. Comfortable, with margin to spare. (One honest caveat: this assumes the cool back radiator is thermally separated from the hot sun-facing front. If the whole slab is instead one big lump of conductor, front and back average out toward the ~58°C we found earlier, and the GPU rides at ~70–85°C — still perfectly fine. Either way, the heat pipe turns the scary "concentrated heat" problem into a non-issue.)
 
 But notice the escape hatch: the problem only exists if heat is _generated_ far from where it's _radiated_. So don't do that. Match the silicon footprint to the radiating footprint — **spread the compute thin, one flat layer, run it at low power density.** Then the conduction distance is centimeters everywhere and the gradient collapses. You're not solving the transport problem; you're designing it out of existence.
 
