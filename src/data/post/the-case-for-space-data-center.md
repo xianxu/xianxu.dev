@@ -2,7 +2,7 @@
 title: The Case for Space Data Centers
 publishDate: 2026-06-05
 published: false
-excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it's a matter of time before we run data centers in space, and that you really DO need Starship to pull it off. That is, if we look at the problem in the time frame of decades."
+excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center, how realistic it is. As I poked around, I realize it's a matter of time before we run data centers in space, and that we really DO need Starship to pull it off economically. That is, if we look at the problem in the time frame of decades."
 tags:
   - tech
   - ai
