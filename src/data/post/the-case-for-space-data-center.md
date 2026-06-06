@@ -30,27 +30,29 @@ Picture the simplest possible configuration: a slab of solar panel. Chips embedd
 
 Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Let's do some math. 
 
-🤖[we should start establish the base model v0 here, e.g. how much sun's energy would land per m², and first establish the equilibrium temperature of a slab, the we add next model v1, that solar generation efficiency at 30%, and we move that 30% to 0.1 m² GPU, without any heat conduction, what's the GPU temperature, this establish the gist of GPU in space problem]
+### Base model v0: a bare slab in the sun
 
-A surface at temperature $T$ radiates power per unit area according to Stefan–Boltzmann: $P = \varepsilon\sigma T^4$, where $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$ and $\varepsilon$ is emissivity (~1 for a good radiator). At Earth's orbit, the sun delivers about $S = 1361\ \mathrm{W/m^2}$. A solar panel at ~30% efficiency turns that into roughly $400\ \mathrm{W/m^2}$ of electricity, which feeds the chips and comes back out as heat.
-
-Set generation equal to radiation and solve for the break-even temperature for the same sized slab to radiate that level of energy away:
+Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face. The slab soaks that up and re-radiates it as infrared — and it radiates from **both** faces, since the sun blocks only a negligible sliver of the front's view of cold space. A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
 
 $$
-T = \left(\frac{\eta S}{\varepsilon\sigma}\right)^{1/4} = \left(\frac{0.30 \times 1361}{5.67\times10^{-8}}\right)^{1/4} \approx 291\ \mathrm{K} \approx 18\,^\circ\mathrm{C}
+S = 2\,\varepsilon\sigma T^4 \quad\Rightarrow\quad T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
 $$
 
-Eighteen degrees Celsius. Room temperature, surprisingly. To dissipate the heat from the generated _electrical_ power, the panel actually barely warms up.
+Fifty-eight degrees. A bare slab in full sun just sits at about 58°C — a perfectly fine temperature for electronics, and we haven't lifted a finger to cool it. (Let it radiate from only one face and you'd get ~120°C; using both faces is what buys the comfortable number.) So the lazy "you can't lose heat in space" is simply wrong — space sheds the entire solar load at a benign temperature. **Shedding capacity is not the problem.**
 
-Another equation we can use, is the more realistic one, we not only need to dissipate 30% of energy converted to electricity to power our GPU, but the whole energy captured by the panel, needs to go somewhere. Let's take a look. 
+### Base model v1: now turn 30% into a GPU
 
-If it radiates from only the back, after some math, you get ~120°C, that's a bit uncomfortably hot. But a flat panel radiates from both faces, and we end up with 57°C, pretty fine. Math is:
+Now make it a data center. A good space solar cell turns ~30% of that sunlight into electricity, the electricity runs a GPU, and the GPU turns essentially all of it back into heat. The *total* energy hasn't changed — but now it matters enormously **where** the heat appears.
+
+One NVIDIA H100 draws ~700–800W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this base model we allow **no heat conduction**: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800W forced out through 0.1 m²:
 
 $$
-T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
+T_\text{GPU} = \left(\frac{Q}{\varepsilon\sigma A_\text{chip}}\right)^{1/4} = \left(\frac{800}{5.67\times10^{-8}\times 0.1}\right)^{1/4} \approx 613\ \mathrm{K} \approx 340\,^\circ\mathrm{C}
 $$
 
-So at its face, if a slab get all sun's energy at Earth orbit, it would stay at equilibrium temperature at about 57°C, a nice temperature for our electronic devices to operate in. That's an extreme case I think, in practice, if you do not have full alignment of solar panel to the sun, you get less sun's energy per unit area on the solar panel, we can also reflect some portion of energy back, if we choose to.
+The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up the ghost above ~100°C. (Even generously letting it radiate from both faces only brings it down to ~240°C — still cooked.)
+
+That, in one number, is the whole GPU-in-space problem. It was never about whether space can absorb the heat — v0 already settled that. It's that the heat is **born in a tiny spot with nowhere to go**. Everything that follows — heat pipes, spreading the silicon thin — is about getting that 800W *out of the 0.1 m² and onto the slab that's already happy to radiate it.*
 
 ## How to move heat from GPU to the back of solar panel
 
