@@ -107,14 +107,36 @@ const { post, url } = Astro.props;
 </section>
 
 <style is:global>
-  /* Footnotes render subdued — smaller and muted vs. the body copy */
+  /* Footnotes render subdued — smaller and muted vs. the body copy,
+     with an auto separator and an auto-revealed "Footnotes" heading
+     (GFM emits it sr-only; no need to hand-write a heading per post). */
   .prose .footnotes {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(203 213 225 / 0.7); /* slate-300 */
     font-size: 0.8rem;
     line-height: 1.55;
     color: rgb(100 116 139); /* slate-500 */
   }
   .dark .prose .footnotes {
+    border-top-color: rgb(51 65 85 / 0.7); /* slate-700 */
     color: rgb(148 163 184); /* slate-400 */
+  }
+  /* Un-hide the screen-reader-only GFM heading, styled to match the subdued look */
+  .prose .footnotes #footnote-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 0 0.6rem;
+    padding: 0;
+    overflow: visible;
+    clip: auto;
+    clip-path: none;
+    white-space: normal;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: inherit;
   }
   .prose .footnotes p {
     margin-block: 0.4rem;
