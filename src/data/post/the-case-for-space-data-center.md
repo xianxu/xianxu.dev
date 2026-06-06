@@ -16,7 +16,7 @@ I haven't heard about why it would work much, but plenty of: _you can't cool any
 
 ## The nice things about space
 
-First of all, the allure of space is the eternal sun-shine, 24/7, without atmosphere (thus stronger), without cloudy days, hurricans, and most important: no nights. So a space data center can be powered largely for free, probably not even need much battery backups for its operation. It's like the perfect environment for silicon lives! 
+First of all, the allure of space is the eternal sun-shine, 24/7, without atmosphere (thus stronger), without cloudy days, without hurricanes, and most important: without nights. So a space data center can be powered largely for free, probably not even need much battery backups for its operation. It's like the perfect environment for silicon lives! 
 
 ## The form factor assumption
 
