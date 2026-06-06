@@ -62,31 +62,18 @@ A heat pipe is a sealed tube holding a little working fluid — in space, usuall
 
 A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
-So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
+So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. 🤖[how is this 10-30°C computed?]
 
 Now the back panel just has to radiate those 800W into space from back face of the slab:
-
 $$
 T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{800}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 297\ \mathrm{K} \approx 24\,^\circ\mathrm{C}
 $$
 
 That's just 400 W/m², a light load, so the radiator sits at a cool ~24°C and the GPU — one heat-pipe hop away — lands at roughly **35–55°C**. Comfortable, with margin to spare. But that ~24°C quietly assumed one thing: that the cool back radiator only has to handle the GPU, kept apart from the sun-baked front. Front and back are two sides of the same slab, though — so whether we put a thermal break between them matters. Let's model it.
 
-### Model v3: solar in front, GPU in back — to insulate or not?
+### Model v3: solar in front, GPU in back, no insulation
 
-Same 2 m² slab: the front absorbs ~2722W of sunlight and ships ~800W of it to the GPU as electricity. The question is whether the front (solar) and back (radiator + GPU) layers are thermally **insulated** from each other.
-
-**Scenario A — insulated.** Each side fends for itself. The back radiates only the GPU's 800W → the ~24°C we just found, so the **GPU sits at 35–55°C**. But the front must now dump its leftover ~1922W (the 70% it didn't convert to electricity) from its *front face alone*:
-
-$$
-T_\text{front} = \left(\frac{1922}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 370\ \mathrm{K} \approx 97\,^\circ\mathrm{C}
-$$
-
-The cells run at ~97°C — they survive, but lose roughly ~10% of their efficiency to the heat.
-
-**Scenario B — no insulation.** The whole slab is one conductive sheet, so it settles at a single temperature, radiating the full 2722W from *both* faces — which is exactly base model v0: **~58°C**. The cells enjoy that cool 58°C, and the GPU sits one heat-pipe hop above → **~70–85°C** (that's where that number came from: the 58°C slab plus the 10–30°C pipe penalty).
-
-So insulation is a real trade, not a free win: it buys a cooler **GPU** (35–55°C) at the price of **hotter, less efficient solar cells** (97°C). Skip it, and the heat budget is shared — cells at a comfortable 58°C, GPU at a perfectly safe 70–85°C, and the slab is simpler to build. For a data center where generated watts are the whole point, the **plain uninsulated slab is probably the sweet spot**. Either way the chip stays well inside silicon's limits — the heat pipe has turned the scary "concentrated heat" problem into a non-issue.
+Same 2 m² slab: the front absorbs ~2722W of sunlight and ships ~800W of it to the GPU as electricity. In reality, they are the same slab and heat travels from front to the back. Let's see what happens when the whole slab is one conductive sheet, so it settles at a single temperature, radiating the full 2722W from *both* faces — which is exactly base model v0: **~58°C**. The cells enjoy that cool 58°C, and the GPU sits one heat-pipe hop above → **~70–85°C** (that's where that number came from: the 58°C slab plus the 10–30°C pipe penalty).
 
 ## How to repair in space
 
@@ -98,7 +85,7 @@ I suspect there are a lot of software issues to be solved in a space oriented da
 
 ## How expensive is launching those data center slabs into space?
 
-🤖{heads-up — the bottom-up estimate below puts launch at ~$30–70k per H100 on *Falcon 9*, comparable to or above the $25k chip. That's in tension with the intro's "you DON'T need Starship." Honest read: marginal on Falcon 9 (works only at SpaceX's *internal* cost), clear win on Starship. Suggest softening the intro to something like "Starship makes it a slam-dunk, though it's not strictly required." Your call — or push back on my mass numbers.}
+🤖{heads-up — the bottom-up estimate below puts launch at ~$30–70k per H100 on *Falcon 9*, comparable to or above the $25k chip. That's in tension with the intro's "you DON'T need Starship." Honest read: marginal on Falcon 9 (works only at SpaceX's *internal* cost), clear win on Starship. Suggest softening the intro to something like "Starship makes it a slam-dunk, though it's not strictly required." Your call — or push back on my mass numbers.}[we should compare not against the cost of the chip, but the total ownership cost over say 5 years, e.g. the amount of energy consumed by 800W appliances over 5 years]
 
 Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A rough mass budget:
 
