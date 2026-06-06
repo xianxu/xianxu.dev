@@ -58,7 +58,7 @@ That, in one number, is the whole GPU-in-space problem: how to get that 800W rad
 
 The trick is to use **heat pipe**, a decades-old design in spaceflight.  
 
-A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one). Scaled down, that's ~280 W rejected per m² of radiator — a *real-world* yardstick that already bakes in operating losses (the radiator also soaks up Earth's own infrared glow, surfaces aren't perfect emitters, and margin is kept). By that number our 800W chip wants ~2.8 m² of radiator, a bit more than the 2 m² it rides on. So let's be honest: the idealized figure we compute in a moment is on the optimistic side, and 2 m² is *marginal* — in practice you'd size the radiator a little larger, or let it run a little warmer. Right ballpark, but tight.
+A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one). Scaled down, that's ~280 W rejected per m² of radiator — a *real-world* yardstick that already bakes in operating losses (the radiator also soaks up Earth's own infrared glow, surfaces aren't perfect emitters, and margin is kept). By that number our 800W chip wants ~2.8 m² of radiator, a bit more than the 2 m² it rides on. So let's be honest: the idealized figure we compute in a moment is on the optimistic side, and 2 m² is *marginal* — in practice you'd size the radiator a little larger, or let it run a little warmer. Right ballpark, but tight. 🤖[slim down this paragraph, way too long]
 
 So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
 
@@ -86,37 +86,17 @@ The cells run at ~97°C — they survive, but lose roughly ~10% of their efficie
 
 So insulation is a real trade, not a free win: it buys a cooler **GPU** (35–55°C) at the price of **hotter, less efficient solar cells** (97°C). Skip it, and the heat budget is shared — cells at a comfortable 58°C, GPU at a perfectly safe 70–85°C, and the slab is simpler to build. For a data center where generated watts are the whole point, the **plain uninsulated slab is probably the sweet spot**. Either way the chip stays well inside silicon's limits — the heat pipe has turned the scary "concentrated heat" problem into a non-issue.
 
-## Debunking #3: "Hardware fails and you can't send a technician"
+## How to repair in space
 
-True, though irrelevant. Terrestrial data centers don't repair individual GPUs either — they run a server until it's decommissioned, then replace the whole thing. The only difference in orbit is that "replace" means "deorbit", you also save on recycling cost. 
+Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips, maybe even have automatic de-orbiting capabilities when certain keep-alive signals stops arriving at those orbiting slabs.
 
-So model it as attrition. Assume some annual failure rate from radiation and thermal cycling. You don't deorbit the satellite when the first chips die — you keep going until enough died that the revenue it generates is lower than the cost to keep it in the orbit.
+🤖[what about space ray negatively affecting life cycle of those electronic devices in space?]
 
-There's even a happy accident here. A low Earth orbit at ~550 km naturally decays in about five years from atmospheric drag — which is roughly the economic life of a chip. End-of-life disposal is **free and automatic**: the satellite deorbits itself right as the silicon goes obsolete. 
+I suspect there are a lot of software issues to be solved in a space oriented data center, a lot more automation's needed as human can't intervene physically. There are also different constraints and trade offs of where the data and computation capabilities is. 
 
-## Debunking #4: "Link speed, how do you get petabytes up there"
+## How expensive is launching those data center slabs into space?
 
-This one dissolves the moment you separate the two workloads.
-
-**Training** runs on a static dataset reused over many epochs. So ingest it _once_ — physically ship the "disks" on the same launch. A few petabytes of flash masses kilograms. And in a world of real space data center consternation, you would have regular launches, multiple times a day, so it's just "logistics". 
-
-**Inference** is not data intensive to begin with, mostly compute, and the free solar power helps a lot.
-
-How about all the multimedia? Those stay terrestrial for now. 
-
-## Debunking #5: "Latency makes inference impossible"
-
-The objection that _sounds_ most physical, and mostly evaporates because of how inference actually works: **modern LLM serving streams.** You pay the network round-trip once — request goes up, first token comes down — and then tokens flow continuously as they're generated. So latency only adds to time-to-first-token, not to the gaps between tokens. And the response already takes seconds.
-
-| Orbit | Round-trip latency | Verdict for chat |
-|---|---|---|
-| GEO (~35,800 km) | ~240 ms | +240 ms to first token — ~8% of a 3s reply. Fine. No handoff, always overhead. |
-| MEO (~8,000 km) | ~55 ms | Comfortable. |
-| LEO (~550 km) | ~4 ms | Trivial — but satellites move, so sessions need handoff. |
-
-For anything conversational, even GEO's quarter-second is buried under the model's own thinking time. The slice that genuinely _doesn't_ fit is real-time voice and live interactive work, where 240 ms is audible — and that slice is exactly what the LEO tier picks back up at 4 ms. The "latency kills it" claim is true only for a narrow band, and that band has its own answer.
-
-## Debunking #6: "Launch is prohibitively expensive"
+🤖[we should rewrite this section, start with looking at current Falcon 9 cost to send such a slab into LEO. we start by estimating the weight of a 2m² solar panel, with heat pipe and a computer with H100 GPU and then some, for example some thruster so that the satellite is manuvarable, make a good estimate first. then estimate current Falcon 9 cost, and stated goal of Starship.]
 
 The headline objection — and the one most thoroughly overtaken by events. Yes, launch is the gating cost _today_. But it's also the cost falling fastest, and the framing hides something. 🤖[provide some number based on Falcon 9 reusable rocket's launch price]{Falcon 9 reusable ≈ $3,000/kg (SpaceX's own marginal cost likely ~$1,500). At ~3.5 kg per H100-equivalent that's ~$5–10k of launch per chip — already under the ~$25k chip itself, and offset by the ~$2.6k of 5-yr ground power you skip. So it pencils out on Falcon 9 *today*; Starship (~$200/kg → ~$700/chip) just makes launch a rounding error — the "you don't need Starship" point. Want a Falcon 9 row added to the table?}
 
