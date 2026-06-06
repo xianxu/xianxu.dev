@@ -12,7 +12,7 @@ highlight: true
 Is space data center a great idea, a stupid idea, or something in between? 
 I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, etc._ All sound somewhat reasonable. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. On the other hand, you don't need Starship to do it, as it's not the main bottleneck.
 
-This, btw, is another use my "brain extension". AI taught me bunch of things along the way, and I pushed back on bunch of its originally framing, all double checked by the 3 main AIs. I did author this post myself.
+This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency and intent). I did author this post myself in an AI assisted flow I'll make another post about.
 
 ## The nice things about space
 
