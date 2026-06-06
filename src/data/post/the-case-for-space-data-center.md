@@ -58,7 +58,9 @@ That, in one number, is the whole GPU-in-space problem: how to get that 800W rad
 
 The trick is to use **heat pipe**, a decades-old design in spaceflight.  
 
-A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a **wick** — a porous lining on the inner wall (sintered metal powder, fine mesh, or micro-grooves) — draws the liquid back to the hot end by capillary action, the same way a paper towel pulls water uphill. It's purely passive: no pump, no moving parts, no maintenance. And ammonia thermal control is proven at scale: the International Space Station rejects ~70 kW of waste heat through six deployable ammonia radiators, each about 3 × 13.6 m — on the order of 250 m² of radiator in all. One honest caveat on the analogy: at that scale the ISS uses *pumped* single-phase ammonia loops, not passive heat pipes — but for a single ~800W chip we're nowhere near needing a pump; a passive heat pipe or vapor chamber handles it easily (the GPU in your desktop already sits on one). Scaled down, that's ~280 W rejected per m² of radiator — a *real-world* yardstick that already bakes in operating losses (the radiator also soaks up Earth's own infrared glow, surfaces aren't perfect emitters, and margin is kept). By that number our 800W chip wants ~2.8 m² of radiator, a bit more than the 2 m² it rides on. So let's be honest: the idealized figure we compute in a moment is on the optimistic side, and 2 m² is *marginal* — in practice you'd size the radiator a little larger, or let it run a little warmer. Right ballpark, but tight. 🤖[slim down this paragraph, way too long]
+A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
+
+A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
 So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
 
@@ -90,27 +92,37 @@ So insulation is a real trade, not a free win: it buys a cooler **GPU** (35–55
 
 Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips, maybe even have automatic de-orbiting capabilities when certain keep-alive signals stops arriving at those orbiting slabs.
 
-🤖[what about space ray negatively affecting life cycle of those electronic devices in space?]
+What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and managed problem. Two effects matter: *single-event upsets* (a stray particle flips a bit) and *total ionizing dose* (cumulative damage that slowly ages the silicon). The first is mostly a software problem — datacenter GPUs already ship with error-correcting memory, and you add watchdog resets and fleet-level redundancy. The second is the real lifecycle limiter, but in **low Earth orbit it's relatively mild**: Earth's magnetic field deflects most of the flux (it's why the ISS runs ordinary electronics), and a few millimeters of shielding plus the slab's own structure buys margin. Over a ~5-year life the chip is far likelier to hit *economic* obsolescence than radiation death — so it folds into the same "tolerate attrition, fly down the curve, then deorbit" model.
 
 I suspect there are a lot of software issues to be solved in a space oriented data center, a lot more automation's needed as human can't intervene physically. There are also different constraints and trade offs of where the data and computation capabilities is. 
 
 ## How expensive is launching those data center slabs into space?
 
-🤖[we should rewrite this section, start with looking at current Falcon 9 cost to send such a slab into LEO. we start by estimating the weight of a 2m² solar panel, with heat pipe and a computer with H100 GPU and then some, for example some thruster so that the satellite is manuvarable, make a good estimate first. then estimate current Falcon 9 cost, and stated goal of Starship.]
+🤖{heads-up — the bottom-up estimate below puts launch at ~$30–70k per H100 on *Falcon 9*, comparable to or above the $25k chip. That's in tension with the intro's "you DON'T need Starship." Honest read: marginal on Falcon 9 (works only at SpaceX's *internal* cost), clear win on Starship. Suggest softening the intro to something like "Starship makes it a slam-dunk, though it's not strictly required." Your call — or push back on my mass numbers.}
 
-The headline objection — and the one most thoroughly overtaken by events. Yes, launch is the gating cost _today_. But it's also the cost falling fastest, and the framing hides something. 🤖[provide some number based on Falcon 9 reusable rocket's launch price]{Falcon 9 reusable ≈ $3,000/kg (SpaceX's own marginal cost likely ~$1,500). At ~3.5 kg per H100-equivalent that's ~$5–10k of launch per chip — already under the ~$25k chip itself, and offset by the ~$2.6k of 5-yr ground power you skip. So it pencils out on Falcon 9 *today*; Starship (~$200/kg → ~$700/chip) just makes launch a rounding error — the "you don't need Starship" point. Want a Falcon 9 row added to the table?}
+Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A rough mass budget:
 
-Take a 1 km² array at ~2 kg/m² — about 2,000 tonnes, or 15–20 Starship loads. Spread across the about ~600,000 H100-equivalents of compute that array can power, that's  ~3 kg of launched mass per chip. Now price the launch:
+| Component | Mass |
+|---|---|
+| Solar array, 2 m² | ~3 kg |
+| Radiator + heat pipes, 2 m² | ~3 kg |
+| Compute — H100 + board + memory + power + NIC (no Earth-style cooling) | ~4 kg |
+| Structure / frame | ~2 kg |
+| Avionics + laser comms + attitude control | ~3 kg |
+| Electric thruster + propellant + eclipse battery | ~3 kg |
+| **Total per H100** | **~18–20 kg** |
 
-| Launch price | Cost per chip-equivalent | vs. the $25k chip |
-|---|---|---|
-| $1000/kg (near-term) | ~$3,100 | 12% |
-| $200/kg (Starship target) | ~$620 | 2.5% |
-| $50/kg (aspirational) | ~$155 | 0.6% |
+That's ~5× heavier than a bare solar array would suggest — dense compute, a real radiator, and a maneuvering bus dominate, not the panel. Now the launch bill, at ~20 kg per chip:
 
-Now compare that to what it _replaces._ A terrestrial GPU burns ~700 W, ~1 kW after cooling overhead, over a five-year life — roughly **$2,600 of electricity** at $0.06/kWh, plus the chillers and the grid hookup. Look at those two numbers: at Starship-target prices, the cost to _launch_ a chip (~$620) is **smaller than the electricity you'd have spent running it on the ground** (~$2,600). They roughly cancel, and both are noise next to the $25k of silicon.
+| Vehicle | Cost to LEO | Per H100-unit | vs. the $25k chip |
+|---|---|---|---|
+| Falcon 9, list price | ~$3,500/kg | **~$70,000** | ~3× |
+| Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~1.2× |
+| Starship, stated goal | ~$100/kg | **~$2,000** | ~8% |
 
-So "launch cost is the only problem" is nearly the opposite of true at maturity. Launch ≈ the energy bill you avoid. Once it's even moderately cheap, it stops being the deciding term.
+So the honest picture is sharper than "launch is cheap." On Falcon 9 at list price, lofting one H100 costs **more than the chip itself** — launch is the single biggest line item, not a rounding error. At SpaceX's internal cost it's roughly a wash with the silicon. It's **Starship's ~$100/kg goal that collapses launch to ~$2,000** — genuinely negligible, and well under the ~$2,600 of ground electricity you'd avoid over five years.
+
+The takeaway is more honest than triumphal: launch isn't *prohibitive* — even on Falcon 9 it's the same order as the chip, recoverable over years of the asset earning — but it isn't free either. **Starship is what turns the space data center from "marginal" into "obvious."**
 
 ## Well, there are still some real problems. 
 
