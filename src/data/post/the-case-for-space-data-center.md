@@ -30,45 +30,43 @@ Picture the simplest possible configuration: a slab of solar panel. Chips embedd
 
 Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Let's do some math. 
 
-### Base model v0: a bare slab in the sun
+### Model v0: a bare slab in the sun
 
-Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face. The slab soaks that up and re-radiates it as infrared — and it radiates from **both** faces, since the sun blocks only a negligible sliver of the front's view of cold space. A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
+Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face, if perfectly facing the sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
 
 $$
 S = 2\,\varepsilon\sigma T^4 \quad\Rightarrow\quad T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
 $$
 
-Fifty-eight degrees. A bare slab in full sun just sits at about 58°C — a perfectly fine temperature for electronics, and we haven't lifted a finger to cool it. (Let it radiate from only one face and you'd get ~120°C; using both faces is what buys the comfortable number.) So the lazy "you can't lose heat in space" is simply wrong — space sheds the entire solar load at a benign temperature. **Shedding capacity is not the problem.**
+Fifty-eight degrees. A bare slab in full sun just sits at about 58°C — a perfectly fine temperature for electronics, and we haven't lifted a finger to cool it. 
 
-### Base model v1: now turn 30% into a GPU
+### Model v1: now turn 30% into a GPU
 
-Now make it a data center. A good space solar cell turns ~30% of that sunlight into electricity, the electricity runs a GPU, and the GPU turns essentially all of it back into heat. The *total* energy hasn't changed — but now it matters enormously **where** the heat appears.
+Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1m². A good space solar cell turns ~30% of that sunlight (~400W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The *total* energy hasn't changed but its distribution changes, and this change affect how hot our GPU is going to be.
 
-One NVIDIA H100 draws ~700–800W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this base model we allow **no heat conduction**: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800W forced out through 0.1 m²:
+One NVIDIA H100 draws ~700–800W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800W forced out through 0.1 m²:
 
 $$
 T_\text{GPU} = \left(\frac{Q}{\varepsilon\sigma A_\text{chip}}\right)^{1/4} = \left(\frac{800}{5.67\times10^{-8}\times 0.1}\right)^{1/4} \approx 613\ \mathrm{K} \approx 340\,^\circ\mathrm{C}
 $$
 
-The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up the ghost above ~100°C. (Even generously letting it radiate from both faces only brings it down to ~240°C — still cooked.)
+The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up above ~100°C.
 
-That, in one number, is the whole GPU-in-space problem. It was never about whether space can absorb the heat — v0 already settled that. It's that the heat is **born in a tiny spot with nowhere to go**. Everything that follows — heat pipes, spreading the silicon thin — is about getting that 800W *out of the 0.1 m² and onto the slab that's already happy to radiate it.*
+That, in one number, is the whole GPU-in-space problem: how to get that 800W radiate out from that 0.1m² surface, and keep at silicon's operation temperature range.
 
-## How to move heat from GPU to the back of solar panel
+## How to move heat from GPU
 
-So, at equilibrium, we can stay cool just putting a slab in space. Running GPU cause on other real problem we need to solve: GPU will generate heat in a very concentrated way. How to move heat fast enough from that point to rest of heat sink to be radiated away? Some math:
+The trick is to use **heat pipe**, a decade old design in spaceflight. 
 
-Our solar panel will receive 1361 W/m², at 30% conversion efficiency, and take a conservative number at ~400W/m². We need about 700W to support one NVidia's H100, so about 2m². The H100 as a heat source is tiny, its surface is only about 0.1m². And remember the chips sit on the back of the slab; the front is busy collecting sunlight, so we really only have that one back face to dump the chip's heat into space. So the problem is: move 700W from a 0.1m² hot spot out across the whole 2m² back panel, fast enough that the chip doesn't melt.
+A heat pipe is a sealed tube with a little working fluid inside. In space, it's usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a wick draws 🤖[what do you mean a wick, how does this work, is it something mechanical, or purely passive] the liquid back to do it all over again. No pump, no moving parts, no maintenance. And this isn't exotic: it's how the International Space Station rejects its ~70+ kW of waste heat — ammonia loops carrying heat out to big radiator panels. 🤖[then how big is the heat pipe for ISS. that's a reference point of what works in practice?]
 
-The trick isn't to find a better metal — it's the **heat pipe**, and it's worth knowing what it actually is, because it isn't really "conduction" at all. A heat pipe is a sealed tube with a little working fluid inside — in space, usually **ammonia**. At the hot end the fluid boils, soaking up a lot of heat as it evaporates; the vapor rushes to the cold end and condenses, dumping that heat into the radiator; and a wick draws the liquid back to do it all over again. No pump, no moving parts — it's driven entirely by capillary action, which is exactly why it keeps working in zero gravity where you can't rely on anything to fall. The whole tube stays nearly the same temperature end to end, so it behaves like a "conductor" hundreds of times better than copper, without copper's crushing weight. This isn't exotic: it's how the International Space Station rejects its ~70+ kW of waste heat — ammonia loops carrying heat out to big radiator panels.
+So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. 🤖[verify numbers]
 
-So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 700W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**.
-
-Now the back panel just has to radiate those 700W into space from its one available face:
+Now the back panel just has to radiate those 800W into space from its one available face:
 
 $$
 T_\text{rad} = \left(\frac{Q}{\varepsilon\sigma A}\right)^{1/4} = \left(\frac{700}{0.9 \times 5.67\times10^{-8} \times 2}\right)^{1/4} \approx 288\ \mathrm{K} \approx 15\,^\circ\mathrm{C}
-$$
+$$ 🤖[verify numbers, I changed from 700 to 800]
 
 That's just 350 W/m², a light load, so the radiator sits at a chilly ~15°C and the GPU — one heat-pipe hop away — lands at roughly **25–45°C**. Comfortable, with margin to spare. (One honest caveat: this assumes the cool back radiator is thermally separated from the hot sun-facing front. If the whole slab is instead one big lump of conductor, front and back average out toward the ~58°C we found earlier, and the GPU rides at ~70–85°C — still perfectly fine. Either way, the heat pipe turns the scary "concentrated heat" problem into a non-issue.)
 
