@@ -2,7 +2,7 @@
 title: The Case for Space Data Centers
 publishDate: 2026-06-05
 published: false
-excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it is matter of time to run data centers in space, and you also realize, you don't need Starship to do it. "
+excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it is matter of time to run data centers in space, and you also realize, you DON'T need Starship to do it. "
 tags:
   - tech
   - ai
@@ -10,13 +10,17 @@ highlight: true
 ---
 
 Is space data center a great idea, a stupid idea, or something in between? 
-I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, etc._ All sound somewhat reasonable. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. On the other hand, you don't need Starship to do it, as it's not the main bottleneck.
+I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, too expensive to launch data centers into space, etc._ All sound reasonable on surface. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. On the other hand, you don't need Starship to do it, as it's not the main bottleneck.
 
-> This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency and intent). I did author this post myself in an AI assisted flow I'll make another post about.
+> This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency and intent). I did author this post myself in an AI assisted flow I'll make another post about. 
+
+---
 
 ## The nice things about space
 
 First of all, the allure of space is the eternal sun-shine, 24/7, without atmosphere (thus stronger), without cloudy days, without hurricanes, and most important: without nights. So a space data center can be powered largely for free, probably not even need much battery backups for its operation. It's like the perfect environment for silicon lives! 
+
+Now, the question is, can we engineer our way out of the other engineering and economical issues, to really put data center in space. Let's take a look.
 
 ## The form factor assumption
 
@@ -24,7 +28,9 @@ Picture the simplest possible configuration: a slab of solar panel. Chips embedd
 
 ## How do you cool things in space
 
-Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, have a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. Not quite, it turns out space is also really really code, like near absolute zero cold. There radiation helps to cool things down, slowly. Is it enough? Let's do some math: 
+Cooling things on earth often is about moving cooler air/fluid through surface of a hot object. When you are sweating, use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Let's do some math. 
+
+🤖[we should start establish the base model v0 here, e.g. how much sun's energy would land per m², and first establish the equilibrium temperature of a slab, the we add next model v1, that solar generation efficiency at 30%, and we move that 30% to 0.1 m² GPU, without any heat conduction, what's the GPU temperature, this establish the gist of GPU in space problem]
 
 A surface at temperature $T$ radiates power per unit area according to Stefan–Boltzmann: $P = \varepsilon\sigma T^4$, where $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$ and $\varepsilon$ is emissivity (~1 for a good radiator). At Earth's orbit, the sun delivers about $S = 1361\ \mathrm{W/m^2}$. A solar panel at ~30% efficiency turns that into roughly $400\ \mathrm{W/m^2}$ of electricity, which feeds the chips and comes back out as heat.
 
