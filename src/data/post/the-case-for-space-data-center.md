@@ -111,7 +111,25 @@ So the verdict flips from where we started, and the physics didn't lie: launch e
 
 ## Can we make it lighter?
 
-🤖[fold in your analysis on making the slab solar computer lighter weight and implication of cost.]
+Launch is billed by the kilogram, so mass *is* the game — and a datacenter GPU's weight is mostly things space lets you throw away. On the ground a server is largely chassis, fans, finned heatsinks, and power supplies; in orbit the slab itself is the heatsink, there's nothing to fan, and solar power arrives as DC so you feed the chip almost directly — no heavy PSUs. Strip it to bare die on a vapor chamber with a minimal shared host. The same logic runs through every component:
+
+| Component | Earth-style | In orbit |
+|---|---|---|
+| Compute (GPU + board + power) | ~4 kg | ~1.5 kg — no chassis/fans/PSU, bare-die |
+| Solar array, 2 m² | ~3 kg | ~1.5 kg — thin-film (~1 kg/m²) |
+| Radiator | ~3 kg | ~1.5 kg — doubles as structure; run it hotter to shrink it |
+| Structure | ~2 kg | ~1 kg — zero-g, only launch loads to survive |
+| Bus (avionics, comms, attitude, thruster, battery) | ~6 kg | ~1 kg — amortized over thousands of chips per platform; a dawn–dusk sun-synchronous orbit has no eclipse, so almost no battery |
+| **Per H100** | **~18–20 kg** | **~6–8 kg** |
+
+None of that needs new physics — it's mostly *deleting* terrestrial overhead and sharing one satellite bus across thousands of chips. Call it a ~3× cut, with a hard floor near ~5 kg (the HBM stack, the die, and the minimum panel and radiator can't vanish).
+
+And it pulls the launch math right back. At ~7 kg per chip:
+
+- **Falcon 9, list price** (~$3,500/kg) → ~**$25k** — now roughly the price of the chip itself, instead of ~3× it.
+- **Starship goal** (~$100/kg) → ~**$700** — pocket change.
+
+So lightweighting doesn't overturn the verdict — you still want Starship — but it moves Falcon 9 from "launch costs triple the chip" to "launch ≈ the chip," and makes the Starship case a slam-dunk. Mass is the highest-leverage knob in the whole design.
 
 ## Well, there are still some real problems. 
 
