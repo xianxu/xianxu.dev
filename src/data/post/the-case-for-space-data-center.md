@@ -2,7 +2,7 @@
 title: The Case for Space Data Centers
 publishDate: 2026-06-05
 published: false
-excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it is matter of time to run data centers in space, and you also realize, you DON'T need Starship to do it. "
+excerpt: "With SpaceX IPO looming, let's take a look at the case of space data center. And as you poke around, you realize it's a matter of time before we run data centers in space — and that you really DO need Starship to pull it off. (Maybe buy the stock.)"
 tags:
   - tech
   - ai
@@ -10,7 +10,7 @@ highlight: true
 ---
 
 Is space data center a great idea, a stupid idea, or something in between? 
-I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, too expensive to launch data centers into space, etc._ All sound reasonable on surface. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. On the other hand, you don't need Starship to do it, as it's not the main bottleneck.
+I haven't heard about why it would work much, but plenty of: _you can't cool anything in space, you can't fix things in space, too expensive to launch data centers into space, etc._ All sound reasonable on surface. But with SpaceX going IPO, I decide to take a closer look, and boy, it's intriguing. I realize it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems. With one real catch: the whole thing hinges on launch cost — so you *do* need Starship to make it pencil out. (Maybe buy the stock.)
 
 > This, btw, is another use my "brain extension" (nous/brain). AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency and intent). I did author this post myself in an AI assisted flow I'll make another post about. 
 
@@ -62,7 +62,7 @@ A heat pipe is a sealed tube holding a little working fluid — in space, usuall
 
 A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
-So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. 🤖[how is this 10-30°C computed?]
+So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. (That's not a clean formula — it's the pipe's thermal resistance times the load: a good vapor chamber runs ~0.01–0.04 °C per watt, so at 800W that's ~10–30°C, almost all of it at the two end interfaces, since the vapor transport itself is nearly isothermal.)
 
 Now the back panel just has to radiate those 800W into space from back face of the slab:
 $$
@@ -85,8 +85,6 @@ I suspect there are a lot of software issues to be solved in a space oriented da
 
 ## How expensive is launching those data center slabs into space?
 
-🤖{heads-up — the bottom-up estimate below puts launch at ~$30–70k per H100 on *Falcon 9*, comparable to or above the $25k chip. That's in tension with the intro's "you DON'T need Starship." Honest read: marginal on Falcon 9 (works only at SpaceX's *internal* cost), clear win on Starship. Suggest softening the intro to something like "Starship makes it a slam-dunk, though it's not strictly required." Your call — or push back on my mass numbers.}[we should compare not against the cost of the chip, but the total ownership cost over say 5 years, e.g. the amount of energy consumed by 800W appliances over 5 years]
-
 Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A rough mass budget:
 
 | Component | Mass |
@@ -101,15 +99,15 @@ Let's estimate it bottom-up, for one **2 m² slab carrying a single H100**. A ro
 
 That's ~5× heavier than a bare solar array would suggest — dense compute, a real radiator, and a maneuvering bus dominate, not the panel. Now the launch bill, at ~20 kg per chip:
 
-| Vehicle | Cost to LEO | Per H100-unit | vs. the $25k chip |
+| Vehicle | Cost to LEO | Per H100-unit | vs. 5-yr ground energy (~$3.5k) |
 |---|---|---|---|
-| Falcon 9, list price | ~$3,500/kg | **~$70,000** | ~3× |
-| Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~1.2× |
-| Starship, stated goal | ~$100/kg | **~$2,000** | ~8% |
+| Falcon 9, list price | ~$3,500/kg | **~$70,000** | ~20× |
+| Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~9× |
+| Starship, stated goal | ~$100/kg | **~$2,000** | ~0.6× |
 
-So the honest picture is sharper than "launch is cheap." On Falcon 9 at list price, lofting one H100 costs **more than the chip itself** — launch is the single biggest line item, not a rounding error. At SpaceX's internal cost it's roughly a wash with the silicon. It's **Starship's ~$100/kg goal that collapses launch to ~$2,000** — genuinely negligible, and well under the ~$2,600 of ground electricity you'd avoid over five years.
+What's the right yardstick? Not the chip's $25k sticker — what you're really buying is ~5 years of *running* that GPU, which on the ground costs real money. Just the electricity for an 800W GPU over five years is ~35,000 kWh ≈ **$3,500** (nearer $5,000 with cooling) — and in orbit the sun delivers it for free. That's the last column above: on Falcon 9, launch costs ~9–20× the energy it would save; only at **Starship's ~$100/kg does launch (~$2,000) drop *below* the five years of energy it replaces** — and that's before counting free cooling and skipping the multi-year grid-interconnect queue.
 
-The takeaway is more honest than triumphal: launch isn't *prohibitive* — even on Falcon 9 it's the same order as the chip, recoverable over years of the asset earning — but it isn't free either. **Starship is what turns the space data center from "marginal" into "obvious."**
+So the verdict flips from where we started, and the physics didn't lie: launch economics are the real gate. **You do need Starship** — and if it all works, maybe buy the stock.
 
 ## Well, there are still some real problems. 
 
