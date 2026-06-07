@@ -19,7 +19,9 @@ Is space data center a great idea, a stupid idea, or something in between? I hav
 
 First of all, the allure of space is the eternal sunshine, 24/7 (if we go with sun-synchronous orbit [^SSO]), without atmosphere (thus more energy), without cloudy days, without hurricanes. So a space data center can be powered largely for free. It's like the perfect environment for silicon "lives"! 
 
-Now, the question is, can we engineer our way out of the engineering and economic challenges to really put a data center in space. Let's take a look.
+Now, the question is, can we engineer our way out of the engineering and economic challenges to really put a data center in space. Will it be economically viable? 
+
+Let's take a look. 
 
 ## The form factor assumption
 
@@ -98,6 +100,9 @@ Well, you don't, I suspect we will just design software systems to tolerate part
 What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. LEO still benefits from Earth's magnetic shielding — which is why the ISS can run plenty of commercial, off-the-shelf electronics. As with computer components, you don't need to design components for too long a life cycle, as it will be economically obsolete in 5 years. 
 
 I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation is needed, since humans can't intervene physically. There are also different constraints and trade-offs in where the data and the computation live. 
+
+## Manufacturing cost
+I don't have much data, except to project from the cost of building Starlink satellite (sans the expensive H100). 🤖[put the number we talked about here.]
 
 ## The civilizational competition: China vs USA
 
