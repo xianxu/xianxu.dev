@@ -81,7 +81,7 @@ First, we need to figure out how heavy it is. Let's estimate it bottom-up, for o
 | Electric thruster + propellant + eclipse battery | ~3 kg |
 | **Total per H100** | **~18–20 kg** |
 
-Is ~10 kg/m² realistic? A current Starlink V2 Mini is a good yardstick: it masses ~800 kg and unfolds ~120 m² of solar array[^starlink] — about **6.7 kg/m²** for a real, flying satellite, bus and Hall thrusters and comms payload included. Our slab lands near **10 kg/m²**, but it also carries dense compute and a radiator that Starlink doesn't — so ~20 kg per H100 is a sane, even slightly conservative figure, not wishful thinking.
+Is ~10 kg/m² realistic? Yes — a real, flying Starlink satellite comes in around **6.7 kg/m²** (more on that in the Starlink calibration below); our slab's extra mass is just the dense compute and radiator Starlink doesn't carry. So ~20 kg per H100 is a sane, even slightly conservative figure — not wishful thinking.
 
 To launch ~20 kg to space[^falcon9]:
 
@@ -101,7 +101,7 @@ What about radiation — cosmic rays and solar particles wearing the chips down?
 
 I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation is needed, since humans can't intervene physically. There are also different constraints and trade-offs in where the data and the computation live. 
 
-## Manufacturing cost, and Calibration against Starlink
+## Manufacturing cost: calibrating against Starlink
 
 A current Starlink V2 Mini is the closest real, flying yardstick — a comparable satellite platform, minus the expensive compute:
 
@@ -113,7 +113,7 @@ A current Starlink V2 Mini is the closest real, flying yardstick — a comparabl
 | Build cost (bus only) | ~$0.25–0.5M[^starlink-cost] |
 | Launch share (~22 per Falcon 9) | ~$1M |
 
-Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part, when you add in expensive chip like GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
+Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part — once you add an expensive chip like a GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
 
 ## The civilizational competition: China vs USA
 
@@ -123,7 +123,7 @@ If we believe we'll need ~1 billion H100s — roughly one per person in the adva
 
 On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have around 30 reactors under construction[^nuclear]). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
 
-On the other hand, it's harder to muster the political will in US to build out on the ground. Too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different opinions of the future demands. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. It's intriguing the "market" is willing to award 1.7 trillion dollars [^IPO] to bet on such an orbital data center, as if the market already picked such a path. 
+On the other hand, it's harder to muster the political will in US to build out on the ground. Too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different views of future demand. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. It's intriguing the "market" is willing to award 1.7 trillion dollars [^IPO] to bet on such an orbital data center, as if the market already picked such a path. 
 
 Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
 
