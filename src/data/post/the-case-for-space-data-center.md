@@ -9,25 +9,25 @@ tags:
 highlight: true
 ---
 
-Is space data center a great idea, a stupid idea, or something in between? I haven't heard much about why it would work, but plenty of naysayers, for example, there's no air to cool things off in space. With SpaceX going IPO, I decide to take a closer look, and it's intriguing. My prediction is it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems left. Let's take a look at the feasibility and cost perspective. 
+Is space data center a great idea, a stupid idea, or something in between? I haven't heard much about why it would work, but plenty of naysayers, for example, there's no air to cool things off in space. With SpaceX going IPO, I decide to take a closer look, and it's intriguing. 🤖~My prediction is it is just a matter of time for us to run data centers in space, it makes a lot of sense and "merely" engineering problems left.~{My prediction: it's just a matter of time before we run data centers in space. It makes a lot of sense — there are "merely" engineering problems left.} Let's take a look at the feasibility and cost perspective. 
 
-> This, btw, is another use my "brain extension" (nous/brain) [^brain]. AI taught me bunch of things along the way (facts, maths), and I pushed back a bunch (long range logical consistency, intent, compare to terrestrial data centers etc.). I did author this post myself in an AI assisted flow I'll make another post about. 
+> This, btw, is another use my "brain extension" (nous/brain) [^brain]. 🤖~AI taught me bunch of things along the way~{AI taught me a bunch of things along the way} (facts, maths), and I pushed back a bunch (long range logical consistency, intent, compare to terrestrial data centers etc.). I did author this post myself in an AI assisted flow I'll make another post about. 
 
 ---
 
 ## The nice things about space
 
-First of all, the allure of space is the eternal sun-shine, 24/7 (if we go with sun-synchronous orbit [^SSO]), without atmosphere (thus more energy), without cloudy days, without hurricanes. So a space data center can be powered largely for free. It's like the perfect environment for silicon "lives"! 
+First of all, 🤖~the allure of space is the eternal sun-shine~{the allure of space is the eternal sunshine}, 24/7 (if we go with sun-synchronous orbit [^SSO]), without atmosphere (thus more energy), without cloudy days, without hurricanes. So a space data center can be powered largely for free. It's like the perfect environment for silicon "lives"! 
 
-Now, the question is, can we engineer our way out of the engineering and economical challenges, to really put data center in space. Let's take a look.
+Now, the question is, 🤖~can we engineer our way out of the engineering and economical challenges, to really put data center in space.~{can we engineer our way out of the engineering and economic challenges to really put a data center in space.} Let's take a look.
 
 ## The form factor assumption
 
-Picture the simplest possible configuration: a slab of solar panel. Chips embedded on the backside of it, away from the sun. The sun-facing side captures the energy; and both sides radiate them away, leveraging the coldness of the space. That's it, just a slab, that looks like the solar panels on your roof, as large as rocket can send them up without any mechanical folding.
+Picture the simplest possible configuration: a slab of solar panel. Chips embedded on the backside of it, away from the sun. The sun-facing side captures the energy; and both sides radiate them away, leveraging the coldness of the space. That's it, just a slab, that looks like the solar panels on your roof, 🤖~as large as rocket can send them up without any mechanical folding.~{as large as a rocket can send up without any mechanical folding.}
 
 ## How do you cool things in space without air?
 
-Cooling things on earth often is about moving cooler air/fluid through surface of a hotter object. When you sweat, you use a fan. There's no air in space for you to fan, and some had used it as the death knell of the whole idea of space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There radiation cool things down. The question is: is it enough? Intuitively, if you got ejected in space without a space suite, you'd imagine you freeze pretty fast? Let's do some math. 
+🤖~Cooling things on earth often is about moving cooler air/fluid through surface of a hotter object.~{Cooling things on Earth is usually about moving cooler air or fluid across the surface of a hotter object.} When you sweat, you use a fan. There's no air in space for you to fan, and 🤖~some had used it as the death knell of the whole idea of space data center.~{some have used it as the death knell of the whole idea of a space data center.} That's lazy. Space is really really really cold, like near absolute zero kelvin cold. 🤖~There radiation cool things down.~{There, radiation cools things down.} The question is: is it enough? 🤖~Intuitively, if you got ejected in space without a space suite, you'd imagine you freeze pretty fast?~{Intuitively, if you were ejected into space without a space suit, you'd imagine you'd freeze pretty fast.} Let's do some math. 
 
 ### Model v0: a bare slab in the sun
 
@@ -41,7 +41,7 @@ Fifty-eight degrees. A bare slab in full sun just sits at about 58°C — a perf
 
 ### Model v1: now use that 30% electricity to power a GPU
 
-Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1m². A good space solar cell turns ~30% of that sunlight (~400W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The *total* energy hasn't changed but its distribution changes, and this change affect how hot our GPU is going to be.
+Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1m². A good space solar cell turns ~30% of that sunlight (~400W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). 🤖~The *total* energy hasn't changed but its distribution changes, and this change affect how hot our GPU is going to be.~{The *total* energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.}
 
 One NVIDIA H100 draws ~700–800W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800W forced out through 0.1 m²:
 
@@ -51,7 +51,7 @@ $$
 
 The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up above ~100°C.
 
-That, in one number, is the first GPU-in-space problem: how to get that 800W radiate out from that 0.1m² surface, and keep at silicon's operation temperature range.
+🤖~That, in one number, is the first GPU-in-space problem: how to get that 800W radiate out from that 0.1m² surface, and keep at silicon's operation temperature range.~{That, in one number, is the first GPU-in-space problem: how to get that 800W to radiate out from that 0.1m² surface and keep it within silicon's operating temperature range.}
 
 ## Model v2, a slab with heat pipe
 
@@ -59,11 +59,11 @@ It turns out this is solved by a decades-old design in spaceflight: heat pipe.
 
 A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
 
-A quick reality check on radiator size: the ISS ejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
+A quick reality check on radiator size: the ISS 🤖~ejects~{rejects} ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
 So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. (That's not a clean formula — it's the pipe's thermal resistance times the load: a good vapor chamber runs ~0.01–0.04 °C per watt, so at 800W that's ~10–30°C, almost all of it at the two end interfaces, since the vapor transport itself is nearly isothermal.)
 
-Now the back panel just has to radiate those 800W into space from back face of the slab, while also helping the front dissipating the rest ~2722W of sunlight. From base model v0, we know roughly the slab would be at **~58°C** in equilibrium temperature. The solar panel enjoys that cool 58°C, and the GPU sits one heat-pipe hop above → **~68–88°C**, within GPU's operating range.
+Now the back panel just has to radiate those 800W into space from 🤖~back face of the slab, while also helping the front dissipating the rest~{the back face of the slab, while also helping the front dissipate the rest} ~2722W of sunlight. From base model v0, we know roughly the slab would be at **~58°C** in equilibrium temperature. The solar panel enjoys that cool 58°C, and the GPU sits one heat-pipe hop above → **~68–88°C**, within GPU's operating range.
 
 ## How expensive is launching such a slab into LEO?
 
@@ -89,31 +89,31 @@ To launch ~20 kg to space:
 | Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~9× |
 | Starship, stated goal            | ~$100/kg   | ~$2,000  | ~0.6× |
 
-So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship to be advantageous. We probably can do better with the weight, for example, achieving Starlink's weight/area ratio at 6.7 kg/m².
+So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship to be advantageous. 🤖~We probably can do better with the weight, for example, achieving Starlink's weight/area ratio at 6.7 kg/m².~{And we can likely do better still on weight — thin-film arrays and sharing one satellite bus across many chips.}
 
 ## How to repair in space
 
 Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips. 
 
-What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. LEO orbit still benefit from earth's magnetic shielding, and why ISS runs with ordinary electronics. As with computer components, you don't need to design components for too long a life cycle, as it will be economically obsolete in 5 years. 
+What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. 🤖~LEO orbit still benefit from earth's magnetic shielding, and why ISS runs with ordinary electronics.~{LEO still benefits from Earth's magnetic shielding — which is why the ISS runs ordinary electronics.} As with computer components, you don't need to design components for too long a life cycle, as it will be economically obsolete in 5 years. 
 
-I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation's needed as human can't intervene physically. There are also different constraints and trade offs of where the data and computation capabilities is. 
+I suspect there are a lot of interesting software issues to be solved in a space oriented data center, 🤖~a lot more automation's needed as human can't intervene physically.~{a lot more automation is needed, since humans can't intervene physically.} 🤖~There are also different constraints and trade offs of where the data and computation capabilities is.~{There are also different constraints and trade-offs in where the data and the computation live.} 
 
 ## The civilizational competition: China vs USA
 
 When I think about space data center, I realize it's not that we don't know how to build data centers on earth, that part is easy. The messy part is how do you fund such dramatic build-up and where. Let's see some numbers.
 
-If we are to believe that we need 1 billion H100s, sort of one for each of human, we need about 1TW of power, about 30% of all electricity human currently has. 
+🤖~If we are to believe that we need 1 billion H100s, sort of one for each of human, we need about 1TW of power, about 30% of all electricity human currently has.~{If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates.} 
 
-On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have 30 nuclear power plants under construction). China has a strong central government that can marshal resources, if they decide to they need to build 1TW power supply, they will go build it. 
+On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have 30 nuclear power plants under construction). China has a strong central government that can marshal resources, 🤖~if they decide to they need to build 1TW power supply, they will go build it.~{if they decide they need 1 TW of power supply, they will go build it.} 
 
-On the other hand, the US seems simply can't muster political will to build it out on the ground, too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different projection of the future needs. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
+On the other hand, 🤖~the US seems simply can't muster political will~{the US simply can't muster the political will} to build it out on the ground, too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different projection of the future needs. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
 
 It's very interesting to see how this competition plays out!
 
 --- 
 
-PS: fun fact of SSO, a diagram generated by AI, to really illustrate the power of joined development of this blog post. 
+🤖~PS: fun fact of SSO, a diagram generated by AI, to really illustrate the power of joined development of this blog post.~{PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joint development behind this post.} 
 
 <figure style="margin:2rem auto;max-width:640px">
 <svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A sun-synchronous orbit: the satellite's orbit plane stays edge-on to the Sun all year, precessing about one degree per day as Earth travels around the Sun." style="width:100%;height:auto;color:currentColor">
@@ -152,3 +152,5 @@ PS: fun fact of SSO, a diagram generated by AI, to really illustrate the power o
 [^SSO]: Sun-synchronous orbit itself is a very clever trick.
 [^brain]: Briefly touched in [this post](./the-value-of-personal-data.md).
 [^birds]: Starship's launch was delayed by concern of harming some bird, not kidding. https://www.space.com/spacex-starship-florida-move-texas-birds-protection
+
+🤖{Two global/mechanical copy-edits I left un-markered to avoid clutter — reply "apply" and I'll sweep the whole post: (1) put a space before units everywhere — "800 W", "1 TW", "2 m²", "0.1 m²", "70 kW"; (2) capitalize **Earth** and **Sun** in prose. Both are cosmetic consistency only, no wording change.}
