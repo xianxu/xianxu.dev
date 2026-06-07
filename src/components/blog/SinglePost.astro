@@ -148,4 +148,17 @@ const { post, url } = Astro.props;
   .prose .footnotes a.data-footnote-backref {
     text-decoration: none;
   }
+  /* KaTeX display math: scroll horizontally instead of overflowing the
+     viewport on mobile (math can't auto-wrap mid-expression). */
+  .prose .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: 0.5rem; /* room so the scrollbar doesn't clip descenders */
+  }
+  @media (max-width: 640px) {
+    .prose .katex-display > .katex {
+      font-size: 0.9em; /* a touch smaller on phones, fewer equations need scrolling */
+    }
+  }
 </style>
