@@ -148,14 +148,27 @@ const { post, url } = Astro.props;
   .prose .footnotes a.data-footnote-backref {
     text-decoration: none;
   }
-  /* KaTeX display math: scroll horizontally instead of overflowing the
-     viewport on mobile (math can't auto-wrap mid-expression). */
+  /* KaTeX display math on narrow screens: scroll horizontally (math can't
+     auto-wrap mid-expression), with a visible scrollbar AND an edge shadow that
+     appears only when the equation overflows — so it's obvious there's more to
+     scroll, even with iOS's fade-away overlay scrollbars. Cover color is the
+     page bg (var adapts to dark mode); shadows are slate (readable on both). */
   .prose .katex-display {
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     padding-block: 0.5rem; /* room so the scrollbar doesn't clip descenders */
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.8) rgb(148 163 184 / 0.2);
+    background:
+      linear-gradient(to right, var(--aw-color-bg-page), transparent) 0 0 / 28px 100% no-repeat local,
+      linear-gradient(to left, var(--aw-color-bg-page), transparent) 100% 0 / 28px 100% no-repeat local,
+      radial-gradient(farthest-side at 0 50%, rgb(100 116 139 / 0.3), transparent) 0 0 / 14px 100% no-repeat scroll,
+      radial-gradient(farthest-side at 100% 50%, rgb(100 116 139 / 0.3), transparent) 100% 0 / 14px 100% no-repeat scroll;
   }
+  .prose .katex-display::-webkit-scrollbar { height: 8px; }
+  .prose .katex-display::-webkit-scrollbar-track { background: rgb(148 163 184 / 0.2); border-radius: 4px; }
+  .prose .katex-display::-webkit-scrollbar-thumb { background: rgb(148 163 184 / 0.75); border-radius: 4px; }
   @media (max-width: 640px) {
     .prose .katex-display > .katex {
       font-size: 0.9em; /* a touch smaller on phones, fewer equations need scrolling */
