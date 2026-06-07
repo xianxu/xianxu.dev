@@ -23,27 +23,27 @@ Now, the question is, can we engineer our way out of the engineering and economi
 
 ## The form factor assumption
 
-Picture the simplest possible configuration: a slab of solar panel. Chips embedded on the backside of it, away from the sun. The sun-facing side captures the energy; and both sides radiate them away, leveraging the coldness of the space. That's it, just a slab, that looks like the solar panels on your roof, as large as a rocket can send up without any mechanical folding.
+Picture the simplest possible configuration: a slab of solar panel. Chips embedded on the backside of it, away from the Sun. The Sun-facing side captures the energy; and both sides radiate them away, leveraging the coldness of the space. That's it, just a slab, that looks like the solar panels on your roof, as large as a rocket can send up without any mechanical folding.
 
 ## How do you cool things in space without air?
 
 Cooling things on Earth is usually about moving cooler air or fluid across the surface of a hotter object. When you sweat, you use a fan. There's no air in space for you to fan, and some have used it as the death knell of the whole idea of a space data center. That's lazy. Space is really really really cold, like near absolute zero kelvin cold. There, radiation cools things down. The question is: is it enough? Intuitively, if you were ejected into space without a space suit, you'd imagine you'd freeze pretty fast. Let's do some math. 
 
-### Model v0: a bare slab in the sun
+### Model v0: a bare slab in the Sun
 
-Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face, if perfectly facing the sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
+Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face, if perfectly facing the Sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
 
 $$
 S = 2\,\varepsilon\sigma T^4 \quad\Rightarrow\quad T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
 $$
 
-Fifty-eight degrees. A bare slab in full sun just sits at about 58°C — a perfectly fine temperature for electronics, and we haven't lifted a finger to cool it. 
+Fifty-eight degrees. A bare slab in full Sun just sits at about 58°C — a perfectly fine temperature for electronics, and we haven't lifted a finger to cool it. 
 
 ### Model v1: now use that 30% electricity to power a GPU
 
-Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1m². A good space solar cell turns ~30% of that sunlight (~400W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The total energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.
+Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1 m². A good space solar cell turns ~30% of that sunlight (~400 W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The total energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.
 
-One NVIDIA H100 draws ~700–800W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800W forced out through 0.1 m²:
+One NVIDIA H100 draws ~700–800 W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800 W forced out through 0.1 m²:
 
 $$
 T_\text{GPU} = \left(\frac{Q}{\varepsilon\sigma A_\text{chip}}\right)^{1/4} = \left(\frac{800}{5.67\times10^{-8}\times 0.1}\right)^{1/4} \approx 613\ \mathrm{K} \approx 340\,^\circ\mathrm{C}
@@ -51,19 +51,19 @@ $$
 
 The slab around it is at a comfortable 58°C, but the chip itself is a glowing **~340°C** spot — and silicon gives up above ~100°C.
 
-That, in one number, is the first GPU-in-space problem: how to get that 800W to radiate out from that 0.1m² surface and keep it within silicon's operating temperature range.
+That, in one number, is the first GPU-in-space problem: how to get that 800 W to radiate out from that 0.1 m² surface and keep it within silicon's operating temperature range.
 
 ## Model v2, a slab with heat pipe
 
 It turns out this is solved by a decades-old design in spaceflight: heat pipe. 
 
-A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
+A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800 W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
 
-A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
+A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800 W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
-So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800W from the 0.1m² chip out across the whole 2m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. (That's not a clean formula — it's the pipe's thermal resistance times the load: a good vapor chamber runs ~0.01–0.04 °C per watt, so at 800W that's ~10–30°C, almost all of it at the two end interfaces, since the vapor transport itself is nearly isothermal.)
+So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800 W from the 0.1 m² chip out across the whole 2 m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. (That's not a clean formula — it's the pipe's thermal resistance times the load: a good vapor chamber runs ~0.01–0.04 °C per watt, so at 800 W that's ~10–30°C, almost all of it at the two end interfaces, since the vapor transport itself is nearly isothermal.)
 
-Now the back panel just has to radiate those 800W into space from the back face of the slab, while also helping the front dissipate the rest ~2722W of sunlight. From base model v0, we know roughly the slab would be at **~58°C** in equilibrium temperature. The solar panel enjoys that cool 58°C, and the GPU sits one heat-pipe hop above → **~68–88°C**, within GPU's operating range.
+Now the back panel just has to radiate those 800 W into space from the back face of the slab, while also helping the front dissipate the rest ~2722 W of sunlight. From base model v0, we know roughly the slab would be at **~58°C** in equilibrium temperature. The solar panel enjoys that cool 58°C, and the GPU sits one heat-pipe hop above → **~68–88°C**, within GPU's operating range.
 
 ## How expensive is launching such a slab into LEO?
 
@@ -101,7 +101,7 @@ I suspect there are a lot of interesting software issues to be solved in a space
 
 ## The civilizational competition: China vs USA
 
-When I think about space data center, I realize it's not that we don't know how to build data centers on earth, that part is easy. The messy part is how do you fund such dramatic build-up and where. Let's see some numbers.
+When I think about space data center, I realize it's not that we don't know how to build data centers on Earth, that part is easy. The messy part is how do you fund such dramatic build-up and where. Let's see some numbers.
 
 If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates. 
 
@@ -152,5 +152,3 @@ PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joi
 [^SSO]: Sun-synchronous orbit itself is a very clever trick.
 [^brain]: Briefly touched in [this post](./the-value-of-personal-data.md).
 [^birds]: Starship's launch was delayed by concern of harming some bird, not kidding. https://www.space.com/spacex-starship-florida-move-texas-birds-protection
-
-🤖{Two global/mechanical copy-edits I left un-markered to avoid clutter — reply "apply" and I'll sweep the whole post: (1) put a space before units everywhere — "800 W", "1 TW", "2 m²", "0.1 m²", "70 kW"; (2) capitalize **Earth** and **Sun** in prose. Both are cosmetic consistency only, no wording change.}[go do it]
