@@ -31,7 +31,7 @@ Cooling things on Earth is usually about moving cooler air or fluid across the s
 
 ### Model v0: a bare slab in the Sun
 
-Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ onto the lit face, if perfectly facing the Sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
+Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$[^tsi] onto the lit face, if perfectly facing the Sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
 
 $$
 S = 2\,\varepsilon\sigma T^4 \quad\Rightarrow\quad T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
@@ -43,7 +43,7 @@ Fifty-eight degrees. A bare slab in full Sun just sits at about 58°C — a perf
 
 Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1 m². A good space solar cell turns ~30% of that sunlight (~400 W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The total energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.
 
-One NVIDIA H100 draws ~700–800 W, so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800 W forced out through 0.1 m²:
+One NVIDIA H100 draws ~700–800 W[^h100], so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800 W forced out through 0.1 m²:
 
 $$
 T_\text{GPU} = \left(\frac{Q}{\varepsilon\sigma A_\text{chip}}\right)^{1/4} = \left(\frac{800}{5.67\times10^{-8}\times 0.1}\right)^{1/4} \approx 613\ \mathrm{K} \approx 340\,^\circ\mathrm{C}
@@ -57,9 +57,9 @@ That, in one number, is the first GPU-in-space problem: how to get that 800 W to
 
 It turns out this is solved by a decades-old design in spaceflight: heat pipe. 
 
-A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW through ~250 m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800 W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
+A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW[^iss] through a couple hundred m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800 W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
 
-A quick reality check on radiator size: the ISS rejects ~280 W per m² — a real-world figure with losses baked in. By that yardstick our 800 W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
+A quick reality check on radiator size: the ISS rejects on the order of ~280 W per m² — a rough real-world benchmark (the exact area depends on how you count). By that yardstick our 800 W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
 So we put a heat pipe (or its flat cousin, a vapor chamber) between the GPU and the back panel. It carries the H100's 800 W from the 0.1 m² chip out across the whole 2 m² back with only a small temperature penalty — counting the losses where heat enters and leaves the pipe, in practice about **10–30°C**. (That's not a clean formula — it's the pipe's thermal resistance times the load: a good vapor chamber runs ~0.01–0.04 °C per watt, so at 800 W that's ~10–30°C, almost all of it at the two end interfaces, since the vapor transport itself is nearly isothermal.)
 
@@ -79,9 +79,9 @@ First, we need to figure out how heavy it is. Let's estimate it bottom-up, for o
 | Electric thruster + propellant + eclipse battery | ~3 kg |
 | **Total per H100** | **~18–20 kg** |
 
-Is ~10 kg/m² realistic? A current Starlink V2 Mini is a good yardstick: it masses ~800 kg and unfolds ~120 m² of solar array — about **6.7 kg/m²** for a real, flying satellite, bus and Hall thrusters and comms payload included. Our slab lands near **10 kg/m²**, but it also carries dense compute and a radiator that Starlink doesn't — so ~20 kg per H100 is a sane, even slightly conservative figure, not wishful thinking.
+Is ~10 kg/m² realistic? A current Starlink V2 Mini is a good yardstick: it masses ~800 kg and unfolds ~120 m² of solar array[^starlink] — about **6.7 kg/m²** for a real, flying satellite, bus and Hall thrusters and comms payload included. Our slab lands near **10 kg/m²**, but it also carries dense compute and a radiator that Starlink doesn't — so ~20 kg per H100 is a sane, even slightly conservative figure, not wishful thinking.
 
-To launch ~20 kg to space:
+To launch ~20 kg to space[^falcon9]:
 
 | Vehicle | Cost to LEO | Per H100-unit | vs. 5-yr ground energy (~$3.5k) |
 |---|---|---|---|
@@ -89,13 +89,13 @@ To launch ~20 kg to space:
 | Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~9× |
 | Starship, stated goal            | ~$100/kg   | ~$2,000  | ~0.6× |
 
-So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship to be advantageous. And we can likely do better still on weight — thin-film arrays and sharing one satellite bus across many chips.
+So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship[^starship] to be advantageous. And we can likely do better still on weight — thin-film arrays and sharing one satellite bus across many chips.
 
 ## How to repair in space
 
 Well, you don't, I suspect we will just design software systems to tolerate partial failures of the chips. 
 
-What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. LEO still benefits from Earth's magnetic shielding — which is why the ISS runs ordinary electronics. As with computer components, you don't need to design components for too long a life cycle, as it will be economically obsolete in 5 years. 
+What about radiation — cosmic rays and solar particles wearing the chips down? Real, but largely a known and manageable problem. LEO still benefits from Earth's magnetic shielding — which is why the ISS can run plenty of commercial, off-the-shelf electronics. As with computer components, you don't need to design components for too long a life cycle, as it will be economically obsolete in 5 years. 
 
 I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation is needed, since humans can't intervene physically. There are also different constraints and trade-offs in where the data and the computation live. 
 
@@ -103,9 +103,9 @@ I suspect there are a lot of interesting software issues to be solved in a space
 
 When I think about space data center, I realize it's not that we don't know how to build data centers on Earth, that part is easy. The messy part is how do you fund such dramatic build-up and where. Let's see some numbers.
 
-If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates. 
+If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates[^elec]. 
 
-On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have 30 nuclear power plants under construction). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
+On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have around 30 reactors under construction[^nuclear]). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
 
 On the other hand, the US simply can't muster the political will to build it out on the ground, too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different projection of the future needs. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
 
@@ -151,4 +151,12 @@ PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joi
 
 [^SSO]: Sun-synchronous orbit itself is a very clever trick.
 [^brain]: Briefly touched in [this post](./the-value-of-personal-data.md).
-[^birds]: Starship's launch was delayed by concern of harming some bird, not kidding. https://www.space.com/spacex-starship-florida-move-texas-birds-protection
+[^birds]: A Starship launch was held up partly by environmental review — including protections for nesting shorebirds. Not kidding. https://www.space.com/spacex-starship-florida-move-texas-birds-protection
+[^tsi]: Total solar irradiance averages ~1361 W/m² at 1 AU (it varies ~0.1% over the solar cycle). [NASA](https://earth.gsfc.nasa.gov/climate/projects/solar-irradiance/data)
+[^h100]: The H100 SXM's rated TDP is ~700 W; the ~800 W used here is the per-slab budget (the chip plus its board and power-conversion overhead). [NVIDIA](https://www.nvidia.com/en-us/data-center/h100/)
+[^iss]: The ISS External Active Thermal Control System is designed to reject ~70 kW via two pumped, single-phase **ammonia** loops (2 × 35 kW) feeding deployable radiators; the radiator area varies with counting convention (~150–250 m²), so the per-m² figure is approximate. [NASA ATCS overview (PDF)](https://www.nasa.gov/pdf/473486main_iss_atcs_overview.pdf)
+[^falcon9]: Falcon 9 lifts ~22.8 t to LEO at a ~$67M list price (≈ $3,000/kg expendable, ~$4,000/kg on a reused booster); the ~$1,500/kg "marginal" figure is a widely-cited estimate of SpaceX's internal cost, not a published price. [SpaceX](https://www.spacex.com/vehicles/falcon-9/)
+[^starship]: Starship's ~$100/kg (and lower) is an aspirational target tied to full reuse and a high flight rate, not a published operational price.
+[^starlink]: A Starlink V2 Mini masses ~800 kg with roughly 100–120 m² of solar array (area figures are compiled estimates, not an official SpaceX spec). [SpaceX Gen2 (PDF)](https://www.starlink.com/public-files/Gen2StarlinkSatellites.pdf)
+[^elec]: 1 TW continuous ≈ 8,760 TWh/yr; world electricity generation is ~30,000 TWh/yr, i.e. ~28–30%. [IEA](https://www.iea.org/)
+[^nuclear]: China has on the order of 30 reactors under construction (sources give ~30–40 depending on start-date definitions). [World Nuclear](https://world-nuclear.org/nuclear-reactor-database/summary/China)
