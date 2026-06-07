@@ -113,7 +113,7 @@ A current Starlink V2 Mini is the closest real, flying yardstick — a comparabl
 | Build cost (bus only) | ~$0.25–0.5M[^starlink-cost] |
 | Launch share (~22 per Falcon 9) | ~$1M |
 
-Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part — once you add an expensive chip like a GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
+Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~\$0.25–0.5M bus across those \~60 GPUs and the platform is only **\~\$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part — once you add an expensive chip like a GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
 
 ## The civilizational competition: China vs USA
 
