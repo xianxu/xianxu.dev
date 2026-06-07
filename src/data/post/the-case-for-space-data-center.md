@@ -79,7 +79,7 @@ First, we need to figure out how heavy it is. Let's estimate it bottom-up, for o
 | Electric thruster + propellant + eclipse battery | ~3 kg |
 | **Total per H100** | **~18–20 kg** |
 
-🤖[add reference to starlink satellite's weight and solar array size, as a way for calibrating that 10kg / m² is not too bad]
+Is ~10 kg/m² realistic? A current Starlink V2 Mini is a good yardstick: it masses ~800 kg and unfolds ~120 m² of solar array — about **6.7 kg/m²** for a real, flying satellite, bus and Hall thrusters and comms payload included. Our slab lands near **10 kg/m²**, but it also carries dense compute and a radiator that Starlink doesn't — so ~20 kg per H100 is a sane, even slightly conservative figure, not wishful thinking.
 
 To launch ~20 kg to space:
 
