@@ -101,9 +101,9 @@ What about radiation — cosmic rays and solar particles wearing the chips down?
 
 I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation is needed, since humans can't intervene physically. There are also different constraints and trade-offs in where the data and the computation live. 
 
-## Calibration against Starlink satellite
+## Manufacturing cost, and Calibration against Starlink
 
-A current Starlink V2 Mini is the closest real, flying yardstick — a comparable satellite bus, minus the expensive compute:
+A current Starlink V2 Mini is the closest real, flying yardstick — a comparable satellite platform, minus the expensive compute:
 
 | One Starlink V2 Mini | Value |
 |---|---|
@@ -113,7 +113,7 @@ A current Starlink V2 Mini is the closest real, flying yardstick — a comparabl
 | Build cost (bus only) | ~$0.25–0.5M[^starlink-cost] |
 | Launch share (~22 per Falcon 9) | ~$1M |
 
-Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
+Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part, when you add in expensive chip like GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
 
 ## The civilizational competition: China vs USA
 
@@ -123,7 +123,9 @@ If we believe we'll need ~1 billion H100s — roughly one per person in the adva
 
 On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have around 30 reactors under construction[^nuclear]). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
 
-On the other hand, the US simply can't muster the political will to build it out on the ground, too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different projection of the future needs. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
+On the other hand, it's harder to muster the political will in US to build out on the ground. Too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different opinions of the future demands. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. It's intriguing the "market" is willing to award 1.7 trillion dollars [^IPO] to bet on such an orbital data center, as if the market already picked such a path. 
+
+Space is the new frontier, and in that new frontier, you don't have too much regulatory hurdles, property rights, NIMBY, etc.. 
 
 It's very interesting to see how this competition plays out!
 
@@ -172,9 +174,10 @@ PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joi
 [^h100]: The H100 SXM's rated TDP is ~700 W; the ~800 W used here is the per-slab budget (the chip plus its board and power-conversion overhead). [NVIDIA](https://www.nvidia.com/en-us/data-center/h100/)
 [^iss]: The ISS External Active Thermal Control System is designed to reject ~70 kW via two pumped, single-phase **ammonia** loops (2 × 35 kW) feeding deployable radiators; published radiator area ranges widely (~150–420 m²) depending on which radiators and whether one or both faces are counted, so the per-m² figure is a rough order-of-magnitude, not a spec. [NASA ATCS overview (PDF)](https://www.nasa.gov/pdf/473486main_iss_atcs_overview.pdf)
 [^chip]: 0.1 m² is a generous stand-in for the chip's mounting footprint; the bare H100 die is only ~800 mm², so a truly unspread chip would run far hotter than the figure here — which only sharpens the point.
-[^falcon9]: Falcon 9 lifts ~22.8 t to LEO at a ~$67M list price (≈ $3,000/kg expendable, ~$4,000/kg on a reused booster); the ~$1,500/kg "marginal" figure is a widely-cited estimate of SpaceX's internal cost, not a published price. [SpaceX](https://www.spacex.com/vehicles/falcon-9/)
+[^falcon9]: Falcon 9 lifts ~22.8 tons to LEO at a ~$67M list price (≈ $3,000/kg expendable, ~$4,000/kg on a reused booster); the ~$1,500/kg "marginal" figure is a widely-cited estimate of SpaceX's internal cost, not a published price. [SpaceX](https://www.spacex.com/vehicles/falcon-9/)
 [^starship]: Starship's ~$100/kg (and lower) is an aspirational target tied to full reuse and a high flight rate, not a published operational price.
 [^starlink]: A Starlink V2 Mini masses ~800 kg with roughly 100–120 m² of solar array (area figures are compiled estimates, not an official SpaceX spec). [SpaceX Gen2 (PDF)](https://www.starlink.com/public-files/Gen2StarlinkSatellites.pdf)
 [^starlink-cost]: SpaceX doesn't publish a per-satellite cost; ~$0.25–0.5M to build is a widely-cited estimate. (The ~$500–1,300 figures often quoted are the *user terminal*, not the satellite.) [Starlink — Wikipedia](https://en.wikipedia.org/wiki/Starlink)
 [^elec]: 1 TW continuous ≈ 8,760 TWh/yr; world electricity generation is ~30,000 TWh/yr, i.e. ~28–30%. [IEA](https://www.iea.org/)
 [^nuclear]: China has on the order of 30 reactors under construction (sources give ~30–40 depending on start-date definitions). [World Nuclear](https://world-nuclear.org/nuclear-reactor-database/summary/China)
+[^IPO]: SpaceX set IPO price at $135, valuing the company at 1.77 trillion USD. https://www.nytimes.com/2026/06/03/technology/spacex-ipo-pricing.html
