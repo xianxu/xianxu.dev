@@ -103,7 +103,17 @@ I suspect there are a lot of interesting software issues to be solved in a space
 
 ## Calibration against Starlink satellite
 
-🤖[put the number we talked about here as calibration of cost of manufactoring of the platform, as well as other weight, power numbers.]
+A current Starlink V2 Mini is the closest real, flying yardstick — a comparable satellite bus, minus the expensive compute:
+
+| One Starlink V2 Mini | Value |
+|---|---|
+| Mass | ~800 kg[^starlink] |
+| Solar array | ~120 m² |
+| Power generated (est. @ ~400 W/m²) | ~40–50 kW |
+| Build cost (bus only) | ~$0.25–0.5M[^starlink-cost] |
+| Launch share (~22 per Falcon 9) | ~$1M |
+
+Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~$0.25–0.5M bus across those ~60 GPUs and the platform is only **~$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
 
 ## The civilizational competition: China vs USA
 
@@ -165,5 +175,6 @@ PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joi
 [^falcon9]: Falcon 9 lifts ~22.8 t to LEO at a ~$67M list price (≈ $3,000/kg expendable, ~$4,000/kg on a reused booster); the ~$1,500/kg "marginal" figure is a widely-cited estimate of SpaceX's internal cost, not a published price. [SpaceX](https://www.spacex.com/vehicles/falcon-9/)
 [^starship]: Starship's ~$100/kg (and lower) is an aspirational target tied to full reuse and a high flight rate, not a published operational price.
 [^starlink]: A Starlink V2 Mini masses ~800 kg with roughly 100–120 m² of solar array (area figures are compiled estimates, not an official SpaceX spec). [SpaceX Gen2 (PDF)](https://www.starlink.com/public-files/Gen2StarlinkSatellites.pdf)
+[^starlink-cost]: SpaceX doesn't publish a per-satellite cost; ~$0.25–0.5M to build is a widely-cited estimate. (The ~$500–1,300 figures often quoted are the *user terminal*, not the satellite.) [Starlink — Wikipedia](https://en.wikipedia.org/wiki/Starlink)
 [^elec]: 1 TW continuous ≈ 8,760 TWh/yr; world electricity generation is ~30,000 TWh/yr, i.e. ~28–30%. [IEA](https://www.iea.org/)
 [^nuclear]: China has on the order of 30 reactors under construction (sources give ~30–40 depending on start-date definitions). [World Nuclear](https://world-nuclear.org/nuclear-reactor-database/summary/China)
