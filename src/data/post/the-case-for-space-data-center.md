@@ -101,8 +101,9 @@ What about radiation — cosmic rays and solar particles wearing the chips down?
 
 I suspect there are a lot of interesting software issues to be solved in a space oriented data center, a lot more automation is needed, since humans can't intervene physically. There are also different constraints and trade-offs in where the data and the computation live. 
 
-## Manufacturing cost
-I don't have much data, except to project from the cost of building Starlink satellite (sans the expensive H100). 🤖[put the number we talked about here.]
+## Calibration against Starlink satellite
+
+🤖[put the number we talked about here as calibration of cost of manufactoring of the platform, as well as other weight, power numbers.]
 
 ## The civilizational competition: China vs USA
 
