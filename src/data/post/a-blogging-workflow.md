@@ -2,60 +2,68 @@
 title: A Nice Research Workbench
 publishDate: 2026-06-07
 published: false
-excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to know what you want. You need to know the tools and how to properly work with AI, to further your knowledge and create new things. Here's an example how I wrote the blog about space data center. "
+excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to create what you want exactly. You need to know the possibilities, and leverage AI to work at different altitudes: building workflows, tools, changing styling and presentations in a website, researching content, crunch math, helping with editorial touchups, all of which are handled in a single consistent flow. Here's a concrete example how I wrote the blog about space data center, which I hope offers a glimpse of that future. AI is the Matlat, the Wikipedia, the Excel, the search engine, all packaged into a single tool. The capability is there; the human/AI interaction is still being sorted out. "
 tags:
   - tech
   - ai
 ---
 
-<!-- SKELETON — bullets are evidence/quotes gathered from the session; write the prose in your voice. 🤖{} marks where I need you. -->
-
-I just published [The Case for Space Data Centers](./the-case-for-space-data-center.md). The post is fine — but *how* it got written is the part I actually want to show you. It's a worked example of a knowledge worker using AI **properly**: not "AI, write me a blog," but a research workbench where I keep the intent and the through-line, AI does the facts, math, drafting and mechanics, and a deterministic shell (git-journaled rounds, fresh-context fact-checks, build gates) keeps the whole thing honest.
+I just published [The Case for Space Data Centers](./the-case-for-space-data-center.md) and hope you find it interesting. But more interesting to me is to show you how it got written. It's a working example of what I see as knowledge worker's AI assisted workflow: not the "AI, write me a blog, and earn me quick bucks", but a research workbench where I keep explore area I don't know, learn facts and math, connecting other dots. AI helps along the way, checking the facts, the math, drafting prose, and managing a deterministic workflow (git-journaled rounds, fresh-context fact-checks, build gates) keeps the whole thing honest. Human is there at the center, the driver that knows where we want to head to; AI is the rocket to help us getting there faster. 
 
 ## It started as a conversation, not a writing task
 
-- I didn't open with "write a post." I opened with a *physics question*: > "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?"
-- We did back-of-envelope calcs and I kept **pushing back**, which is where the thesis actually came from: the front absorbs the unconverted 70% → *"I don't think this is a problem"*; *"you don't repair, just deorbit"*; *"ship a disk to space"*; *"LEO is closer to users → it's edge computing."*
-- The argument *emerged through investigation* — many shots, not one. (Tie to: AI as brain-extension that accumulates, not a one-shot oracle.)
-- **Division of labor:** I own the questions and the pushback; AI supplies the math and surfaces the option space.
+The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a *physics question*: > "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?".  🤖[can you find the exact question I asked?]
+
+I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which in hindsight, look just like a Starlink satellite. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
 
 ## From conversation to a first draft
 
-- The trigger: > "ok, based on this discussion, write a blog post on the thesis… debunk lazy talking points… put it in `the-case-for-space-data-center.md`."
-- 🤖{You asked about this: it was *not* a skeleton-first flow. You asked me to draft from our discussion — I wrote the first full draft from the conversation, after reading your existing posts to match your frontmatter + voice. You'd shaped all the *content* through the brainstorm, but the initial prose was AI-drafted. Confirm that's how you want to tell it.}
-- The draft was a **starting point, not the product**.
+So at some point, I asked: "ok, based on this discussion, write a blog post on the thesis… debunk lazy talking points… put it in `the-case-for-space-data-center.md`." 🤖[find the exact prompt I used]. 
+
+I had created the initial draft of /xx-fix tool as a review workflow for AI to check my writing for me. The workflow is based on my experience, but haven't quite being battle tested on a blog post from scratch, so there ended up some building the airplane while you fly it. I ended up incrementally improve upon the tool as I wrote out the blog post. 
 
 ## Co-authoring in the document, turn by turn
 
-- The protocol I proposed: > "we will start co-author… use /xx-fix format… turn based commit… I'll add my questions in the doc, and you answer in the doc, and also here."
-- The **🤖 marker convention**: `[human]` / `{agent}` sections alternate in the doc; `~old~{new}` for copy-edit *replacement proposals* I accept/reject in my editor.
-- **Git-journaled rounds** (`docflow`): a review branch, a human commit at each turn-start, an agent commit at turn-end, ~16 rounds preserved in `git log`; plus the rule "if the doc changes mid-edit, yield — don't interleave."
-- The **document is the shared workspace; chat is the side-channel.**
+One of my central thesis when it comes to human AI interaction, is that the workflow will need to be structured in a way human understand it. Human needs to understand the stem of the work, so that they can pivot at the right time. LLM based AI essentially has a single transcript that contains all the information. It's often hard for human to keep track of all the details. If we consider blog writing task, there are several things going on at the same time: 
 
-## The substrate: xianxu.dev as an Ariadne repo
+1. that human may ask AI about things to further their understanding in an area, and the goal is not to generate any outward visible artifact, but updating their brain's neurons with knowledge and information. 
 
-- The whole thing worked because this blog is an *Ariadne-styled* repo — the `/xx-fix` skill (symlinked from `ariadne/construct/local/fix`) and `docflow` (`ariadne/scripts`) were already available here. > "the /xx-fix lives in all ariadne repos… let's use the one symlinked from xianxu.dev."
-- 🤖{Item 4 on your list — "xianxu.dev *became* an ariadne repo." In our session it was *already* set up that way (the symlinks existed when we started); I don't have the conversion moment. If you converted it earlier/separately, you have that story — tell me and I'll fold it in.}
-- (Tie to your themes: the deterministic shell, git as the only state, skills as portable procedure — what turns "AI helps me write" into a *governed process*.)
+2. and occasionally, they have some good prose they want to capture. And those prose are still fractured, not a whole essay. 
 
-## Teaching the tool as we went
+3. and sometimes they are in a spur of inspiration that portion of the document is laid out. 
+
+How do you adapt such different modes into a coherent workflow? The setup I end up creating, in hindsight, works a lot like how a human would collaborate with another colleague. 
+
+1. there's a thread of free form consultation. That's the chatbot experience, and in this case, I'm using `claude code` as it gives me a lot of customization opportunities. It's actually infinitely extensible as you can ask it to write additional code to do whatever you want as part of your workflow. We will see part of that power a bit clearer later. 
+
+2. a work surface for the artifact to evolve. Here, the artifact is a blog post manifested as a markdown file. The way human is able to communicate with their smart colleague about the artifact is contextual, that you ask question about that artifact, in the context of some part of that artifact. What I used in my workflow is `nvim` with `parley.nvim` extension, that the human directly insert comments inside the document under review using markup conventions, and the paired agent skill in `claude code` that is able to interpret such markup, effectively creating paralleled sub-conversations inside those markups within the host document. This setup conveniently solved the mental load for human to specify context precisely: context is already clear around where the markups are inserted. Even when there are many of such "comments" thus form many sub-conversations, human's still able to mentally keep track of them, as it is not too unfamiliar compared to how human interact with other humans in a collaborative document review process. 
+
+3. and to keep track of things, if not, for posterity, /xx-fix skill is instructed to interpret the changes in the artifact as signals for a turn. Whenever a turn happens in the conversational thread, AI will figure out if the turn means to update the document, or means to be free form, and if it decides the turn means to update the document, it will create a git commit on behalf of human first, then update the document, then make another commit after AI finishes editing. 
+
+## Building and improving the tool continuously
+
+And as I wrote the space data center [post](./the-case-for-space-data-center.md), I also kept improving tooling around it. Some are agent skills (essentially prompts) to institute turn
 
 - The key refinement, in your words: > "when I ask them here, doesn't mean… you should go review… I would use 'review' as the keyword."
 - So we **codified explicit triggers** into the skill *while using it*: free-form chat changes nothing; review rounds run only on "go review" / "update the doc"; a session opens on "start a docflow"; and a **reading-frontier** rule (text above the first open marker is settled).
 - This is the crux of *leveraging AI properly*: I can **interrogate freely** (build intuition, check facts) **and** drive **precise edits** — without the two modes colliding. The collaboration produced its own tooling.
+- Separately, improved parley.nvim's review tool, so that it's mechanism to resolve AI remarks in the document is animated, offer user visual clue of the change applied. 
 
-## Trust but verify: a fresh-context second agent
+## Learning facts and math from AI
 
-- The ask: > "do a fresh context review with codex… only report issues and reference found… codify such fresh context 2nd agent review."
-- **Codified it:** an external, read-only, *cross-model* agent (codex / GPT-5.5, then a third pass with `agy` / Gemini) audits the doc for facts + citations and **never edits**; I triage the report.
-- The cross-check **earned its keep**: agy claimed a footnote link was a dead 404 and offered a "fix" — a `WebFetch` showed the original was live, so I **rejected the hallucinated correction**. Net result: every quantitative claim footnoted (14 references), fact-checked by two independent models *and* me.
-- **Why fresh context:** the co-author carries confirmation bias — a separate agent with no history catches what you both missed.
+By now no one would be arguing that AI doesn't have world's knowledge. They do. When they are less sure, they can always do a search and summarize. So part of this writing about space data center, is also my journey of learning about this topics. 
 
-## The craft details (AI as a capable IC)
+AI pulled in theories, formula of thermodynamics, which I have no previous exposure of. I think it's a much quicker ways of learning, as it's targeted to a particular problem at hand. I bet it is much easier for human to remember facts in adjacent areas when human is in the driver seat, mapping it out, compared to the traditional indiscriminate dumping of information, sort of self-guided progressive disclosure? I think it is a very interesting angle to explore in education. 
 
-- A hand-authored **inline SVG** of a sun-synchronous orbit (you asked: *"good ways to draw SVG… draw this sun-synchronous orbit"*) — math diagram, dark-mode aware, no dependencies.
-- **Rendering plumbing:** wired up KaTeX for the equations; restyled footnotes (subdued, auto-revealed heading); fixed mobile equation overflow with a visible scroll affordance — all build-verified, and **mirrored to the sibling blog** so both engines stay in lockstep.
-- The fiddly engineering — pipelines, CSS, cross-repo sync — is exactly where AI-as-IC shines, freeing me for intent and taste.
+## How do you know if AI is giving the right information?
+
+This is what I'd call part of AI literacy. Just like you can't just trust information on the Internet, you should treat what AI tells you with a grain of salt. Human always needs to construct a consistent mental picture based on new information gained from AI. There are also the typical ways to improve AI accuracy:
+
+1. human to establish a consistent logical framing. 
+2. AI to be self consistent. 
+3. Reference to source of fact, and check the source. 
+4. Leverage AI from different vendor. 
+5. Fresh context for fact checking agent runs.
 
 ## What this says about knowledge work + AI
 
@@ -64,4 +72,4 @@ I just published [The Case for Space Data Centers](./the-case-for-space-data-cen
 - **The shell makes it trustworthy:** git-journaled rounds, explicit triggers, fresh-context fact-checks, build gates — determinism wrapped around a probabilistic core.
 - **The result:** a post I couldn't have produced alone at this quality and speed — with a complete audit trail of how every claim and every sentence got there.
 
-🤖{Skeleton done. Two open questions for you flagged above (draft-vs-skeleton framing; the "became an Ariadne repo" story). Tell me which sections to expand first and I'll draft prose in your voice — or you write and I review.}
+
