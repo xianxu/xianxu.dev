@@ -1,7 +1,7 @@
 ---
 title: AI as My Research Workbench
-publishDate: 2026-06-07
-published: false
+publishDate: 2026-06-10
+published: true
 excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to create what you want exactly. You own the possibilities, and leverage AI to help at many different altitudes. Here's a concrete example of how I wrote the blog about space data centers. AI is the MATLAB, the Wikipedia, the Excel, the search engine, all packaged into a single tool that you can customize and extend. The capability is there; the human/AI interaction is still being sorted out."
 tags:
   - tech
@@ -72,8 +72,6 @@ P.S. the fact that AI recovered the above information is because the review roun
 ## Wrapping it up
 
 It has been a very empowering experience, using my newly minted workbench to learn about space and write about it. This really is just one aspect of me adopting the pattern of leveraging AI to construct the many different layers of tooling that support the creation of various durable artifacts: be it code (see [nous](https://github.com/xianxu/nous), [pair](https://github.com/xianxu/pair), and [parley](https://github.com/xianxu/parley.nvim)); or a blog post, like this one; or research about [who to vote for](https://github.com/xianxu/you-decide). The application of such human-steered, AI-assisted workflow is everywhere, and I believe that's a plausible differentiator of the contemporary human knowledge worker. 
-
----
 
 [^ariadne]: See ariadne's `construct`, which forms the base workflow-embedded-in-repo pattern I'm applying everywhere.
 [^xx-fix]: See the fix skill [in ariadne](https://github.com/xianxu/ariadne/blob/main/construct/local/fix/SKILL.md).
