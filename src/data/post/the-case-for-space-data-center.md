@@ -131,40 +131,36 @@ It's very interesting to see how this competition plays out!
 
 --- 
 
-PS: a fun fact about SSO — plus an AI-generated diagram, to illustrate the joint development behind this post. 
+PS: a fun fact about SSO — plus an AI-generated animation, to illustrate the joint development behind this post. 
 
 <figure style="margin:2rem auto;max-width:640px">
-<svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A sun-synchronous orbit: the satellite's orbit plane stays edge-on to the Sun all year, precessing about one degree per day as Earth travels around the Sun." style="width:100%;height:auto;color:currentColor">
-  <circle cx="320" cy="240" r="160" fill="none" stroke="currentColor" stroke-opacity="0.28" stroke-dasharray="3 7"/>
-  <path d="M451,148 A160,160 0 0 0 400,101" fill="none" stroke="currentColor" stroke-opacity="0.5" marker-end="url(#a)"/>
-  <circle cx="320" cy="240" r="28" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A satellite's orbital plane stays edge-on to the Sun all year by precessing about one degree per day as the Earth travels around the Sun." style="width:100%;height:auto;color:currentColor;font-family:sans-serif">
+  <!-- Earth's yearly path around the Sun -->
+  <circle cx="320" cy="240" r="160" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="3 7"/>
+  <!-- the Sun -->
+  <circle cx="320" cy="240" r="30" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
   <text x="320" y="245" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Sun</text>
-  <line x1="348" y1="240" x2="466" y2="240" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="2 4"/>
-  <circle cx="480" cy="240" r="14" fill="#3b82f6"/>
-  <ellipse cx="480" cy="240" rx="7" ry="28" fill="none" stroke="currentColor" stroke-width="2"/>
-  <circle cx="480" cy="212" r="3.5" fill="#10b981"/>
-  <text x="512" y="244" font-size="12" fill="currentColor">Jan</text>
-  <line x1="320" y1="212" x2="320" y2="94" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="2 4"/>
-  <circle cx="320" cy="80" r="14" fill="#3b82f6"/>
-  <ellipse cx="320" cy="80" rx="28" ry="7" fill="none" stroke="currentColor" stroke-width="2"/>
-  <circle cx="348" cy="80" r="3.5" fill="#10b981"/>
-  <text x="320" y="52" text-anchor="middle" font-size="12" fill="currentColor">Apr</text>
-  <line x1="292" y1="240" x2="174" y2="240" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="2 4"/>
-  <circle cx="160" cy="240" r="14" fill="#3b82f6"/>
-  <ellipse cx="160" cy="240" rx="7" ry="28" fill="none" stroke="currentColor" stroke-width="2"/>
-  <circle cx="160" cy="268" r="3.5" fill="#10b981"/>
-  <text x="128" y="244" text-anchor="end" font-size="12" fill="currentColor">Jul</text>
-  <line x1="320" y1="268" x2="320" y2="386" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="2 4"/>
-  <circle cx="320" cy="400" r="14" fill="#3b82f6"/>
-  <ellipse cx="320" cy="400" rx="28" ry="7" fill="none" stroke="currentColor" stroke-width="2"/>
-  <circle cx="292" cy="400" r="3.5" fill="#10b981"/>
-  <text x="320" y="430" text-anchor="middle" font-size="12" fill="currentColor">Oct</text>
-  <text x="320" y="458" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">The plane stays edge-on to the Sun all year → it precesses ~1°/day, for free.</text>
-  <defs>
-    <marker id="a" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="currentColor" fill-opacity="0.5"/></marker>
-  </defs>
+  <!-- Earth + its edge-on orbit + satellite, precessing as one rigid arm around the Sun -->
+  <g>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 320 240" to="360 320 240" dur="24s" repeatCount="indefinite"/>
+    <!-- faint Sun-line: from Earth toward the Sun -->
+    <line x1="463" y1="240" x2="354" y2="240" stroke="currentColor" stroke-opacity="0.3" stroke-dasharray="2 5"/>
+    <!-- Earth's shadow: rays from the Sun's center graze Earth's top and bottom and diverge, so the cone WIDENS away from the Sun (the night side) -->
+    <path d="M480,225 L555,218 L555,262 L480,255 Z" fill="#475569" fill-opacity="0.4" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="5 4"/>
+    <!-- orbit ring, FAR half — drawn behind Earth, so it's hidden where it passes behind the globe (top-down view) -->
+    <path d="M480,206 A9,34 0 0 0 480,274" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.4"/>
+    <!-- satellite, FAR pass: shown only during the 2nd half of the loop (back semicircle), behind Earth — the globe occludes it in the middle, the poles stay visible -->
+    <circle r="5" fill="#10b981" opacity="0"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="0;1" keyTimes="0;0.5"/></circle>
+    <!-- Earth (over the shadow base and the far-side orbit) -->
+    <circle cx="480" cy="240" r="15" fill="#3b82f6"/>
+    <!-- orbit ring, NEAR half — drawn in front of Earth -->
+    <path d="M480,206 A9,34 0 0 1 480,274" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.95"/>
+    <!-- satellite, NEAR pass: shown only during the 1st half of the loop (front semicircle), riding over the globe -->
+    <circle r="5" fill="#10b981" opacity="1"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.5"/></circle>
+  </g>
+  <text x="320" y="464" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">The plane stays edge-on to the Sun all year &#8594; it precesses ~1&#176;/day, for free.</text>
 </svg>
-<figcaption style="text-align:center;font-size:0.85rem;opacity:0.7;margin-top:0.5rem">Each blue dot is Earth a season apart on its yearly trip around the Sun; the green dot is the satellite. The thin ring is the orbit seen edge-on — notice it stays perpendicular to the Sun-line at every season. Keeping it there as Earth moves requires the plane to turn ~1°/day, which Earth's equatorial bulge does for free.</figcaption>
+<figcaption style="text-align:center;font-size:0.85rem;opacity:0.7;margin-top:0.5rem">The blue dot is Earth on its yearly trip around the Sun; the green dot is the satellite on its (much faster) orbit. The shaded cone trailing Earth is its shadow — the night side. Watch the thin green ring: it threads the day/night line, staying perpendicular to the Sun-line the whole way around and out of that shadow. Holding it there <em>is</em> the ~1&#176;/day precession, which Earth's equatorial bulge supplies for nothing.</figcaption>
 </figure>
 
 [^SSO]: Sun-synchronous orbit itself is a very clever trick.
