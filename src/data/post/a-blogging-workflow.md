@@ -8,13 +8,13 @@ tags:
   - ai
 ---
 
-I just published [The Case for Space Data Centers](./the-case-for-space-data-center.md) and hope you find it interesting. I went to write about it, not only because it's interesting, but also it is a good test for one of the workflows I'm tinkering with. It's a working example of what I see as a knowledge worker's AI-assisted workflow: not the "AI, write me a blog, and earn me quick bucks", but a research workbench where I keep exploring areas I don't know, learning facts and some maths, connecting other dots. AI helps along the way, checking the facts, the math, drafting prose, debating the importance of certain angles, managing a deterministic workflow (git-journaled rounds, fresh-context fact-checks, build gates) and keeping the whole thing honest (through fresh context reviews, fact checks). Human is there at the center, as the driver that knows where we want to head to and what we want to learn about; AI is the rocket to help us get wherever we want to go, much faster. 
+I just published [The Case for Space Data Centers](./the-case-for-space-data-center.md) and hope you find it interesting. I went to write about it, not only because it's interesting, but also it is a good test for one of the workflows I'm tinkering with. It's a working example of what I see as a knowledge worker's AI-assisted workflow: not the "AI, write me a blog, and earn me quick bucks", but a research workbench where I keep exploring areas I don't know, learning facts and some maths, connecting other dots. Human is there at the center, as the driver that knows where we want to head to and what we want to learn about; AI is the rocket to help us get wherever we want to go, much faster. 
 
 ## It started as a conversation, not a writing task
 
-The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a physics question: *> "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?"*.
+The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a physics question: *"I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?"*.
 
-I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which in hindsight, looks just like a newer Starlink satellite that went up in Starship launch 12. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
+I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which is just like a newer Starlink satellite that went up in Starship launch 12. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
 
 ## From conversation to a first draft
 
@@ -32,7 +32,7 @@ My central thesis when it comes to human AI interaction, is that whatever workfl
 
 3. and sometimes they are in a spur of inspiration where a portion of the document gets laid out. 
 
-How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating, in hindsight, works a lot like how a human would collaborate with another human. 
+How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating, works a lot like how a human would collaborate with another human. 
 
 1. there's a thread of free form consultation. That's the chatbot experience, and in this case, I'm using `claude code` as it gives me a lot of customization opportunities (skills etc.). It's actually infinitely extensible as you can ask it to write additional code to do whatever you want as part of your workflow [^ariadne]. We will see part of that power a bit clearer later. 
 
@@ -69,9 +69,9 @@ A concrete example from the space data center post: once the draft settled, I ra
 
 P.S. the fact that AI recovered the above information is because the review rounds are committed; between the commit messages and the history, you can infer many things.
 
-## Closing
+## Wrapping it up
 
-It has been a very empowering experience. And to close on this post, I kept doing the above as I wrote this — for example, improved the `docflow` workflow, with save context and later recovery, as I decided to work on some other things mid-way through this post. I'm confident that all those little improvements to the workflow, embedded in the repo itself, will help me work increasingly efficiently: like riding on a rocket ship!
+It has been a very empowering experience, using my newly minted workbench to learn about space and write about it. This really is just one aspect of me going to the pattern of leverage AI to construct the many different layers of tooling that supports the creation of various durable artifacts: be it code (see [nous](https://github.com/xianxu/nous), [pair](https://github.com/xianxu/pair), and [parley](https://github.com/xianxu/parley.nvim)); or blog post, like this; or research about [who to vote](https://github.com/xianxu/you-decide). The application of such human steered AI assisted workflow is everywhere, and I believe that's the plausible differentiators of contemporary human knowledge worker. 
 
 ---
 
