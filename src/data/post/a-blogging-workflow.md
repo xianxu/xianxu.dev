@@ -46,7 +46,7 @@ And as I wrote the space data center [post](./the-case-for-space-data-center.md)
 
 1. establishing turns, and commits. When agent should commit on behalf of human (when human left document changed and asked for review or `flow the doc`).
 2. eventually lifted some portion of such workflow [into binary](https://github.com/xianxu/ariadne/blob/main/scripts/docflow.sh) that skill prose would call [^poem].
-3. teaching it that a chat turn is not a review round. as I edit, I keep asking the agent factual / knowledge questions, and those shouldn't be mistaken for "I'm done, go review". so I made the trigger explicit — review rounds (and the commits that journal them) only fire on a keyword. in my words at the time: *"when I ask them here, doesn't mean… you should go review… I would use 'review' as the keyword"* — and that very message, of course, didn't itself trigger a review. 🤖{drafted from your 2026-06-06 transcript — trim / put in your voice}
+3. teaching it that a chat turn is not a review round. as I edit, I keep asking the agent factual / knowledge questions, and those shouldn't be mistaken for "I'm done, go review". It's just a small tweak away, and I asked `claude` to just do that, and remember it as part of `/xx-fix` skill.
 
 I feel this long range of changes while I'm writing a blog post, to not only writing a blog post, but construct and improve the environment to make writing a post with AI easier, is how AI going to dramatically change how we work.
 
@@ -65,7 +65,9 @@ The truth is you don't know for sure, but there are ways to improve your confide
 3. ask AI for reference to source of fact, and check the source [^you-decide]. 
 4. Leverage AI from different vendor, to double check with different/fresh context. [^you-decide].
 
-A concrete example from the space data center post: once the draft settled, I ran it past *fresh-context* reviewers from other vendors — a read-only second agent whose only job is to fact-check every claim, and whether the source I cited actually backs it. `codex` flagged a handful of real soft spots, and I added seven citations off it (ISS cooling capacity, the H100's power draw, Starlink specs…) and toned down a couple of over-confident numbers. A third pass with Google's `agy`/Gemini agreed on the physics and even sharpened a caveat — then claimed one of my source links was dead and offered a replacement. It wasn't: a quick fetch showed the page loads fine. The reviewer itself had hallucinated the broken link. So even the fact-checker needs fact-checking — which, really, is the whole point. 🤖{drafted from r13/r14 of the space post — keep / trim / your voice}
+A concrete example from the space data center post: once the draft settled, I ran it past *fresh-context* reviewers from other vendors — a read-only second agent whose only job is to fact-check every claim, and whether the source I cited actually backs it. `codex` flagged a handful of real soft spots, and I added seven citations off it (ISS cooling capacity, the H100's power draw, Starlink specs…) and toned down a couple of over-confident numbers. A third pass with Google's `agy`/Gemini agreed on the physics and even sharpened a caveat — then claimed one of my source links was dead and offered a replacement. It wasn't: a quick fetch showed the page loads fine. The reviewer itself had hallucinated the broken link. So even the fact-checker needs fact-checking — which, really, is the whole point. 
+
+P.S. the fact AI recovered the above information, is because the review rounds are committed, so between the commit message and history, you can infer many things.
 
 ## Closing
 
@@ -76,5 +78,5 @@ It had been a very empowering experience. And to close on this post, I kept doin
 [^ariadne]: See ariadne's `construct`, which forms the base workflow-embedded-in-repo pattern I'm applying everywhere.
 [^xx-fix]: See the fix skill [in ariadne](https://github.com/xianxu/ariadne/blob/main/construct/local/fix/SKILL.md).
 [^history]: See the [history](https://github.com/xianxu/xianxu.dev/commits/main/src/data/post/the-case-for-space-data-center.md)  established while the space center post's authored.
-[^poem]: I remember in some blog I mentioned "I write poem now", which means to write prose to constrain LLM. It's not that I only write prose, but that tends to be a more flexible place to start. The pattern I observed, inevitably resulted in later `lifing` some of prose into binary, for determinism.
+[^poem]: I remember in some blog I mentioned "I write poem now", which means to write prose to constrain LLM. It's not that I only write prose, but that tends to be a more flexible place to start. The pattern I observed, inevitably resulted in later `lifting` some of prose into binary, for determinism.
 [^you-decide]: In [you-decide](https://github.com/xianxu/you-decide), I went a dramatical length asking AI to give reference for all fact claims, and asked another AIs (codex and Google's antigravity in that case) to check those facts and sources. 
