@@ -33,7 +33,7 @@ Cooling things on Earth is usually about moving cooler air or fluid across the s
 
 ### Model v0: a bare slab in the Sun
 
-Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$[^tsi] onto the lit face, if perfectly facing the Sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
+Forget the chips for a moment. Hang a plain slab in Earth orbit and ask what temperature it settles at. Sunlight there delivers $S = 1361\ \mathrm{W/m^2}$ [^tsi] onto the lit face, if perfectly facing the Sun. The slab soaks that up and re-radiates it as infrared from both surfaces (front and back). A surface at temperature $T$ radiates $\varepsilon\sigma T^4$ per face (Stefan–Boltzmann; $\sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$, emissivity $\varepsilon \approx 1$). Set what comes in equal to what goes out:
 
 $$
 S = 2\,\varepsilon\sigma T^4 \quad\Rightarrow\quad T = \left(\frac{S}{2\varepsilon\sigma}\right)^{1/4} = \left(\frac{1361}{2\times5.67\times10^{-8}}\right)^{1/4} \approx 331\ \mathrm{K} \approx 58\,^\circ\mathrm{C}
@@ -43,9 +43,9 @@ Fifty-eight degrees. A bare slab in full Sun just sits at about 58°C — a perf
 
 ### Model v1: now use that 30% electricity to power a GPU
 
-Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1 m²[^chip]. A good space solar cell turns ~30% of that sunlight (~400 W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The total energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.
+Now make it a data center. We plate one side of our slab solar panels, and the other side, at its center, a GPU chip of dimension about 0.1 m² [^chip]. A good space solar cell turns ~30% of that sunlight (~400 W) into electricity, the electricity runs that GPU, and the GPU turns essentially all of it back into heat (30% of solar energy received). The total energy hasn't changed, but its distribution has — and that change is what drives how hot our GPU gets.
 
-One NVIDIA H100 draws ~700–800 W[^h100], so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800 W forced out through 0.1 m²:
+One NVIDIA H100 draws ~700–800 W [^h100], so it rides on about 2 m² of panel ($0.30 \times 1361 \times 2 \approx 800\ \mathrm{W}$). The trouble is the chip is tiny — about **0.1 m²** — sitting on the back of the slab. In this model we are still lazy, and don't provide any heat dissipation to the chip: whatever the chip makes, it has to radiate from its own little footprint (and only the back face — the front is busy collecting sun). That's ~800 W forced out through 0.1 m²:
 
 $$
 T_\text{GPU} = \left(\frac{Q}{\varepsilon\sigma A_\text{chip}}\right)^{1/4} = \left(\frac{800}{5.67\times10^{-8}\times 0.1}\right)^{1/4} \approx 613\ \mathrm{K} \approx 340\,^\circ\mathrm{C}
@@ -59,7 +59,7 @@ That, in one number, is the first GPU-in-space problem: how to get that 800 W to
 
 It turns out this is solved by a decades-old design in spaceflight: heat pipe. 
 
-A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW[^iss] through a couple hundred m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800 W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
+A heat pipe is a sealed tube holding a little working fluid — in space, usually **ammonia**. Heat boils it at the hot end; the vapor rushes to the cold end and condenses onto the radiator; and a **wick** (a porous lining on the wall) pulls the liquid back by capillary action. No pump, no moving parts — fully passive, which is exactly why it works in zero-g. It's proven at scale, too: the ISS sheds ~70 kW [^iss] through a couple hundred m² of deployable ammonia radiators — at that size via *pumped* loops rather than passive pipes, but a single 800 W chip needs only a passive pipe or vapor chamber, the kind already in your desktop GPU.
 
 A quick reality check on radiator size: the ISS rejects on the order of ~280 W per m² — a rough real-world benchmark (the exact area depends on how you count). By that yardstick our 800 W chip wants ~2.8 m², a bit more than the 2 m² it rides on. So 2 m² is marginal: size up a little, or let it run a touch warmer.
 
@@ -83,7 +83,7 @@ First, we need to figure out how heavy it is. Let's estimate it bottom-up, for o
 
 Is ~10 kg/m² realistic? Yes — a real, flying Starlink satellite comes in around **6.7 kg/m²** (more on that in the Starlink calibration below); our slab's extra mass is just the dense compute and radiator Starlink doesn't carry. So ~20 kg per H100 is a sane, even slightly conservative figure — not wishful thinking.
 
-To launch ~20 kg to space[^falcon9]:
+To launch ~20 kg to space [^falcon9]:
 
 | Vehicle | Cost to LEO | Per H100-unit | vs. 5-yr ground energy (~$3.5k) |
 |---|---|---|---|
@@ -91,7 +91,7 @@ To launch ~20 kg to space[^falcon9]:
 | Falcon 9, SpaceX's marginal cost | ~$1,500/kg | ~$30,000 | ~9× |
 | Starship, stated goal            | ~$100/kg   | ~$2,000  | ~0.6× |
 
-So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship[^starship] to be advantageous. And we can likely do better still on weight — thin-film arrays and sharing one satellite bus across many chips.
+So if we treat launch cost as the item to offset energy cost in a terrestrial system, we need to get to the stated goal of Starship [^starship] to be advantageous. And we can likely do better still on weight — thin-film arrays and sharing one satellite bus across many chips.
 
 ## How to repair in space
 
@@ -107,10 +107,10 @@ A current Starlink V2 Mini is the closest real, flying yardstick — a comparabl
 
 | One Starlink V2 Mini | Value |
 |---|---|
-| Mass | ~800 kg[^starlink] |
+| Mass | ~800 kg [^starlink] |
 | Solar array | ~120 m² |
 | Power generated (est. @ ~400 W/m²) | ~40–50 kW |
-| Build cost (bus only) | ~$0.25–0.5M[^starlink-cost] |
+| Build cost (bus only) | ~$0.25–0.5M [^starlink-cost] |
 | Launch share (~22 per Falcon 9) | ~$1M |
 
 Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-class satellite is roughly a **60-GPU node**. Spread its ~\$0.25–0.5M bus across those \~60 GPUs and the platform is only **\~\$5–8k per GPU** (and ~13 kg per GPU) — both *below* our per-H100 estimates, since Starlink hauls no dense compute or radiator. The point: the spacecraft hardware is the cheap part — once you add an expensive chip like a GPU. The cost stack is **chip ≫ launch ≳ platform** — the H100, and (until Starship) the launch, dominate; the satellite around it does not.
@@ -119,9 +119,9 @@ Read as a compute platform, that ~50 kW would power ~60 H100s — so a Starlink-
 
 When I think about space data center, I realize it's not that we don't know how to build data centers on Earth, that part is easy. The messy part is how do you fund such dramatic build-up and where. Let's see some numbers.
 
-If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates[^elec]. 
+If we believe we'll need ~1 billion H100s — roughly one per person in the advanced economies — that's about 1 TW of power, ~30% of all the electricity humanity currently generates [^elec]. 
 
-On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have around 30 reactors under construction[^nuclear]). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
+On one hand, merely increasing power build out by 30% shouldn't be something dramatic, and China seems to be doing just that (they have around 30 reactors under construction [^nuclear]). China has a strong central government that can marshal resources, if they decide they need 1 TW of power supply, they will go build it. 
 
 On the other hand, it's harder to muster the political will in US to build out on the ground. Too many different interests, jurisdictions, environmental reviews, birds to protect [^birds], and different views of future demand. This makes space data center uniquely alluring to the US, and by extension western political system that's decentralized. It's intriguing the "market" is willing to award 1.7 trillion dollars [^IPO] to bet on such an orbital data center, as if the market already picked such a path. 
 
