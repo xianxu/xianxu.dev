@@ -12,13 +12,13 @@ I just published [The Case for Space Data Centers](./the-case-for-space-data-cen
 
 ## It started as a conversation, not a writing task
 
-The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a *physics question*: > "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?".  🤖[can you find the exact question I asked?]
+The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a *physics question*: > "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?".
 
 I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which in hindsight, look just like newer Starlink satellite that went up in Starship launch 12. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
 
 ## From conversation to a first draft
 
-So at some point, I asked: "ok, based on this discussion, write a blog post on the thesis… put it in `the-case-for-space-data-center.md`." 🤖[find the exact prompt I used]. 
+So at some point, I asked: "ok, based on this discussion, write a blog post on the thesis… put it in `the-case-for-space-data-center.md`." 
 
 I had created the initial draft of /xx-fix tool as a review workflow for AI to check my writing for me. The workflow is based on my experience, but haven't quite being battle tested on a blog post from scratch, so there ended up some building the airplane while flying it aspect to it. I ended up incrementally improve upon the tool as I wrote out the blog post. I believe this is one aspect of this AI era, that "everyone" needs to have a tool builder mindset. I touched about this with a [personalized software](./a-saturday-coding-session.md) framing previously as well.
 
@@ -74,4 +74,4 @@ It had been a very empowering experience. And to close on this post, I kept doin
 [^xx-fix]: See the fix skill [in ariadne](https://github.com/xianxu/ariadne/blob/main/construct/local/fix/SKILL.md).
 [^history]: See the [history](https://github.com/xianxu/xianxu.dev/commits/main/src/data/post/the-case-for-space-data-center.md)  established while the space center post's authored.
 [^poem]: I remember in some blog I mentioned "I write poem now", which means to write prose to constrain LLM. It's not that I only write prose, but that tends to be a more flexible place to start. The pattern I observed, inevitably resulted in later `lifing` some of prose into binary, for determinism.
-[^uou-decide]: In [you-decide](https://github.com/xianxu/you-decide), I went a dramatical length asking AI to give reference for all fact claims, and asked another AIs (codex and Google's antigravity in that case) to check those facts and sources. 
+[^you-decide]: In [you-decide](https://github.com/xianxu/you-decide), I went a dramatical length asking AI to give reference for all fact claims, and asked another AIs (codex and Google's antigravity in that case) to check those facts and sources. 
