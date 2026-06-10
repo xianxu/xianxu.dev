@@ -1,0 +1,80 @@
+---
+title: AI as My Research Workbench
+publishDate: 2026-06-10
+published: true
+excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to create what you want exactly. You own the possibilities, and leverage AI to help at many different altitudes. Here's a concrete example of how I wrote the blog about space data centers. AI is the MATLAB, the Wikipedia, the Excel, the search engine, all packaged into a single tool that you can customize and extend. The capability is there; the human/AI interaction is still being sorted out."
+tags:
+  - tech
+  - ai
+---
+
+I just published [The Case for Space Data Centers](./the-case-for-space-data-center.md) and hope you find it interesting. I went to write about it, not only because it's interesting, but also it is a good test for one of the workflows I'm tinkering with. It's a working example of what I see as a knowledge worker's AI-assisted workflow: not the "AI, write me a blog, and earn me quick bucks", but a research workbench where I keep exploring areas I don't know, learning facts and some maths, connecting other dots. Human is there at the center, as the driver that knows where we want to head to and what we want to learn about; AI is the rocket to help us get wherever we want to go, much faster. 
+
+## It started as a conversation, not a writing task
+
+The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a physics question: *"I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?"*.
+
+I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which is just like a newer Starlink satellite that went up in Starship launch 12. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
+
+## From conversation to a first draft
+
+So at some point, I asked: *"ok, based on this discussion, write a blog post on the thesis… put it in `the-case-for-space-data-center.md`"*. 
+
+I had created the initial draft of the /xx-fix tool as a review workflow for AI to check my writing for me. The workflow is based on my experience, but hasn't quite been battle tested on a blog post from scratch, so there ended up being some building-the-airplane-while-flying-it aspect to it. I ended up incrementally improving upon the tool as I wrote out the blog post. I believe this is one aspect of this AI era, that "everyone" needs to have a tool builder mindset. I touched on this with a [personalized software](./a-saturday-coding-session.md) framing previously as well.
+
+## Co-authoring in a stable document, turn by turn
+
+My central thesis when it comes to human AI interaction, is that whatever workflow we end up in during the AI era, it needs to be structured in a way human can understand it. Human needs to understand the stem of the work, so that they can steer at the right time, and at the right altitude. LLM-based AI essentially has a single transcript that contains all the information. It's often hard for human to keep track of all the details. If we consider a blog writing task, there are several things going on at the same time: 
+
+1. that human may ask AI about things to further their understanding in an area, and the goal of such turns is not to generate any outward visible artifact, but to update their brain's neurons with knowledge and information. 
+
+2. and occasionally, they have some good prose they want to capture. And those prose are still fractured, not a whole essay. 
+
+3. and sometimes they are in a spur of inspiration where a portion of the document gets laid out. 
+
+How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating works a lot like how a human would collaborate with another human. 
+
+1. there's a thread of free form consultation. That's the chatbot experience, and in this case, I'm using `claude code` as it gives me a lot of customization opportunities (skills etc.). It's actually infinitely extensible as you can ask it to write additional code to do whatever you want as part of your workflow [^ariadne]. We will see part of that power a bit clearer later. 
+
+2. a work surface for the artifact to evolve. Here, the artifact is a blog post manifested as a markdown file. The way human is able to communicate with their smart colleague about the artifact is contextual, that you ask question about that artifact, in the context of some part of that artifact, alas: comment in that document. This is what `nvim` with `parley.nvim` does, that the human directly inserts comments inside that markdown document under review using some simple markup conventions, and the paired agent skill in `claude code` [^xx-fix] that is able to interpret such markup, effectively creating paralleled sub-conversations inside those markups within the hosting document. This setup conveniently solved the mental load for human to specify context precisely: context is already clear around where the markups are inserted. Even when there are many of such "comments" thus form many sub-conversations, human's still able to mentally keep track of them with localized context, as it is not too unfamiliar compared to how humans interact with other humans in a collaborative document comment and review process. 
+
+3. and to keep track of things, if not, for posterity, `/xx-fix` skill is instructed to interpret the changes in the artifact as signals for a turn. Whenever a turn happens in the conversational thread, AI will figure out if the turn means to update the document, or means to be free form. And if it decides the turn means to update the document, it will create a git commit on behalf of human first, then update the document, then make another commit after AI finishes editing [^history].
+
+## Building and improving the tool continuously
+
+And as I wrote the space data center [post](./the-case-for-space-data-center.md), I also kept improving tooling around it. Some are agent skills (essentially prompts), to name a few:
+
+1. establishing turns, and commits. When agent should commit on behalf of human (when human left document changed and asked for review or `flow the doc`).
+2. eventually lifted some portion of such workflow [into binary](https://github.com/xianxu/ariadne/blob/main/scripts/docflow.sh) that skill prose would call [^poem].
+3. teaching it that a chat turn is not a review round. as I edit, I keep asking the agent factual / knowledge questions, and those shouldn't be mistaken for "I'm done, go review". It's just a small tweak away, and I asked `claude` to just do that, and remember it as part of the `/xx-fix` skill.
+
+I feel this long range of changes while I'm writing a blog post — to not only write a blog post, but construct and improve the environment to make writing a post with AI easier — is how AI is going to dramatically change how we work.
+
+## Learning facts and math from AI
+
+By now no one would be arguing that AI doesn't have the world's knowledge. They do. When they are less sure, they can always do a search and summarize. So part of this writing about space data center, is also my journey of learning about these topics. 
+
+AI pulled in theories, formulas of thermodynamics, which I had no previous exposure to. I think it's a much quicker way of learning, as it's targeted to a particular problem at hand. I bet it is much easier for human to remember facts in adjacent areas when human is in the driver seat, with a concrete issue at hand, compared to the traditional indiscriminate dumping of information, sort of self-guided progressive learning? I think it is a very interesting angle to explore how to leverage this in education. What would learning be, when everyone can afford access to the world's best professors.
+
+## How do you know if AI is not making things up?
+
+The truth is you don't know for sure, but there are ways to improve your confidence. This is what I'd call part of **AI literacy**. Just like you can't just trust information on the Internet, you should treat what AI tells you with a giant grain of salt. Human always needs to construct a consistent mental picture based on new information gained from AI. There are also the typical ways to work with AI: 
+
+1. human to establish a consistent logical framing. Does what AI tells you make sense based on your other understanding? 
+2. is AI self-consistent. 
+3. ask AI for reference to source of fact, and check the source [^you-decide]. 
+4. Leverage AI from different vendors, to double-check with different/fresh context. [^you-decide].
+
+A concrete example from the space data center post: once the draft settled, I ran it past *fresh-context* reviewers from other vendors — a read-only second agent whose only job is to fact-check every claim, and whether the source I cited actually backs it. `codex` flagged a handful of real soft spots, and I added seven citations off it (ISS cooling capacity, the H100's power draw, Starlink specs…) and toned down a couple of over-confident numbers. A third pass with Google's `agy`/Gemini agreed on the physics and even sharpened a caveat — then claimed one of my source links was dead and offered a replacement. It wasn't: a quick fetch showed the page loads fine. The reviewer itself had hallucinated the broken link. So even the fact-checker needs fact-checking — which, really, is the whole point. 
+
+P.S. the fact that AI recovered the above information is because the review rounds are committed; between the commit messages and the history, you can infer many things.
+
+## Wrapping it up
+
+It has been a very empowering experience, using my newly minted workbench to learn about space and write about it. This really is just one aspect of me adopting the pattern of leveraging AI to construct the many different layers of tooling that support the creation of various durable artifacts: be it code (see [nous](https://github.com/xianxu/nous), [pair](https://github.com/xianxu/pair), and [parley](https://github.com/xianxu/parley.nvim)); or a blog post, like this one; or research about [who to vote for](https://github.com/xianxu/you-decide). The application of such human-steered, AI-assisted workflow is everywhere, and I believe that's a plausible differentiator of the contemporary human knowledge worker. 
+
+[^ariadne]: See ariadne's `construct`, which forms the base workflow-embedded-in-repo pattern I'm applying everywhere.
+[^xx-fix]: See the fix skill [in ariadne](https://github.com/xianxu/ariadne/blob/main/construct/local/fix/SKILL.md).
+[^history]: See the [history](https://github.com/xianxu/xianxu.dev/commits/main/src/data/post/the-case-for-space-data-center.md) established while the space-center post was being authored.
+[^poem]: I remember in some blog I mentioned "I write poem now", which means to write prose to constrain an LLM. It's not that I only write prose, but that tends to be a more flexible place to start. The pattern I observed, inevitably resulted in later `lifting` some of the prose into a binary, for determinism.
+[^you-decide]: In [you-decide](https://github.com/xianxu/you-decide), I went to dramatic lengths asking AI to give references for all fact claims, and asked other AIs (codex and Google's antigravity in that case) to check those facts and sources. 
