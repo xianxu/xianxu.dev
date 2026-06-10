@@ -1,8 +1,8 @@
 ---
-title: A Nice Research Workbench
+title: AI as My Research Workbench
 publishDate: 2026-06-07
 published: false
-excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to create what you want exactly. You need to know the possibilities, and leverage AI to work at different altitudes: building workflows, tools, changing styling and presentations in a website, researching content, crunch math, helping with editorial touchups, all of which are handled in a single consistent flow. Here's a concrete example how I wrote the blog about space data center, which I hope offers a glimpse of that future. AI is the Matlat, the Wikipedia, the Excel, the search engine, all packaged into a single tool. The capability is there; the human/AI interaction is still being sorted out. "
+excerpt: "AI is powerful, but it is not an oracle. It does not have a magic wand to create what you want exactly. You own the possibilities, and leverage AI to help at many different altitudes. Here's a concrete example how I wrote the blog about space data center. AI is the MATLAB, the Wikipedia, the Excel, the search engine, all packaged into a single tool that you can customize and extend. The capability is there; the human/AI interaction is still being sorted out."
 tags:
   - tech
   - ai
@@ -12,13 +12,13 @@ I just published [The Case for Space Data Centers](./the-case-for-space-data-cen
 
 ## It started as a conversation, not a writing task
 
-The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a *physics question*: > "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?".
+The starting point of this post was my curiosity around the concept of space data center, particularly as SpaceX is nearing IPO. I opened the session with a physics question: *> "I'm thinking about space data center… help me compute something… what's the temperature of the device need to be, to break even?"*.
 
 I chatted in the `claude code` window about the equilibrium temperature of an object in space, and didn't initially have any idea of the geometry of this space computer. Later after back and forth, I settled on a simple model of just a rectangular slab, which in hindsight, look just like newer Starlink satellite that went up in Starship launch 12. And once I had a mental picture of that geometry, I felt the conversation went far enough and interesting enough to write something about it. 
 
 ## From conversation to a first draft
 
-So at some point, I asked: "ok, based on this discussion, write a blog post on the thesis… put it in `the-case-for-space-data-center.md`." 
+So at some point, I asked: *"ok, based on this discussion, write a blog post on the thesis… put it in `the-case-for-space-data-center.md`"*. 
 
 I had created the initial draft of /xx-fix tool as a review workflow for AI to check my writing for me. The workflow is based on my experience, but haven't quite being battle tested on a blog post from scratch, so there ended up some building the airplane while flying it aspect to it. I ended up incrementally improve upon the tool as I wrote out the blog post. I believe this is one aspect of this AI era, that "everyone" needs to have a tool builder mindset. I touched about this with a [personalized software](./a-saturday-coding-session.md) framing previously as well.
 
