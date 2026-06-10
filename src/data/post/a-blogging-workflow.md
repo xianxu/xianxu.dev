@@ -24,13 +24,13 @@ I had created the initial draft of the /xx-fix tool as a review workflow for AI 
 
 ## Co-authoring in a stable document, turn by turn
 
-My central thesis when it comes to human AI interaction, is that whatever workflow we end up in during the AI era, it needs to be structured in a way human can understand it. Human needs to understand the stem of the work, so that they can steer at the right time, and at the right altitude. LLM-based AI essentially has a single transcript that contains all the information. It's often hard for human to keep track of all the details. If we consider blog writing task, there are several things going on at the same time: 
+My central thesis when it comes to human AI interaction, is that whatever workflow we end up in during the AI era, it needs to be structured in a way human can understand it. Human needs to understand the stem of the work, so that they can steer at the right time, and at the right altitude. LLM-based AI essentially has a single transcript that contains all the information. It's often hard for human to keep track of all the details. If we consider a blog writing task, there are several things going on at the same time: 
 
-1. that human may ask AI about things to further their understanding in an area, and the goal of such turns is not to generate any outward visible artifact, but updating their brain's neurons with knowledge and information. 
+1. that human may ask AI about things to further their understanding in an area, and the goal of such turns is not to generate any outward visible artifact, but to update their brain's neurons with knowledge and information. 
 
 2. and occasionally, they have some good prose they want to capture. And those prose are still fractured, not a whole essay. 
 
-3. and sometimes they are in a spur of inspiration that portion of the document is laid out. 
+3. and sometimes they are in a spur of inspiration where a portion of the document gets laid out. 
 
 How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating, in hindsight, works a lot like how a human would collaborate with another human. 
 
