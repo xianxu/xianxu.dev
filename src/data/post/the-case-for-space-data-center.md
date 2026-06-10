@@ -131,9 +131,10 @@ It's very interesting to see how this competition plays out!
 
 --- 
 
-PS: a fun fact about SSO — plus an AI-generated animation, to illustrate the joint development behind this post. 
+PS: a fun fact about SSO — plus a pair of AI-generated animations, to illustrate the joint development behind this post. 
 
-<figure style="margin:2rem auto;max-width:640px">
+<div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;align-items:flex-start;margin:2rem auto;max-width:760px">
+<figure style="flex:1 1 300px;min-width:260px;margin:0">
 <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A satellite's orbital plane stays edge-on to the Sun all year by precessing about one degree per day as the Earth travels around the Sun." style="width:100%;height:auto;color:currentColor;font-family:sans-serif">
   <!-- Earth's yearly path around the Sun -->
   <circle cx="320" cy="240" r="160" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="3 7"/>
@@ -150,18 +151,54 @@ PS: a fun fact about SSO — plus an AI-generated animation, to illustrate the j
     <!-- orbit ring, FAR half — drawn behind Earth, so it's hidden where it passes behind the globe (top-down view) -->
     <path d="M480,206 A9,34 0 0 0 480,274" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.4"/>
     <!-- satellite, FAR pass: shown only during the 2nd half of the loop (back semicircle), behind Earth — the globe occludes it in the middle, the poles stay visible -->
-    <circle r="5" fill="#10b981" opacity="0"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="0;1" keyTimes="0;0.5"/></circle>
+    <g opacity="0"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="0;1" keyTimes="0;0.5"/><rect x="-2" y="-10" width="4" height="20" fill="#60a5fa" stroke="#1e3a8a" stroke-width="0.5"/><circle r="4" fill="#10b981"/></g>
     <!-- Earth (over the shadow base and the far-side orbit) -->
     <circle cx="480" cy="240" r="15" fill="#3b82f6"/>
     <!-- orbit ring, NEAR half — drawn in front of Earth -->
     <path d="M480,206 A9,34 0 0 1 480,274" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.95"/>
     <!-- satellite, NEAR pass: shown only during the 1st half of the loop (front semicircle), riding over the globe -->
-    <circle r="5" fill="#10b981" opacity="1"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.5"/></circle>
+    <g opacity="1"><animateMotion dur="3s" repeatCount="indefinite" path="M480,206 A9,34 0 1 1 480,274 A9,34 0 1 1 480,206 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.5"/><rect x="-2" y="-10" width="4" height="20" fill="#60a5fa" stroke="#1e3a8a" stroke-width="0.5"/><circle r="4" fill="#10b981"/></g>
   </g>
   <text x="320" y="464" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">The plane stays edge-on to the Sun all year &#8594; it precesses ~1&#176;/day, for free.</text>
 </svg>
-<figcaption style="text-align:center;font-size:0.85rem;opacity:0.7;margin-top:0.5rem">The blue dot is Earth on its yearly trip around the Sun; the green dot is the satellite on its (much faster) orbit. The shaded cone trailing Earth is its shadow — the night side. Watch the thin green ring: it threads the day/night line, staying perpendicular to the Sun-line the whole way around and out of that shadow. Holding it there <em>is</em> the ~1&#176;/day precession, which Earth's equatorial bulge supplies for nothing.</figcaption>
+<figcaption style="text-align:center;font-size:0.8rem;opacity:0.75;margin-top:0.4rem"><strong>With the bulge (real Earth).</strong> The plane precesses ~1&#176;/day, staying edge-on to the Sun all year — panel lit, orbit clear of the shadow.</figcaption>
 </figure>
+<figure style="flex:1 1 300px;min-width:260px;margin:0">
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Without precession the orbital plane stays fixed in space, so as the Earth orbits the Sun the plane drifts from edge-on to face-on, the solar panel turns away from the Sun, and the orbit slides into Earth's shadow." style="width:100%;height:auto;color:currentColor;font-family:sans-serif">
+  <!-- Earth's yearly path around the Sun -->
+  <circle cx="320" cy="240" r="160" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="3 7"/>
+  <!-- the Sun -->
+  <circle cx="320" cy="240" r="30" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <text x="320" y="245" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Sun</text>
+  <!-- Sun-line + shadow ROTATE around the Sun, so they stay radial (pointing at / away from the Sun). Earth lives in the revolving group below, so it can sit BETWEEN the orbit halves and occlude the back one. -->
+  <g>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 320 240" to="360 320 240" dur="24s" repeatCount="indefinite"/>
+    <!-- faint Sun-line: from Earth toward the Sun -->
+    <line x1="463" y1="240" x2="354" y2="240" stroke="currentColor" stroke-opacity="0.3" stroke-dasharray="2 5"/>
+    <!-- Earth's shadow (night side), trailing away from the Sun -->
+    <path d="M480,225 L555,218 L555,262 L480,255 Z" fill="#475569" fill-opacity="0.4" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="5 4"/>
+  </g>
+  <!-- COPIED from the LEFT figure's occlusion stack (orbit-far / satellite-far / Earth / orbit-near / satellite-near) — same draw order, so Earth hides the back half. The ONLY difference: this group REVOLVES by <animateMotion rotate="0"> (position circles the Sun, orientation stays FIXED = no precession) instead of the left's rotate (= precession). Contents are relative to Earth's centre at the origin; 24s period matches the Sun-line rotation so Earth + Sun-line stay aligned. -->
+  <g>
+    <animateMotion dur="24s" repeatCount="indefinite" rotate="0" path="M480,240 A160,160 0 1 1 160,240 A160,160 0 1 1 480,240 Z"/>
+    <!-- orbit ring, FAR half — behind Earth (hidden where it passes behind the globe) -->
+    <path d="M0,-34 A9,34 0 0 0 0,34" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.4"/>
+    <!-- satellite, FAR pass: shown only on the back semicircle, behind Earth -->
+    <g opacity="0"><animateMotion dur="3s" repeatCount="indefinite" path="M0,-34 A9,34 0 1 1 0,34 A9,34 0 1 1 0,-34 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="0;1" keyTimes="0;0.5"/><rect x="-2" y="-10" width="4" height="20" fill="#60a5fa" stroke="#1e3a8a" stroke-width="0.5"/><circle r="4" fill="#10b981"/></g>
+    <!-- Earth (over the far-side orbit + satellite) -->
+    <circle cx="0" cy="0" r="15" fill="#3b82f6"/>
+    <!-- orbit ring, NEAR half — in front of Earth -->
+    <path d="M0,-34 A9,34 0 0 1 0,34" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.95"/>
+    <!-- satellite, NEAR pass: shown only on the front semicircle, over Earth; panel (navy) starts facing the Sun, then drifts as the fixed plane fails to track it -->
+    <g opacity="1"><animateMotion dur="3s" repeatCount="indefinite" path="M0,-34 A9,34 0 1 1 0,34 A9,34 0 1 1 0,-34 Z"/><animate attributeName="opacity" dur="3s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.5"/><rect x="-2" y="-10" width="4" height="20" fill="#60a5fa" stroke="#1e3a8a" stroke-width="0.5"/><circle r="4" fill="#10b981"/></g>
+  </g>
+  <text x="320" y="464" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">Perfect ball &#8594; no precession &#8594; the plane drifts edge-on &#8594; face-on in ~3 months.</text>
+</svg>
+<figcaption style="text-align:center;font-size:0.8rem;opacity:0.75;margin-top:0.4rem"><strong>Perfect ball — no bulge.</strong> No precession, so by Newton the plane stays fixed in space; a quarter-year on it's face-on — panel edge-on to the Sun, orbit sliding into the shadow.</figcaption>
+</figure>
+</div>
+
+The only difference between the two is that free ~1&#176;/day nudge from Earth's equatorial bulge. **With it** (left), the orbit plane turns just fast enough to track the Sun all year — a *sun-synchronous* orbit. **Without it** (right), Newton wins: the plane keeps its fixed orientation in space, so as the Earth rounds the Sun the once-perfect dawn–dusk orbit drifts toward noon–midnight in about three months — and the free lunch is gone.
 
 [^SSO]: Sun-synchronous orbit itself is a very clever trick.
 [^brain]: Briefly touched in [this post](./the-value-of-personal-data.md).
