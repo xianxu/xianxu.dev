@@ -32,7 +32,7 @@ My central thesis when it comes to human AI interaction, is that whatever workfl
 
 3. and sometimes they are in a spur of inspiration where a portion of the document gets laid out. 
 
-How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating, works a lot like how a human would collaborate with another human. 
+How do you adapt such different modes of operation into a coherent workflow? The setup I end up creating works a lot like how a human would collaborate with another human. 
 
 1. there's a thread of free form consultation. That's the chatbot experience, and in this case, I'm using `claude code` as it gives me a lot of customization opportunities (skills etc.). It's actually infinitely extensible as you can ask it to write additional code to do whatever you want as part of your workflow [^ariadne]. We will see part of that power a bit clearer later. 
 
@@ -71,7 +71,7 @@ P.S. the fact that AI recovered the above information is because the review roun
 
 ## Wrapping it up
 
-It has been a very empowering experience, using my newly minted workbench to learn about space and write about it. This really is just one aspect of me going to the pattern of leverage AI to construct the many different layers of tooling that supports the creation of various durable artifacts: be it code (see [nous](https://github.com/xianxu/nous), [pair](https://github.com/xianxu/pair), and [parley](https://github.com/xianxu/parley.nvim)); or blog post, like this; or research about [who to vote](https://github.com/xianxu/you-decide). The application of such human steered AI assisted workflow is everywhere, and I believe that's the plausible differentiators of contemporary human knowledge worker. 
+It has been a very empowering experience, using my newly minted workbench to learn about space and write about it. This really is just one aspect of me adopting the pattern of leveraging AI to construct the many different layers of tooling that support the creation of various durable artifacts: be it code (see [nous](https://github.com/xianxu/nous), [pair](https://github.com/xianxu/pair), and [parley](https://github.com/xianxu/parley.nvim)); or a blog post, like this one; or research about [who to vote for](https://github.com/xianxu/you-decide). The application of such human-steered, AI-assisted workflow is everywhere, and I believe that's a plausible differentiator of the contemporary human knowledge worker. 
 
 ---
 
