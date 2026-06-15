@@ -28,3 +28,8 @@ bin/
 
 .astro
 .goto
+/AGENTS.md
+/.claude/skills/
+/.claude/settings.json
+/.colima/
+/construct/scripts/vm-log.sh

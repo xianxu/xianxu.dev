@@ -1,0 +1,12 @@
+# xianxu.dev base.manifest — xianxu.dev's module declaration for the weave layer compiler.
+#
+# xianxu.dev is a LEAF derivative: it consumes ariadne as its substrate (construct/deps
+# `substrate ../ariadne`) and inherits ariadne's EXPORTED base layer through that edge.
+# It exports NOTHING downstream. Declares ONLY its OWN internal artifacts.
+#
+# Format and verbs: see ariadne's construct/base.manifest. The leading `internal` token
+# (ariadne#99) keeps an artifact with this repo (selected only on its own self-walk),
+# and an ancestor's internal artifacts never leak DOWN into its AGENTS.md (#95 fix).
+
+# ── Constitution ──────────────────────────────────────────────────────────────
+internal  prose AGENTS.local.md
