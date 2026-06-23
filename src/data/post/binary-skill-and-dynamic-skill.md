@@ -1,11 +1,12 @@
 ---
-title: Skill Binary and Dynamic Skill
+title: Skill Binaries and Dynamic Skills
 publishDate: 2026-06-20
-published: false
+published: true
 excerpt: "The key role of the human in agentic coding is to set up what I would call the deterministic shell in more places such that human intention can be enforced. Agent skill is the main way the current generation of harnesses uses to stitch together a static set of prose, potentially with embedded scripts. Here, I demonstrate two patterns I used in ariadne to make such prose fragments easier to maintain and regenerate dynamically."
 tags:
   - ai
   - tech
+  - ariadne
 ---
 
 The useful way to think about agent skills is not as a pile of prompts, but as part of a deterministic shell around a stochastic machine. The prose tells the agent how to behave; the scripts, binaries, and generated files decide which parts of that behavior are enforced by code. This post is about two patterns I use to make that shell less fragile.
