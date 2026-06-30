@@ -22,7 +22,7 @@ Today, June 30, 2026, the final ruling is out: 6-3 on statutory grounds, or 5-4 
 
 ROBERTS, C. J., delivered the opinion of the Court, in which SOTOMAYOR, KAGAN, BARRETT, and JACKSON, JJ., joined. JACKSON, J., filed a concurring opinion, in which SOTOMAYOR, J., joined as to the introduction and Part I. 
 
-The majority further endorsed the prevailing view of birthright citizenship: you are born here, you are a citizen. No law can be passed to narrow it, 🤖<sans>{without} a constitutional amendment. 
+The majority further endorsed the prevailing view of birthright citizenship: you are born here, you are a citizen. No law can be passed to narrow it, without a constitutional amendment. 
 
 KAVANAUGH, J., filed an opinion concurring in the judgment and dissenting in part. He would have ruled against Trump on statutory grounds [^statutory], but left the door open for Congress to further change the list of exclusions from birthright citizenship. While that's a position I predicted, nonetheless the way he argued about it seems logically inconsistent: 
 
@@ -45,7 +45,7 @@ On the eve of the United States' 250th birthday, it is worth remembering that th
 
 [^occam]: Occam's razor is the principle that, all else equal, the simpler explanation is preferred.
 
-[^declaration]: The phrase comes from the Declaration of Independence.
+[^declaration]: The phrase comes from the [Declaration of Independence](https://www.archives.gov/founding-docs/declaration-transcript).
 
 [^statutory]: Since Trump used an executive order, there are two ways it may be struck down: by finding that it contravenes the Constitution itself, or merely conflicts with federal law. In this case, the court found that it contravenes the Constitution itself, the Fourteenth Amendment in particular. This means a new constitutional precedent is established, and together with Wong Kim Ark, it strengthens the US practice of granting citizenship to almost everyone born on US soil. The court's ruling today, I think, pretty clearly foreclosed future challenges on this issue without a constitutional amendment. And it's a good thing. 
 
