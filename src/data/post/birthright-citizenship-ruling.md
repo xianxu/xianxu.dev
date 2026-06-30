@@ -1,6 +1,6 @@
 ---
 title: "Birthright Citizenship Ruling"
-publishDate: 2030-07-01
+publishDate: 2030-06-30
 published: true
 excerpt: "A reflection on the Supreme Court's birthright citizenship ruling and what it says about America."
 tags:
