@@ -34,13 +34,14 @@ const tags = [...counts.entries()]
       <a href={getBlogPermalink()} class="hover:text-primary dark:hover:text-blue-400">View all posts »</a>
       {tags.length > 0 && (
         <ul class="flex flex-wrap gap-2 text-sm">
-          {tags.map(({ slug }) => (
+          {tags.map(({ slug, count }) => (
             <li class="bg-gray-100 dark:bg-slate-700 py-0.5 px-2 lowercase font-medium">
               <a
                 href={getPermalink(slug, 'tag')}
                 class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
               >
                 {slug}
+                <span class="ml-1 opacity-60">({count})</span>
               </a>
             </li>
           ))}
