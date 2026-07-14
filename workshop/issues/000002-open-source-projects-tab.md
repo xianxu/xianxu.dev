@@ -1,12 +1,13 @@
 ---
 id: 000002
-status: working
+status: codecomplete
 deps: []
 github_issue:
 created: 2026-07-14
 updated: 2026-07-14
 estimate_hours: 2.64
 started: 2026-07-14T13:04:17-07:00
+actual_hours: 1.10
 ---
 
 # Add open-source projects tab
@@ -80,6 +81,7 @@ _Produced via `brain/data/life/42shots/velocity/estimate-logic-v3.1.md` against 
 ## Log
 
 ### 2026-07-14
+- 2026-07-14: closed — Both repos pass collision-safe scripts/test-projects-page.sh with permalink, anchor, ordering, visibility assertions; targeted lint/format, clean builds, and diff checks pass; atlas and README document the authoring flow.; review verdict: SHIP
 
 - Approved direction: projects remain blog posts; `project.github` marks a
   substantial project introduction or reflection. `ARCH-DRY` rules out a
