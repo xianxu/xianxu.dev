@@ -5,7 +5,7 @@ deps: []
 github_issue:
 created: 2026-07-14
 updated: 2026-07-14
-estimate_hours: 0.99
+estimate_hours: 1.22
 started: 2026-07-14T13:04:17-07:00
 ---
 
@@ -62,7 +62,7 @@ item: issue-spec design=0.20 impl=0.08
 item: typed-data-prototype design=0.20 impl=0.48
 item: milestone-review design=0.00 impl=0.20
 design-buffer: 0.15
-total: 0.99
+total: 1.22
 ```
 
 *Produced via `brain/data/life/42shots/velocity/estimate-logic-v3.1.md` against `baseline-v3.1.md`. Method A only.*
