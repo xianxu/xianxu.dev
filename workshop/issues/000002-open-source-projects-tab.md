@@ -5,7 +5,7 @@ deps: []
 github_issue:
 created: 2026-07-14
 updated: 2026-07-14
-estimate_hours: 2.17
+estimate_hours: 2.64
 started: 2026-07-14T13:04:17-07:00
 ---
 
@@ -31,10 +31,10 @@ as blog posts.
 - The page reuses the existing blog list and shows published posts with project
   metadata, newest first. Each project entry includes a direct GitHub link in
   addition to its ordinary post link.
-- Keep one canonical introductory post per project. Other posts about the same
-  project continue to use ordinary tags and links. The build rejects duplicate
-  normalized `project.github` values so this remains an invariant rather than a
-  writing convention.
+- `project` marks a substantial introduction, history, or reflection worth
+  discovering from the Projects tab. Multiple posts may point at the same
+  repository; version one does not impose repository identity or canonical-post
+  rules.
 - Do not create a separate project collection, case-study renderer, filtering
   system, or new prose in version one.
 - Port the reusable post schema, normalization, list capability, and Projects
@@ -47,7 +47,6 @@ as blog posts.
 - `project.github` is schema-validated and preserved by post normalization.
 - `/projects` lists only published project introductions and provides both the
   introduction and GitHub destinations.
-- Duplicate project GitHub URLs fail deterministically before rendering.
 - `Projects` appears in the primary navigation.
 - Existing Highlights, Archive, and post rendering continue to build.
 - The shared capability is build-verified in both xianxu.dev and 42shots without
@@ -64,9 +63,10 @@ familiarity: 1.0
 item: issue-spec design=0.20 impl=0.08
 item: typed-data-prototype design=0.20 impl=0.48
 item: cross-repo-refactor-small design=0.30 impl=0.60
+item: cross-cutting-refactor design=0.15 impl=0.30
 item: milestone-review design=0.00 impl=0.20
 design-buffer: 0.15
-total: 2.17
+total: 2.64
 ```
 
 *Produced via `brain/data/life/42shots/velocity/estimate-logic-v3.1.md` against `baseline-v3.1.md`. Method A only.*
@@ -95,3 +95,11 @@ total: 2.17
 - Made canonical uniqueness enforceable by rejecting duplicate normalized
   GitHub URLs, expanded end-to-end assertions across both repositories, and
   recalculated the estimate to include the cross-repo port and verification.
+
+### 2026-07-14 14:18 PDT — simplicity correction after gate review
+
+- Removed the agent-invented canonical-uniqueness requirement. The operator
+  asked for a discoverability marker, and multiple useful essays may point to
+  one repository; URL identity enforcement is outside version one.
+- Retained durable process-level build assertions for the actual metadata and
+  rendering path, and re-estimated that additional test surface.
