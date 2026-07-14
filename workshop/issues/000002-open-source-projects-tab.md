@@ -73,9 +73,9 @@ total: 2.64
 
 ## Plan
 
-- [ ] Extend and verify the typed post pipeline for optional project metadata.
-- [ ] Reuse the blog list to render project introductions with contextual GitHub links.
-- [ ] Add the Projects page and navigation entry, then build-verify the site.
+- [x] Extend and verify the typed post pipeline for optional project metadata.
+- [x] Reuse the blog list to render project introductions with contextual GitHub links.
+- [x] Add the Projects page and navigation entry, then build-verify the site.
 
 ## Log
 
@@ -87,6 +87,20 @@ total: 2.64
   over normalized posts, and `ARCH-PURPOSE` requires the GitHub destination to
   survive schema → normalization → page rendering rather than exist as inert
   frontmatter.
+- Implemented the optional nested schema and normalized `Post` field, reused the
+  shared list with an opt-in GitHub link, and added `/projects` plus personal-site
+  navigation. Mirrored the shared engine, page, and test surface to 42shots
+  (`ARCH-DRY`, `ARCH-PURPOSE`).
+- TDD evidence: invalid `project.github` failed Astro content validation; the
+  corrected URL passed content synchronization. The committed process-level test
+  passed in both repositories and verified published-project inclusion,
+  non-project/draft exclusion, safe accessible GitHub linking, and no link leak
+  into an ordinary list (`ARCH-PURE`).
+- Verification: `scripts/test-projects-page.sh .`, targeted ESLint and Prettier,
+  clean `npm run build`, and `git diff --check` passed in both repositories.
+  Full `npm run check` remains blocked in both repos by matching pre-existing
+  archive `page.data: unknown[]` typing and unrelated Footer/frontmatter lint
+  debt; no task-owned file produced a diagnostic.
 
 ## Revisions
 

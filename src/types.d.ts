@@ -39,6 +39,9 @@ export interface Post {
   /**  */
   highlight?: boolean;
 
+  /** Open-source project metadata when this post belongs on the Projects page. */
+  project?: ProjectMetadata;
+
   /**  */
   hidden?: boolean;
 
@@ -51,6 +54,10 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+}
+
+export interface ProjectMetadata {
+  github: string;
 }
 
 export interface Taxonomy {

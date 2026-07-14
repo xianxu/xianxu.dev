@@ -53,6 +53,7 @@ const postCollection = defineCollection({
     updateDate: z.date().optional(),
     published: z.boolean().optional(),
     highlight: z.boolean().optional(),
+    project: z.object({ github: z.string().url() }).optional(),
     hidden: z.boolean().optional(),
     comments: z.boolean().optional(),
 
