@@ -18,7 +18,7 @@
 | ----------------- | ------------------------------------------------------------- | ------ |
 | `ProjectMetadata` | `src/content/config.ts`, `src/types.d.ts` and 42shots mirrors | new    |
 
-- **ProjectMetadata** — optional metadata marking a post as the canonical introduction to an open-source project.
+- **ProjectMetadata** — optional metadata marking a substantial project introduction or reflection for discovery.
   - **Relationships:** A post has zero or one project record; a project record has exactly one GitHub URL.
   - **DRY rationale:** The nested object is the sole marker and destination, avoiding independent boolean and URL fields that can disagree (`ARCH-DRY`).
   - **Future extensions:** Optional project destinations such as a homepage can widen this object without changing marker semantics.
