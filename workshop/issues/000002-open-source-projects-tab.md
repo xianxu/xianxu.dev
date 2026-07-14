@@ -69,7 +69,7 @@ design-buffer: 0.15
 total: 2.64
 ```
 
-*Produced via `brain/data/life/42shots/velocity/estimate-logic-v3.1.md` against `baseline-v3.1.md`. Method A only.*
+_Produced via `brain/data/life/42shots/velocity/estimate-logic-v3.1.md` against `baseline-v3.1.md`. Method A only._
 
 ## Plan
 
@@ -81,8 +81,8 @@ total: 2.64
 
 ### 2026-07-14
 
-- Approved direction: projects remain blog posts; `project.github` marks the one
-  canonical introduction for an open-source project. `ARCH-DRY` rules out a
+- Approved direction: projects remain blog posts; `project.github` marks a
+  substantial project introduction or reflection. `ARCH-DRY` rules out a
   parallel content collection, `ARCH-PURE` keeps selection as a simple predicate
   over normalized posts, and `ARCH-PURPOSE` requires the GitHub destination to
   survive schema → normalization → page rendering rather than exist as inert
@@ -117,3 +117,10 @@ total: 2.64
   one repository; URL identity enforcement is outside version one.
 - Retained durable process-level build assertions for the actual metadata and
   rendering path, and re-estimated that additional test surface.
+
+### 2026-07-14 14:25 PDT — boundary review
+
+- Made test fixtures collision-safe and expanded assertions to cover the post
+  permalink, anchor-specific safety/accessibility attributes, and newest-first
+  ordering. Reclassified Astro-backed post normalization as an integration
+  boundary, and documented the authoring surface in README and atlas.

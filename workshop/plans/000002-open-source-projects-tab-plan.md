@@ -14,19 +14,14 @@
 
 ### Pure entities
 
-| Name              | Lives in                                                      | Status   |
-| ----------------- | ------------------------------------------------------------- | -------- |
-| `ProjectMetadata` | `src/content/config.ts`, `src/types.d.ts` and 42shots mirrors | new      |
-| Normalized `Post` | `src/utils/blog.ts` and 42shots mirror                        | modified |
+| Name              | Lives in                                                      | Status |
+| ----------------- | ------------------------------------------------------------- | ------ |
+| `ProjectMetadata` | `src/content/config.ts`, `src/types.d.ts` and 42shots mirrors | new    |
 
 - **ProjectMetadata** — optional metadata marking a post as the canonical introduction to an open-source project.
   - **Relationships:** A post has zero or one project record; a project record has exactly one GitHub URL.
   - **DRY rationale:** The nested object is the sole marker and destination, avoiding independent boolean and URL fields that can disagree (`ARCH-DRY`).
   - **Future extensions:** Optional project destinations such as a homepage can widen this object without changing marker semantics.
-- **Normalized `Post`** — the existing renderer-facing representation gains the project record.
-  - **Relationships:** One content entry normalizes to one `Post`; all consumers share it.
-  - **DRY rationale:** Metadata travels through the existing normalization boundary rather than being re-read by the Projects page (`ARCH-PURPOSE`).
-  - **Future extensions:** None planned for version one.
 
 Validation runs through Astro's schema/type checks and production build. This repository has no unit-test harness; adding one solely for a declarative Zod field would exceed this feature's scope.
 
@@ -35,6 +30,7 @@ Validation runs through Astro's schema/type checks and production build. This re
 | Name                     | Lives in                                                                                   | Status   | Wraps                                     |
 | ------------------------ | ------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
 | Project-aware blog list  | `src/components/blog/List.astro`, `src/components/blog/ListItem.astro` and 42shots mirrors | modified | Astro rendering                           |
+| Post normalization       | `src/utils/blog.ts` and 42shots mirror                                                     | modified | Astro content rendering                   |
 | Projects route           | `src/pages/projects.astro` and 42shots mirror                                              | new      | Static page generation                    |
 | Projects build assertion | `scripts/test-projects-page.sh` and 42shots mirror                                         | new      | Temporary content fixtures + static build |
 | Primary navigation       | `src/navigation.ts`                                                                        | modified | Site navigation                           |
@@ -42,6 +38,9 @@ Validation runs through Astro's schema/type checks and production build. This re
 - **Project-aware blog list** — accepts an optional display flag and renders a direct GitHub link when enabled.
   - **Injected into:** The Projects page passes the flag; existing consumers retain current output.
   - **Future extensions:** Other project metadata can use the same context without forking the list.
+- **Post normalization** — carries schema-validated project metadata through the existing Astro `render(post)` boundary into `Post`.
+  - **Injected into:** All post consumers through `fetchPosts()` / `fetchAllPosts()`.
+  - **Future extensions:** None planned for version one.
 - **Projects route** — fetches published posts, applies `post.project !== undefined`, and hands them to the shared list.
   - **Injected into:** Astro's static route build.
   - **Future extensions:** None until project count demonstrates a need for grouping or filtering.
@@ -161,3 +160,12 @@ Update issue #2's checklist and Log with verification evidence. Commit with an i
 - Added an explicit committed build-assertion script, mirrored and executed in
   both repositories, so the rendered behavior remains reproducible after
   temporary fixtures are removed.
+
+### 2026-07-14 14:25 PDT — boundary review
+
+- Reclassified normalized-post construction from PURE to INTEGRATION because it
+  invokes Astro rendering.
+- Made fixture setup refuse collisions before registering cleanup and expanded
+  assertions for the introduction permalink, anchor-specific attributes, and
+  newest-first ordering.
+- Added README and atlas documentation for the author-facing metadata and route.
