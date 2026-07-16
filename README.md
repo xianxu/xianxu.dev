@@ -1,5 +1,18 @@
 # 🚀 AstroWind
 
+## Project introductions
+
+Published blog posts can appear on `/projects` by adding project metadata to
+their frontmatter:
+
+```yaml
+project:
+  github: https://github.com/xianxu/example
+```
+
+The post remains an ordinary blog post. The Projects page adds a direct GitHub
+link; installation and usage details continue to live in the repository README.
+
 <img src="https://raw.githubusercontent.com/arthelokyo/.github/main/resources/astrowind/lighthouse-score.png" align="right"
      alt="AstroWind Lighthouse Score" width="100" height="358">
 

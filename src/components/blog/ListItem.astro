@@ -13,9 +13,10 @@ import { getFormattedDate } from '~/utils/utils';
 
 export interface Props {
   post: Post;
+  showProjectLink?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, showProjectLink = false } = Astro.props;
 const image = (await findImage(post.image)) as ImageMetadata | undefined;
 
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
@@ -107,6 +108,20 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
     </header>
 
     {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
+    {
+      showProjectLink && post.project && (
+        <a
+          class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium hover:underline"
+          href={post.project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${post.title} on GitHub`}
+        >
+          <Icon name="tabler:brand-github" class="w-4 h-4" />
+          GitHub
+        </a>
+      )
+    }
     {
       post.tags && Array.isArray(post.tags) ? (
         <footer class="mt-5">
