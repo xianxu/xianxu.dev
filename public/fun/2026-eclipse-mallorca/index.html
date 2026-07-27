@@ -3,7 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mallorca Eclipse 2026 — Sunset Viewshed</title>
+<title>Total Solar Eclipse over Mallorca — 12 August 2026</title>
+<meta name="description" content="Where to watch the sunset totality on Mallorca: terrain-ray-traced viewsheds for 13 viewpoints, interactive map and horizon panoramas.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="xianxu.dev">
+<meta property="og:title" content="Total Solar Eclipse over Mallorca — 12 August 2026">
+<meta property="og:description" content="Where to watch the sunset totality: terrain-ray-traced viewsheds for 13 viewpoints, interactive map and horizon panoramas.">
+<meta property="og:url" content="https://xianxu.dev/fun/2026-eclipse-mallorca/">
+<meta property="og:image" content="https://xianxu.dev/fun/2026-eclipse-mallorca/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root {
   --bg: #faf8f3; --card: #ffffff; --ink: #221d14; --ink-2: #5c5340; --ink-3: #8a8171;
@@ -1336,7 +1348,7 @@ function renderChart(s) {
   const cx = az => PL + (az - X0) / (X1 - X0) * CW;
   const cy = el => PT + (Y1 - el) / (Y1 - Y0) * CH;
   const XS = CW / (X1 - X0), YS = CH / (Y1 - Y0);
-  const RX = (0.267 * XS).toFixed(1), RY = (0.267 * YS).toFixed(1);
+  const RX = (0.267 * YS).toFixed(1), RY = (0.267 * YS).toFixed(1);  // circles: size by the altitude scale (the axis the sun-width comparisons use)
   const dip = s.dip;
   const cross = s.cross;
   let c = [];
