@@ -85,6 +85,8 @@ tr.active-row { background: var(--hl); box-shadow: inset 3px 0 0 var(--good); }
 .spot-pill.active { background: var(--chip-good-bg); color: var(--good-deep);
   border-color: var(--good); }
 .spot-pill .g { color: var(--good-deep); margin-right: 4px; }
+#hitlayer circle { fill: transparent; cursor: pointer; }
+#hitlayer circle:hover { stroke: #0ca30c; stroke-width: 2.5; }
 .chip { display: inline-block; border-radius: 999px; padding: 1px 10px; font-size: 12px;
   font-weight: 700; white-space: nowrap; }
 .chip-full { background: var(--chip-good-bg); color: var(--good-deep); }
@@ -1218,7 +1220,7 @@ eclipsed</em>.</td></tr>
 totality <em>and</em> a sea-horizon sunset. Open green: totality clears terrain by over 1° but the
 last partial phase sets behind land. Amber: under 1° of margin. Red: terrain hides totality.
 Triangles: drive-up elevated viewpoints. The orange fan is the sun bearing (285–295°) from the
-<b>selected spot</b> — click a highlighted table row to move it. Relief: NASA SRTM 1″.</figcaption>
+<b>selected spot</b> — click any ringed spot directly on the map (the cursor changes over them), or use the pills and table rows. Relief: NASA SRTM 1″.</figcaption>
 </figure>
 
 <h2 id="sees-title">…</h2>
@@ -1476,6 +1478,24 @@ function setFocus(key, updateHash = true) {
     b.classList.toggle("active", b.dataset.spot === key));
 }
 
+const SVGNS = "http://www.w3.org/2000/svg";
+const mapsvg = document.querySelector("#mapbox svg");
+if (mapsvg) {
+  const hl = document.createElementNS(SVGNS, "g");
+  hl.id = "hitlayer";
+  Object.values(DATA).forEach(s => {
+    const [x, y] = mapP(s.lon, s.lat);
+    const ci = document.createElementNS(SVGNS, "circle");
+    ci.setAttribute("cx", x.toFixed(1)); ci.setAttribute("cy", y.toFixed(1));
+    ci.setAttribute("r", "14");
+    const ti = document.createElementNS(SVGNS, "title");
+    ti.textContent = s.short + " — click to focus";
+    ci.appendChild(ti);
+    ci.addEventListener("click", () => setFocus(s.key));
+    hl.appendChild(ci);
+  });
+  mapsvg.appendChild(hl);
+}
 const nav = document.getElementById("spotnav");
 const ORDER = { FULL: 0, TOT: 1 };
 Object.values(DATA)
