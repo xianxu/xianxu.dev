@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "admission": {
+    "key": {"kind": "worktree", "roots": []},
+    "capacity": {"kind": "bounded", "limit": 1},
+    "onCapacity": "provision-worktree"
+  }
+}
