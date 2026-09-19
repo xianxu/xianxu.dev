@@ -7,6 +7,7 @@ created: 2026-09-19
 updated: 2026-09-19
 estimate_hours:
 started: 2026-09-19T16:58:34-07:00
+flow: {kind: quick, provenance: inferred, spec: "b4fcab35", done: "0e0c2431"}
 ---
 
 # Collapse parley tool and thinking blocks at render
