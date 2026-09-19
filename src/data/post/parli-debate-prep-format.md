@@ -80,3 +80,12 @@ Give me the first topic whenever you're ready.
 [→ Nigeria oil privatization debate](./nigeria-oil-privatization-debate.md)
 
 </div>
+
+
+
+
+<div class="branch-nav child-link">
+
+[→ Student debt debate prep](./student-debt-debate-prep.md)
+
+</div>
