@@ -83,9 +83,17 @@ Give me the first topic whenever you're ready.
 
 
 
-
 <div class="branch-nav child-link">
 
 [→ Student debt debate prep](./student-debt-debate-prep.md)
+
+</div>
+
+
+
+
+<div class="branch-nav child-link">
+
+[→ Senate approval for pardons](./senate-approval-for-pardons.md)
 
 </div>
