@@ -65,7 +65,7 @@ Give me the first topic whenever you're ready.
 
 📝: you asked to set up a recurring parli debate-prep workflow (2v2, HS, CA, 5 points per side, ≤5 linked facts, single main contention framed as line-drawing), I answered by confirming and laying out the per-topic template (clash in one line, line-drawing axis, 5 Gov points, 5 Opp points, likely responses, ≤5 facts) plus two calibration questions on motion type and whether to include a weighing framework
 
-
+@@Notre Dame Parliamentary Warm Up@@
 
 <div class="branch-nav child-link">
 
@@ -91,9 +91,20 @@ Give me the first topic whenever you're ready.
 
 
 
-
 <div class="branch-nav child-link">
 
 [→ Senate approval for pardons](./senate-approval-for-pardons.md)
 
 </div>
+
+
+
+
+<div class="branch-nav child-link">
+
+[→ Greenland military presence debate](./greenland-military-presence-debate.md)
+
+</div>
+
+
+💬
