@@ -148,6 +148,51 @@ const { post, url } = Astro.props;
   .prose .footnotes a.data-footnote-backref {
     text-decoration: none;
   }
+  /* Parley transcript folds (built by parleyFoldsRemarkPlugin): the reasoning,
+     summary and tool blocks an agentic loop leaves behind. Apparatus, not prose
+     — collapsed by default, and styled to sit beside the conversation rather
+     than in it. The marker glyph is the only color the row needs. */
+  .prose details.parley-fold {
+    margin-block: 0.9rem;
+    padding-left: 0.85rem;
+    border-left: 2px solid rgb(203 213 225 / 0.8); /* slate-300 */
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgb(100 116 139); /* slate-500 */
+  }
+  .prose details.parley-fold > summary {
+    cursor: pointer;
+    list-style: none; /* the ▸/▾ below replaces the default disclosure marker */
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem;
+    user-select: none;
+  }
+  .prose details.parley-fold > summary::-webkit-details-marker {
+    display: none;
+  }
+  .prose details.parley-fold > summary::after {
+    content: ' ▸';
+  }
+  .prose details.parley-fold[open] > summary::after {
+    content: ' ▾';
+  }
+  .prose details.parley-fold > summary:hover {
+    color: rgb(51 65 85); /* slate-700 */
+  }
+  /* Tighter than body copy, and no oversized code inside a fold. */
+  .prose details.parley-fold > :not(summary) {
+    margin-block: 0.5rem;
+  }
+  .prose details.parley-fold pre {
+    font-size: 0.78rem;
+  }
+  .dark .prose details.parley-fold {
+    border-left-color: rgb(51 65 85 / 0.8); /* slate-700 */
+    color: rgb(148 163 184); /* slate-400 */
+  }
+  .dark .prose details.parley-fold > summary:hover {
+    color: rgb(203 213 225); /* slate-300 */
+  }
   /* KaTeX display math on narrow screens: scroll horizontally (math can't
      auto-wrap mid-expression), with a visible scrollbar AND an edge shadow that
      appears only when the equation overflows — so it's obvious there's more to

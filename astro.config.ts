@@ -19,6 +19,7 @@ import rehypeKatex from 'rehype-katex';
 import {
   readingTimeRemarkPlugin,
   relativePostLinksRemarkPlugin,
+  parleyFoldsRemarkPlugin,
   responsiveTablesRehypePlugin,
   lazyImagesRehypePlugin,
   anchorLinksRehypePlugin,
@@ -85,7 +86,7 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin, relativePostLinksRemarkPlugin, remarkMath],
+    remarkPlugins: [readingTimeRemarkPlugin, relativePostLinksRemarkPlugin, parleyFoldsRemarkPlugin, remarkMath],
     rehypePlugins: [rehypeKatex, responsiveTablesRehypePlugin, lazyImagesRehypePlugin, anchorLinksRehypePlugin],
   },
 
