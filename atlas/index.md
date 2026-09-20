@@ -1,3 +1,3 @@
 # Atlas
 
-- [Blog surfaces](blog-surfaces.md) — discovery routes and project-post metadata.
+- [Blog surfaces](blog-surfaces.md) — discovery routes, project-post metadata, and the markdown render pipeline.
