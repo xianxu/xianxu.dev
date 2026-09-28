@@ -91,6 +91,64 @@ export const relativePostLinksRemarkPlugin: RemarkPlugin = () => {
   };
 };
 
+// Parley transcripts (https://github.com/xianxu/parley.nvim) carry marker lines
+// that the editor folds away by default because they're apparatus, not prose:
+// reasoning, summary, and the tool call / tool result pairs of an agentic loop.
+// Published as-is they bury the readable parts, so fold them here too — as a
+// native <details>, no JS. Prefixes and summary wording mirror parley's own
+// config (`chat_memory.reasoning_prefix` etc.) and foldtext, so a fold reads the
+// same on the page as it does in the editor; they're a contract between the two
+// repos, which is why they live in one table rather than inline in the walk.
+const PARLEY_MARKERS = [
+  { prefix: '🧠:', label: () => '🧠 thinking', ownsFence: false },
+  { prefix: '📝:', label: () => '📝 summary', ownsFence: false },
+  { prefix: '🔧:', label: (rest: string) => `🔧 ${rest.split(/\s+/)[0] || 'tool'}`, ownsFence: true },
+  {
+    prefix: '📎:',
+    label: (rest: string) => `📎 ${rest.split(/\s+/)[0] || 'result'}${/\berror=true\b/.test(rest) ? ' error' : ''}`,
+    ownsFence: true,
+  },
+];
+
+const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+export const parleyFoldsRemarkPlugin: RemarkPlugin = () => {
+  return function (tree) {
+    const children = tree.children;
+    if (!Array.isArray(children)) return;
+
+    // Top level only: these posts also *write about* parley, so a "🧠: line"
+    // mentioned inside a list item or sentence is prose and must stay put.
+    for (let i = 0; i < children.length; i++) {
+      const node = children[i];
+      if (node.type !== 'paragraph') continue;
+      const head = node.children?.[0];
+      if (head?.type !== 'text' || node.position?.start?.column !== 1) continue;
+
+      const marker = PARLEY_MARKERS.find((m) => head.value.startsWith(m.prefix));
+      if (!marker) continue;
+      const rest = head.value.slice(marker.prefix.length).trim();
+
+      // A tool marker labels the fenced block that follows it; the line itself
+      // is redundant once its text is the summary. A reasoning/summary line IS
+      // the content, so it stays, minus the prefix now shown in the summary.
+      let end = i;
+      const body: typeof children = [];
+      if (marker.ownsFence && children[i + 1]?.type === 'code') {
+        end = i + 1;
+        body.push(children[i + 1]);
+      } else {
+        head.value = rest;
+        body.push(node);
+      }
+
+      const open = `<details class="parley-fold"><summary>${escapeHtml(marker.label(rest))}</summary>`;
+      children.splice(i, end - i + 1, { type: 'html', value: open }, ...body, { type: 'html', value: '</details>' });
+      i += body.length + 1;
+    }
+  };
+};
+
 export const responsiveTablesRehypePlugin: RehypePlugin = () => {
   return function (tree) {
     if (!tree.children) return;

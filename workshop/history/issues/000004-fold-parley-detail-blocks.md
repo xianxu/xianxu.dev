@@ -1,13 +1,14 @@
 ---
 id: 000004
-status: working
+status: done
 deps: []
 github_issue:
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-09-27
 estimate_hours:
 started: 2026-09-19T16:58:34-07:00
-flow: {kind: quick, provenance: inferred, spec: "b4fcab35", done: "0e0c2431"}
+flow: {kind: full, provenance: inferred}
+actual_hours: 11.75
 ---
 
 # Collapse parley tool and thinking blocks at render
@@ -91,17 +92,17 @@ build-verify both.
 
 ## Plan
 
-- [ ] Confirm the marker grammar against `../parley.nvim` (prefixes, `id=` suffix, which
+- [x] Confirm the marker grammar against `../parley.nvim` (prefixes, `id=` suffix, which
       blocks own a following fence); record the exact forms in `## Log`
-- [ ] Add `parleyFoldsRemarkPlugin` to `src/utils/frontmatter.ts` and wire it into
+- [x] Add `parleyFoldsRemarkPlugin` to `src/utils/frontmatter.ts` and wire it into
       `markdown.remarkPlugins` in `astro.config.ts`
-- [ ] Verification script over fixture markdown (no test framework is installed in this
+- [x] Verification script over fixture markdown (no test framework is installed in this
       repo — a plain node script that runs the plugin and asserts, rather than adding
       vitest for one plugin)
-- [ ] Styling for `details.parley-fold` (light + dark)
-- [ ] Build here; spot-check a rendered transcript post in `dist/` and in the browser
-- [ ] Port plugin + wiring + styles to `../42shots/`, build-verify there
-- [ ] Atlas: note the render-time transform and the cross-repo marker contract
+- [x] Styling for `details.parley-fold` (light + dark)
+- [x] Build here; spot-check a rendered transcript post in `dist/` and in the browser
+- [x] Port plugin + wiring + styles to `../42shots/`, build-verify there
+- [x] Atlas: note the render-time transform and the cross-repo marker contract
 
 ## Log
 
@@ -113,3 +114,44 @@ automatically"), after I had recommended exporter-side; the tradeoff is recorded
 `## Spec` so the choice is not re-litigated later.
 
 Corpus counts at filing: `🧠:` in 8 posts, `📝:` in 10, no `🔧:`/`📎:` yet.
+
+### 2026-09-19 — session summary
+
+Landed. `parleyFoldsRemarkPlugin` in `src/utils/frontmatter.ts`, wired into
+`markdown.remarkPlugins`; styles in `SinglePost.astro`; `npm run check:folds`
+(`scripts/verify-parley-folds.mjs`, 11 cases) covering line-start vs mid-prose,
+list items, tool marker + fence, error flag, consecutive markers, escaping.
+Ported to `../42shots/` (commit 3394780) — it has no marker-carrying posts yet,
+so the port is forward-looking.
+
+Marker grammar confirmed at source rather than from the corpus: prefixes are
+`chat_memory.reasoning_prefix` / `summary_prefix` and `chat_tool_use_prefix` /
+`chat_tool_result_prefix` in `../parley.nvim/lua/parley/config.lua`. Summary
+wording mirrors `tool_folds.foldtext()` (`🧠 thinking`, `📝 summary`,
+`🔧 <name>`, `📎 <name> error`) instead of the labels this issue's Spec invented
+— a fold should read the same in both places. The tool summary keeps only the
+tool name, dropping `id=`; the spec's `<tool> result` wording became parley's
+own `error` flag, which is the part that actually distinguishes a result.
+
+Two corrections to the filing: the corpus is **14** posts with markers (not 18 —
+that double-counted files carrying both `🧠:` and `📝:`), and 118 folds now
+render across them. The 8 `📝:` strings left in `dist/` are all mid-prose
+mentions inside list items in posts *about* parley — the case the plugin must
+not touch, verified by hand.
+
+Baselines checked before claiming clean: `npm run check:astro` had 1 pre-existing
+error (`[...blog]/[...page].astro`) and eslint 2 pre-existing `no-explicit-any`
+in `frontmatter.ts`; both repos end at those same baselines, not better or worse.
+Prettier already flags 98 files repo-wide, so I matched surrounding style by hand
+rather than reformatting unrelated lines.
+
+Not verified: how the fold looks in a browser. Structure and CSS are asserted in
+built output, but the visual judgment is the operator's.
+
+### 2026-09-27
+- 2026-09-27: closed — check:folds 11/11 (line-start vs mid-prose, list items, tool marker+fence, error flag, consecutive markers, HTML escaping); build clean, 118 folds render across 14 transcript posts with fold CSS bundled; remaining raw markers in dist are mid-prose mentions inside list items, hand-verified; operator confirmed the rendered folds in a browser at localhost:4321; type-check and lint at pre-existing baselines; ported to peer blog 42shots (3394780), byte-identical and 11/11 there. --no-judge: the boundary review subprocess cannot reach api.anthropic.com from inside the agent sandbox (ariadne#256); operator judged a substitute review overkill for a change this size and directed a manual close.; review verdict: not-run
+- 2026-09-27: flow upgraded quick → full — 222 added lines in code files (limit 100); an earlier round of this close already ran the full review
+
+Operator verified the rendered folds in a browser at `localhost:4321` — the one
+check left open at implementation time (structure and CSS were asserted in built
+output, but the visual judgment was his). `check:folds` re-run on this date: 11/11.
