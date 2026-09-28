@@ -1,13 +1,14 @@
 ---
 id: 000004
-status: working
+status: codecomplete
 deps: []
 github_issue:
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-09-27
 estimate_hours:
 started: 2026-09-19T16:58:34-07:00
-flow: {kind: quick, provenance: inferred, spec: "b4fcab35", done: "0e0c2431"}
+flow: {kind: full, provenance: inferred}
+actual_hours: 11.75
 ---
 
 # Collapse parley tool and thinking blocks at render
@@ -148,6 +149,8 @@ Not verified: how the fold looks in a browser. Structure and CSS are asserted in
 built output, but the visual judgment is the operator's.
 
 ### 2026-09-27
+- 2026-09-27: closed — check:folds 11/11 (line-start vs mid-prose, list items, tool marker+fence, error flag, consecutive markers, HTML escaping); build clean, 118 folds render across 14 transcript posts with fold CSS bundled; remaining raw markers in dist are mid-prose mentions inside list items, hand-verified; operator confirmed the rendered folds in a browser at localhost:4321; type-check and lint at pre-existing baselines; ported to peer blog 42shots (3394780), byte-identical and 11/11 there. --no-judge: the boundary review subprocess cannot reach api.anthropic.com from inside the agent sandbox (ariadne#256); operator judged a substitute review overkill for a change this size and directed a manual close.; review verdict: not-run
+- 2026-09-27: flow upgraded quick → full — 222 added lines in code files (limit 100); an earlier round of this close already ran the full review
 
 Operator verified the rendered folds in a browser at `localhost:4321` — the one
 check left open at implementation time (structure and CSS were asserted in built
