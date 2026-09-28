@@ -6,6 +6,7 @@ github_issue:
 created: 2026-06-08
 updated: 2026-06-08
 estimate_hours: 4
+card_mirror: '6180bc9f73fb7aff4d179e5bf97db238cc7aa6b6' # card fields mirrored from issue-cards; edit via sdlc
 ---
 
 # AI blogging-workflow meta post
