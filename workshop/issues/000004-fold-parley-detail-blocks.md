@@ -146,3 +146,9 @@ rather than reformatting unrelated lines.
 
 Not verified: how the fold looks in a browser. Structure and CSS are asserted in
 built output, but the visual judgment is the operator's.
+
+### 2026-09-27
+
+Operator verified the rendered folds in a browser at `localhost:4321` — the one
+check left open at implementation time (structure and CSS were asserted in built
+output, but the visual judgment was his). `check:folds` re-run on this date: 11/11.
