@@ -1,0 +1,116 @@
+---
+// Hydrates `<div class="cast-embed" data-cast="/casts/x.cast"></div>` placeholders in posts
+// into an asciinema player. A cast cut by parley.nvim's demo/cut.py carries
+// `captions: [{start, end, text}]` in its header; they are shown as an overlay pinned to
+// the terminal's bottom-left, beside Screenkey and above the editor's status line.
+// Optional: `data-poster="npt:0:30"` picks the frame shown before playback.
+---
+
+<script>
+  import type { Player } from 'asciinema-player';
+
+  type Caption = { start: number; end: number; text: string };
+
+  // Caption box in terminal fractions: left edge, max width, bottom edge.
+  const CAPTION_BOX = { left: 0.02, width: 0.5, bottom: 0.935 };
+  const mounted: { player: Player; timer: number }[] = [];
+
+  function readCaptions(data: string): Caption[] {
+    try {
+      const header = JSON.parse(data.slice(0, data.indexOf('\n')));
+      return Array.isArray(header.captions) ? header.captions : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function placeCaption(stage: HTMLElement, caption: HTMLElement) {
+    const term = stage.querySelector('.ap-term');
+    if (!term) return;
+    const t = term.getBoundingClientRect();
+    const s = stage.getBoundingClientRect();
+    caption.style.left = `${t.left - s.left + t.width * CAPTION_BOX.left}px`;
+    caption.style.maxWidth = `${t.width * CAPTION_BOX.width}px`;
+    caption.style.bottom = `${s.bottom - (t.top + t.height * CAPTION_BOX.bottom)}px`;
+    caption.style.fontSize = `${Math.max(13, t.width * 0.032)}px`;
+  }
+
+  async function mount(stage: HTMLElement) {
+    const [{ create }] = await Promise.all([
+      import('asciinema-player'),
+      import('asciinema-player/dist/bundle/asciinema-player.css'),
+    ]);
+    const response = await fetch(stage.dataset.cast!);
+    if (!response.ok) throw new Error(`${stage.dataset.cast}: ${response.status}`);
+    const data = await response.text();
+    const captions = readCaptions(data);
+
+    const target = document.createElement('div');
+    const caption = document.createElement('div');
+    caption.className = 'cast-embed-caption';
+    stage.append(target, caption);
+
+    const player = create({ data }, target, { fit: 'width', preload: true, poster: stage.dataset.poster });
+    const timer = window.setInterval(async () => {
+      placeCaption(stage, caption);
+      const now = player.getCurrentTime() || 0;
+      caption.textContent = captions.find((c) => c.start <= now && now < c.end)?.text ?? '';
+    }, 100);
+    mounted.push({ player, timer });
+  }
+
+  function setup() {
+    const stages = [...document.querySelectorAll<HTMLElement>('.cast-embed:not([data-mounted])')];
+    if (!stages.length) return;
+    // Load the player (and the multi-megabyte cast) only when the embed nears the viewport.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          io.unobserve(e.target);
+          mount(e.target as HTMLElement).catch((err) => {
+            (e.target as HTMLElement).textContent = 'Could not load the recording.';
+            console.error(err);
+          });
+        }
+      },
+      { rootMargin: '600px' }
+    );
+    for (const s of stages) {
+      s.dataset.mounted = '';
+      io.observe(s);
+    }
+  }
+
+  // ClientRouter navigation: scripts don't re-run, so mount per page and clean up on leave.
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-swap', () => {
+    for (const { player, timer } of mounted.splice(0)) {
+      clearInterval(timer);
+      player.dispose();
+    }
+  });
+</script>
+
+<style is:global>
+  .cast-embed {
+    position: relative;
+    margin-block: 2rem;
+  }
+  .cast-embed-caption {
+    position: absolute;
+    z-index: 10;
+    padding: 0.35em 0.7em;
+    border-radius: 10px;
+    pointer-events: none;
+    background: rgb(0 0 0 / 0.85);
+    color: #fff;
+    font:
+      600 16px/1.25 system-ui,
+      sans-serif;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 0.5);
+  }
+  .cast-embed-caption:empty {
+    display: none;
+  }
+</style>
