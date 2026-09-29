@@ -10,22 +10,24 @@ tags:
 
 Previously, I introduced you to [Parley.nvim](chatgpt-in-neovim-collab.md), a Neovim plugin. Now it's a lot more polished and easy to install: introducing **Parley** the app. 
 
+## What is Parley
+
 What exactly is Parley? It is a research tool that helps you learn a topic, leveraging AI. It encourages free form discussion, and provides you with tools to find your way around the many threads of digression a learner inevitably takes. To explain how it works, let's think about what AI is good at, and how humans learn.
 
-AI has the world's knowledge. It is an encyclopedia 🤖<that has a natural language interface,>{with a natural-language interface} that understands the context of a particular conversation. It is your ultimate librarian and professor, depending on how you use it. All you need to do is to ask the right question. 
+AI has the world's knowledge. It is an encyclopedia with a natural-language interface that understands the context of a particular conversation. It is your ultimate librarian and professor, depending on how you use it. All you need to do is to ask the right question. 
 
 On the other hand, human learning is less about facts than about constructing a consistent mental model about a domain. And in order to actually learn, humans need repetition, which typically means reviewing material more than once. That's why we make notes in textbooks, make flash cards, take quizzes, etc. Here's the dilemma: Have you ever been inundated with long-winded, super-comprehensive AI answers? Have you ever gone back to your ChatGPT conversation and read them again, with new questions to ask in the middle of that conversation? The ChatGPT user interface is good for entertainment, weak for actual learning. 
 
-Parley provides a simple and consistent way to help you get oriented in the sea of AI-generated text: you chat with the AI, have full control of the transcript, make notes in the same file, jump through notes you took, cut off bloated AI answers to focus on the gist, so that you can review them later. If chatting with ChatGPT is printing a customized textbook that no one's going to read again, talking to AI in Parley is making notes talking with your professor. 🤖{the name belongs right here: a parley is a talk between parties (from the French parler) — discussion, not lookup, which is the professor-not-textbook point you just made. One line, yours to write.} You don't need another 🤖<textbook,>{textbook —} with AI, it's just one ask away. 
+Parley provides a simple and consistent way to help you get oriented in the sea of AI-generated text: you chat with the AI, have full control of the transcript, make notes in the same file, jump through notes you took, cut off bloated AI answers to focus on the gist, so that you can review them later. If chatting with ChatGPT is printing a customized textbook that no one's going to read again, talking to AI in Parley is making notes talking with your professor. Actually this is how Parley got its name! You don't need another textbook — with AI, it's just one ask away. 
 
 If that sounds useful, read on. 
 
-The key distinctions of Parley from 🤖<typical>{a typical} chatbot:
+The key distinctions of Parley from a typical chatbot:
 
-1. A durable transcript presented just as a markdown file, with 🤖<easy to understand>{an easy-to-understand} convention: you ask questions after 💬:, and AI replies after 🤖:. Having a durable transcript in a file allows you to use all the power of Neovim, to search, organize, change text. Yes, you can, and should, change AI's answers as well.
+1. A durable transcript presented just as a markdown file, with an easy-to-understand convention: you ask questions after 💬:, and AI replies after 🤖:. Having a durable transcript in a file allows you to use all the power of Neovim, to search, organize, change text. Yes, you can, and should, change AI's answers as well.
 2. Chat files are linked and organized into a tree, mapping to how humans tend to ask questions. When you have questions about AI's response, you can easily fork off a thread to ask about it, without losing track of the main thread. A single keystroke shows you the overall map of the conversation across many notes in the tree of chat files.
 3. You make notes in the chat files themselves. Those are your notes to remind you of your learning. You create annotations that appear in the outline of a group of chat files, to help you construct a mental model. You can also come back weeks later, and easily get oriented from annotations you left behind.
-4. If the AI generates too much detail, shortcut keystroke `dae`[^dae] clears that 🤖<entity >{entity}, be it a paragraph, a section, or entire answer. This helps cut down bloated AI answers to what you are interested in learning at that moment. Don't worry about the trimming, AI is the textbook sitting right there. 
+4. If the AI generates too much detail, shortcut keystroke `dae`[^dae] clears that entity, be it a paragraph, a section, or entire answer. This helps cut down bloated AI answers to what you are interested in learning at that moment. Don't worry about the trimming, AI is the textbook sitting right there. 
 5. Parley works across different AI with the help of `cliproxyapi`. Parley talks to all major AI providers, utilizing the subscription plan you already have with them. 
 
 How does it work? One video is worth a thousand words. 
@@ -38,17 +40,16 @@ Highlights from the video
 2. Fork off a chat. 
 3. Check definitions of some phrase. 
 4. Make some notes, annotations. 
-5. One key to see the whole chat tree, go back to 🤖<some where>{somewhere} in the middle, and fork other branches. 
+5. One key to see the whole chat tree, go back to somewhere in the middle, and fork other branches. 
 
 ## What Parley isn't
 
-🤖{three short points, your words: it isn't a notes app (no graph, no backlinks, no mobile — Obsidian wins there, and the notes here are a byproduct of asking); it isn't an agent (your tutorial already says it "foremost stays a research tool"); and it runs on Neovim, so there are modes to learn. Better said plainly here than discovered after install.}
+🤖{three short points, your words: it isn't a notes app (no graph, no backlinks, no mobile — Obsidian wins there, and the notes here are a byproduct of asking); it isn't an agent (your tutorial already says it "foremost stays a research tool"); and it runs on Neovim, so there are modes to learn. Better said plainly here than discovered after install.}[make a list here for me]
 
 ## Install
 
 ```sh
 brew install xianxu/parley/parley
-parley
 ```
 
 🤖{worth a line each: the first launch downloads the plugins and opens the welcome chat; `:ParleyProxy connect` logs into a provider you already pay for; `:ParleyAgent` picks a model. And that Parley keeps its config and chats separate from an existing Neovim setup — that's the first thing a vim user will want to know.}
