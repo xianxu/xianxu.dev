@@ -2,7 +2,7 @@
 title: "Parley: A durable AI Interface for Learning"
 publishDate: 2026-09-29
 published: false
-excerpt: "AI is a great helper to help you access world's knowledge. However, the current Chatbot user interface makes research and learning harder. Have you ever felt inundated with too much information? Parley is different, you have full control of the chat, it's just a text file you can edit."
+excerpt: "AI is a great helper to help you access 🤖<world's>{the world's} knowledge. However, the current 🤖<Chatbot>{chatbot} user interface makes research and learning harder. Have you ever felt inundated with too much information? Parley is different🤖<,>{:} you have full control of the chat, it's just a text file you can edit."
 tags:
   - tech
   - ai
@@ -12,15 +12,15 @@ Previously, I introduced you to [Parley.nvim](chatgpt-in-neovim-collab.md), a Ne
 
 ## What is Parley
 
-What exactly is Parley? It is a research tool that helps you learn a topic, leveraging AI. It encourages free form discussion, and provides you with tools to find your way around the many threads of digression a learner inevitably takes. To explain how it works, let's think about what AI is good at, and how humans learn.
+What exactly is Parley? It is a research tool that helps you learn a topic, leveraging AI. It encourages 🤖<free form>{free-form} discussion, and provides you with tools to find your way around the many threads of digression a learner inevitably takes. To explain how it works, let's think about what AI is good at, and how humans learn.
 
 AI has the world's knowledge. It is an encyclopedia with a natural-language interface that understands the context of a particular conversation. It is your ultimate librarian and professor, depending on how you use it. All you need to do is to ask the right question. 
 
 On the other hand, human learning is less about facts than about constructing a consistent mental model about a domain. And in order to actually learn, humans need repetition, which typically means reviewing material more than once. That's why we make notes in textbooks, create outlines, make flash cards, take quizzes, etc. Here's the dilemma: Have you ever been inundated with long-winded, super-comprehensive AI answers? Have you ever gone back to your ChatGPT conversation and read them again, with new questions to ask in the middle of that conversation? The ChatGPT user interface is good for entertainment, weak for actual learning. 
 
-Parley provides a simple and consistent way to help you get oriented in the sea of AI-generated text: you chat with the AI, have full control of the transcript, make notes in the same file, jump through notes you took, cut off bloated AI answers to focus on the gist, and you can review all those later. If chatting with ChatGPT is like printing a customized textbook that no one's going to read again, talking to AI in Parley is like talking with your professor and making some notes. Actually this is how Parley got its name! You don't need another textbook, with AI, it's just one ask away. 
+Parley provides a simple and consistent way to help you get oriented in the sea of AI-generated text: you chat with the AI, have full control of the transcript, make notes in the same file, jump through notes you took, cut off bloated AI answers to focus on the gist, and you can review all those later. If chatting with ChatGPT is like printing a customized textbook that no one's going to read again, talking to AI in Parley is like talking with your professor and making some notes. Actually this is how Parley got its name! You don't need another textbook🤖<,>{;} with AI, it's just one ask away. 
 
-If that sounds useful, read on. There's a video at the end to show you Parley in action.
+If that sounds useful, read on. There's a video 🤖<at the end>{after the key features} to show you Parley in action.
 
 ## Key features
 
@@ -38,11 +38,11 @@ How does it work? One video is worth a thousand words. Take a look.
 
 ## What Parley isn't
 
-To be something, you can't be everything. Parley is not for everyone, in particular, Parley is:  
+To be something, you can't be everything. Parley is not for everyone🤖<, in particular>{. In particular}, Parley is:  
 
-- **Not a notes app.** The notes here are a byproduct of asking, not the central feature. There are many note taking apps.
-- **Not an agent.** Yes, Parley has local tool calls, can answer questins about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or `claude code`.
-- **It runs on Neovim.** While you don't need much knowlege of VIM to use it, I find the love of VIM's often in the eyes of the beholders. 
+- **Not a notes app.** The notes here are a byproduct of asking, not the central feature. There are many 🤖<note taking>{note-taking} apps.
+- **Not an agent.** Yes, Parley has local tool calls, can answer 🤖<questins>{questions} about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or `claude code`.
+- **It runs on Neovim.** While you don't need much 🤖<knowlege>{knowledge} of 🤖<VIM>{Vim} to use it, I find the love of 🤖<VIM's>{Vim's} often in the eyes of the beholders. 🤖{The idiom is "in the eye of the beholder" (singular), and "the love of Vim is in the eye of the beholder" reads a little tangled. Your call on wording.} 
 
 ## Install
 
