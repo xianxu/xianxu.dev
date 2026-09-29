@@ -26,10 +26,10 @@ If that sounds useful, read on. There's a video after the key features to show y
 
 The key distinctions of Parley from a typical chatbot:
 
-1. A durable transcript presented just as a 🤖<markdown>{Markdown} file, with an easy-to-understand convention: you ask questions after 💬:, and AI replies after 🤖:. Having a durable transcript in a file allows you to use all the power of Neovim, to search, organize, change text. Yes, you can, and should, change AI's answers as well.
+1. A durable transcript presented just as a Markdown file, with an easy-to-understand convention: you ask questions after 💬:, and AI replies after 🤖:. Having a durable transcript in a file allows you to use all the power of Neovim, to search, organize, change text. Yes, you can, and should, change AI's answers as well.
 2. Chat files are linked and organized into a tree, mapping to how humans tend to ask questions. When you have questions about AI's response, you can easily fork off a thread to ask about it, without losing track of the main thread. A single keystroke shows you the overall map of the conversation across many notes in the tree of chat files.
 3. You make notes in the chat files themselves. Those are your notes to remind you of your learning. You create annotations that appear in the outline of a group of chat files, to help you construct a mental model. You can also come back weeks later, and easily get oriented from annotations you left behind.
-4. If the AI generates too much detail, shortcut keystroke `dae`[^dae] clears that entity, be it a paragraph, a section, or entire answer. This helps cut down bloated AI answers to what you are interested in learning at that moment. Don't worry about the trimming🤖<,>{;} AI is the textbook sitting right there. 
+4. If the AI generates too much detail, shortcut keystroke `dae`[^dae] clears that entity, be it a paragraph, a section, or entire answer. This helps cut down bloated AI answers to what you are interested in learning at that moment. Don't worry about the trimming; AI is the textbook sitting right there. 
 5. Parley works across different AI with the help of `cliproxyapi`. Parley talks to all major AI providers, utilizing the subscription plan you already have with them. 
 
 How does it work? One video is worth a thousand words. Take a look.
@@ -41,8 +41,8 @@ How does it work? One video is worth a thousand words. Take a look.
 To be something, you can't be everything. Parley is not for everyone. In particular, Parley is:  
 
 - **Not a notes app.** The notes here are a byproduct of asking, not the central feature. There are many note-taking apps.
-- **Not an agent.** Yes, Parley has local tool calls, can answer questions about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or 🤖<`claude code`>{Claude Code}.
-- **🤖<It runs on Neovim>{Neovim-only}.** While you don't need much knowledge of Vim to use it, I find the love of Vim's often in the eye of the beholder.  
+- **Not an agent.** Yes, Parley has local tool calls, can answer questions about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or Claude Code.
+- **Neovim-only.** While you don't need much knowledge of Vim to use it, I find the love of Vim's often in the eye of the beholder.  
 
 ## Install
 
