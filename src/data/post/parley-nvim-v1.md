@@ -44,7 +44,11 @@ Highlights from the video
 
 ## What Parley isn't
 
-🤖{three short points, your words: it isn't a notes app (no graph, no backlinks, no mobile — Obsidian wins there, and the notes here are a byproduct of asking); it isn't an agent (your tutorial already says it "foremost stays a research tool"); and it runs on Neovim, so there are modes to learn. Better said plainly here than discovered after install.}[make a list here for me]
+- **Not a notes app.** No graph, no backlinks, no mobile. Obsidian does that job better. The notes here are a byproduct of asking, not a filing system you maintain.
+- **Not an agent.** Parley has local tool calls — it can search your past chats and read files in a project folder — but it stays a research tool. You don't hand it a task and walk away.
+- **It runs on Neovim.** There are modes to learn. The app opens with a vim crash course, but if modal editing isn't for you, neither is Parley.
+
+🤖{a fourth one worth considering: it isn't source-grounded — no citations, and answers come from the model's knowledge rather than documents you upload. That's the honest limit against NotebookLM for the readers you're aiming at. Add it, or keep the section to three?}
 
 ## Install
 
@@ -52,7 +56,7 @@ Highlights from the video
 brew install xianxu/parley/parley
 ```
 
-🤖{worth a line each: the first launch downloads the plugins and opens the welcome chat; `:ParleyProxy connect` logs into a provider you already pay for; `:ParleyAgent` picks a model. And that Parley keeps its config and chats separate from an existing Neovim setup — that's the first thing a vim user will want to know.}
+🤖{worth a line each: the first launch downloads the plugins and opens the welcome chat; `:ParleyProxy connect` logs into a provider you already pay for; `:ParleyAgent` picks a model. And that Parley keeps its config and chats separate from an existing Neovim setup — the first thing a vim user will want to know. Also: the fence now installs but never says how to start it — the packaging README has `parley` as the second line, and `parley notes.md` opens a file.}
 
 ---
 [^dae]: `ae` is a Parley text object. Other verbs 🤖<works>{work} as well: e.g. `yae` etc.
