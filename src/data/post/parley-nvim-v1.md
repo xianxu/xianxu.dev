@@ -1,7 +1,7 @@
 ---
 title: "Parley: A durable AI Interface for Learning"
 publishDate: 2026-09-29
-published: false
+published: true
 excerpt: "AI is a great helper to help you access the world's knowledge. However, the current chatbot user interface makes research and learning harder. Have you ever felt inundated with too much information? Parley is different: you have full control of the chat, it's just a text file you can edit."
 tags:
   - tech
