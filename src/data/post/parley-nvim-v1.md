@@ -41,7 +41,7 @@ How does it work? One video is worth a thousand words. Take a look.
 To be something, you can't be everything. Parley is not for everyone. In particular, Parley is:  
 
 - **Not a notes app.** The notes here are a byproduct of asking, not the central feature. There are many note-taking apps.
-- **Not an agent.** Yes, Parley has local tool calls🤖<,>{ and} can answer questions about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or Claude Code.
+- **Not an agent.** Yes, Parley has local tool calls and can answer questions about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or Claude Code.
 - **Neovim-only.** While you don't need much knowledge of Vim to use it, I find the love of Vim's often in the eye of the beholder.  
 
 ## Install
@@ -50,7 +50,7 @@ To be something, you can't be everything. Parley is not for everyone. In particu
 brew install xianxu/parley/parley
 ```
 
-All the additional dependencies will be downloaded the first time you open Parley to chat with AI. Take Parley for a spin🤖<,>{;} I hope you like it! 
+All the additional dependencies will be downloaded the first time you open Parley to chat with AI. Take Parley for a spin; I hope you like it! 
 
 ---
 [^dae]: `ae` is a Parley text object. Other verbs work as well: e.g. `yae` etc.
