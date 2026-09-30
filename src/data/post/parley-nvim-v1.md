@@ -42,7 +42,7 @@ To be something, you can't be everything. Parley is not for everyone. In particu
 
 - **Not a notes app.** The notes here are a byproduct of asking, not the central feature. There are many note-taking apps.
 - **Not an agent.** Yes, Parley has local tool calls and can answer questions about itself through provided help text, but it doesn't intend to be a proper harness. For that, use `codex` or Claude Code.
-- **Neovim-only.** While you don't need much knowledge of Vim to use it, I find the love of Vim's often in the eye of the beholder.  
+- **Terminal and Neovim.** While you don't need much knowledge of terminal or Vim to use Parley, it is not totally devoid of them.
 
 ## Install
 
