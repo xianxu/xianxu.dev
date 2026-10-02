@@ -1,8 +1,8 @@
 ---
 title: Building Blocks of AI Coding
 publishDate: 2026-10-01
-published: false
-excerpt: "AI coding is all the rage; what are the basic building blocks? How should we think about its future? This is the first 🤖<installation>{installment} of a series of 5 posts🤖{.}"
+published: true
+excerpt: "AI coding is all the rage; what are the basic building blocks? How should we think about its future? This is the first installment of a series of 5 posts."
 tags:
   - tech
   - ai
@@ -36,7 +36,7 @@ Now, quick history recap. I took the anti-`Gas Town` approach and started very c
 
 2. One of the early choices I made was that all state should be in a single repository, the issues, the plans, the projects, the roadmaps. All those should be text files in a repository so that changing them is more like "coding" tasks. This stayed true in the whole journey, with the later addition of using git to maintain multiple lineages of history, so that certain workflows can run smoother. 
 
-3. And then, to manage those local text files, I used AI to make tools for me, e.g. a neovim plugin to list all open issue files, to open one of them nicely formatted, and to jump to interlinked issue IDs, among other things. While I still use those today, I find I tend to just ask the agent about the state of things, and to do things for me. But this is consistent with my philosophy that the human operator must always have a firm grasp of the state of the system they are working on. The details that matter are what type of state is understandable by a human with limited brain power ;) (no pun intended), how and when to surface those details, and how to design an overall process in which human and machine work in harmony and address the 🤖~pretty much ~fundamental impedance mismatches of human speed vs machine speed. 
+3. And then, to manage those local text files, I used AI to make tools for me, e.g. a neovim plugin to list all open issue files, to open one of them nicely formatted, and to jump to interlinked issue IDs, among other things. While I still use those today, I find I tend to just ask the agent about the state of things, and to do things for me. But this is consistent with my philosophy that the human operator must always have a firm grasp of the state of the system they are working on. The details that matter are what type of state is understandable by a human with limited brain power ;) (no pun intended), how and when to surface those details, and how to design an overall process in which human and machine work in harmony and address the fundamental impedance mismatches of human speed vs machine speed. 
 
 4. Soon, I realized it's painful to use `claude` or `codex` really, the tiny input box, without mouse support, or any other editor goodies. I wanted something closer to a text editor, than a command line prompt. This led me to create [pair](https://github.com/xianxu/pair), which is a TTY terminal wrapper around any TUI program, but coding agents in particular, and gives you an input pane backed by nvim. With that, you get mouse support, all nvim goodies, spell checking, auto completion of not only what you had typed, but also what the agent highlighted in their response. You get full nvim style search of the transcript and many other things. Think of `pair` as a coding agent wrapper that gives you much more control over how you organize your thought. Another fundamental benefit is to allow you to use any coding agent without changing the user interface you are familiar with. This, along with the next point, forms my agent agnostic development flow. While at the beginning being agent agnostic was just an idea, frequent `claude` outages surely motivated me to actually commit to it. 
 
