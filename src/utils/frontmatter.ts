@@ -76,7 +76,9 @@ export const relativePostLinksRemarkPlugin: RemarkPlugin = () => {
 
     visit(tree, 'link', (node: { url: string }) => {
       const url = node.url;
-      if (!url || !/^\.\.?\//.test(url)) return;
+      // Any relative path counts — `./x.md`, `../x.md` or bare `x.md`. Skip URLs
+      // with a scheme, root-absolute paths and in-page anchors.
+      if (!url || /^([a-z][a-z0-9+.-]*:|\/|#)/i.test(url)) return;
       const [pathPart, hash = ''] = url.split('#');
       if (!/\.md$/i.test(pathPart)) return;
 
