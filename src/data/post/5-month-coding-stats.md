@@ -10,7 +10,7 @@ tags:
 
 I asked my coding agent to count what is in my repositories: code by language, Markdown documents by purpose, issues opened and closed, and lines changed since April 20. Here are the results. 
 
-I typically have a single $200 MAX plan with Claude, though last month I started a $200 plan with Codex as well. I tend to use their frontier models, which burns through budget too fast, especially if I'm not careful cleaning up context. 
+I typically have a single \$200 MAX plan with Claude, though last month I started a \$200 plan with Codex as well. I tend to use their frontier models, which burns through budget too fast, especially if I'm not careful cleaning up context. 
 
 The period is April 20 through October 1, 2026: 165 calendar days, or about five and a half months. The inventory covers 15 repositories that use my Ariadne layout. It excludes personal capture repositories, third-party clones, packaging repositories, and duplicate worktrees.
 
