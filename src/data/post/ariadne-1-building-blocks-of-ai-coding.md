@@ -1,6 +1,6 @@
 ---
 title: Building Blocks of AI Coding
-publishDate: 2026-10-01
+publishDate: 2026-10-02
 published: true
 excerpt: "AI coding is all the rage; what are the basic building blocks? How should we think about its future? This is the first installment of a series of 5 posts."
 tags:
@@ -12,11 +12,11 @@ In the [previous post](parley-nvim-v1.md), I announced `Parley` the app, which i
 
 I'm thinking of organizing this into a series of posts, roughly:
 
-1. the 5-month journey of building the workflow that created `Parley`.
-2. reflection on how to leverage AI in software product development.
-3. `couch` and `pair`, the coding environment I use daily.
-4. `ariadne`, the skills and binaries that supported my workflow.
-5. and lastly, where to go from here.
+1. **the 5-month journey of building the workflow that created `Parley`.** (this post)
+2. [reflection on how to leverage AI in software product development.](ariadne-2-hot-takes.md)
+3. [`couch` and `pair`, the coding environment I use daily.](ariadne-3-pair-couch.md)
+4. [`ariadne`, the skills and binaries that supported my workflow.](ariadne-4-ariadne.md)
+5. [and lastly, where to go from here.](ariadne-5-future.md)
 
 ---
 

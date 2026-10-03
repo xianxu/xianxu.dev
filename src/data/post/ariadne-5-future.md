@@ -1,6 +1,6 @@
 ---
 title: "Where to Go From Here"
-publishDate: 2030-07-01
+publishDate: 2026-10-10
 published: false
 excerpt: "TODO. This is installment 5 of a series of 5 posts."
 tags:

@@ -1,6 +1,6 @@
 ---
 title: "pair and couch: My Daily Coding Environment"
-publishDate: 2030-07-01
+publishDate: 2026-10-06
 published: false
 excerpt: "TODO. This is installment 3 of a series of 5 posts."
 tags:
