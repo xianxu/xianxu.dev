@@ -2,7 +2,7 @@
 title: "Hot Takes on AI Coding"
 publishDate: 2026-10-05
 published: false
-excerpt: "TODO. This is installment 2 of a series of 5 posts."
+excerpt: "Hot take for current trends in AI coding. This is installment 2 of a series of 5 posts."
 tags:
   - tech
   - ai
@@ -18,67 +18,67 @@ This is post 2 of a 5-post series on the AI-native development stack I built ove
 
 ---
 
-In this post, 🤖<hot take on how>{my hot takes on how} we leverage AI. 
+In this post, my hot takes on how we leverage AI. 
 
 ## What is AI good at?
 
 #### 1.
 
-AI (LLM) has all the world's knowledge. It's trained with basically all the written and increasingly probably all the digital assets we have ever accumulated as a species. So often, for each specific domain, especially in 🤖<domains operator is>{domains where the operator is} not an expert, AI will be more knowledgeable than you. 
+AI (LLM) has all the world's knowledge. It's trained with basically all the written and increasingly probably all the digital assets we have ever accumulated as a species. So often, for each specific domain, especially in domains where the operator is not an expert, AI will be more knowledgeable than you. 
 
 #### 2.
 
-General purpose LLM is good at 🤖<follow>{following} some small-scale logical consistency. 🤖<What I meant small-scale>{By small-scale, I mean}: short reasoning chains before grounding. Errors compound with every step taken without grounding: if each step is right with probability $p$, a sequence of $n$ steps is right with $p^n$. Better models raise $p$, but don't change the exponent. Not even a human can write perfect code without a compiler. So I don't think one-shotting a very deep sequence of actions is something that will be solved; grounding is what resets the chain.  
+General purpose LLM is good at following some small-scale logical consistency. By small-scale, I mean: short reasoning chains before grounding. Errors compound with every step taken without grounding: if each step is right with probability $p$, a sequence of $n$ steps is right with $p^n$. Better models raise $p$, but don't change the exponent. Not even a human can write perfect code without a compiler. So I don't think one-shotting a very deep sequence of actions is something that will be solved; grounding is what resets the chain.  
 
 #### 3.
 
-It 🤖<seems not yet have good appreciation of>{doesn't yet seem to have a good appreciation of the} relative importance of different competing facts. You may say they lack the good intuition and "common sense" 🤖<human expert has>{human experts have}, for example, regarding system architecture, user ergonomics, performance etc. I used the word "general purpose LLM" here, as I don't think it's the case that such intuition is human only, as for example, AlphaGo/AlphaZero seems to have pretty good intuition in playing the game Go. It seems those intuitions are deep domain understanding, sort of needing customized training. General purpose LLM still lacks such specialization. This on the other hand, seems to indicate if the 🤖<economical>{economic} value is great, then likely such more specialized "LLM" will emerge. Or they will emerge when "LLM" learning efficiency 🤖<increase by orders of magnitudes>{increases by orders of magnitude}.
+It doesn't yet seem to have a good appreciation of the relative importance of different competing facts. You may say they lack the good intuition and "common sense" human experts have, for example, regarding system architecture, user ergonomics, performance etc. I used the word "general purpose LLM" here, as I don't think it's the case that such intuition is human only, as for example, AlphaGo/AlphaZero seems to have pretty good intuition in playing the game Go. It seems those intuitions are deep domain understanding, sort of needing customized training. General purpose LLM still lacks such specialization. This on the other hand, seems to indicate if the economic value is great, then likely such more specialized "LLM" will emerge. Or they will emerge when "LLM" learning efficiency increases by orders of magnitude.
 
 #### 4.
 
-Combining [1.](#1) and [2.](#2), they are pretty good at following rules and process, 🤖<at reasonable length of steps without definitive grounding steps>{over a reasonable number of steps without definitive grounding}. 
+Combining [1.](#1) and [2.](#2), they are pretty good at following rules and process, over a reasonable number of steps without definitive grounding. 
 
 ## What does this mean for AI coding? 
 
 #### 5.
 
-Decompose system change into shorter steps. Improve performance by **a)** either providing definitive grounding after those short steps; or **b)** at least 🤖<provide>{providing} some guidance on the shape of some of the intermediate state. In AI coding, this means compile often, so 🤖<language with fast compile/test cycle will have advantage>{languages with a fast compile/test cycle will have an advantage}. And having some process, like 🤖<asking to write plan know, asking to write domain entity down>{asking it to write a plan first, or to write the domain entities down}. 
+Decompose system change into shorter steps. Improve performance by **a)** either providing definitive grounding after those short steps; or **b)** at least providing some guidance on the shape of some of the intermediate state. In AI coding, this means compile often, so languages with a fast compile/test cycle will have an advantage. And having some process, like asking it to write a plan first, or to write the domain entities down. 
 
 #### 6.
 
-From point [4.](#4), make the software development, product development process legible to AI and let it drive. 🤖<AI native company>{The AI-native company} is real, but errors compound. We need to build one step at a time. 
+From point [4.](#4), make the software development, product development process legible to AI and let it drive. The AI-operated company can be real, but errors compound and we need to build one step at a time. 
 
 #### 7.
 
-I do not believe that human can or should review AI generated code. First of all, AI 🤖<generate>{generates} code fast, and is a function of 🤖<how much token>{how many tokens} you use. Human will never keep up with that speed. Human, in order to review code, needs to have a good mental model of the code base itself. While during the initial introduction of AI coding to a system, human can still review as they have accumulated enough knowledge, this advantage will quickly be 🤖<erode>{eroded} as more code is generated by AI. If we 🤖<insist human to review>{insist that humans review} code, then the review will become the bottleneck. Plus, in special domains, e.g. security, AI 🤖<reviewer likely will outperform human>{reviewers will likely outperform humans at} finding arcane issues. Review does keep a human's mental model of the system alive, and that matters, but reading code is a very expensive way to get it. A cheaper way is for the human to own the system's invariants (the state model, the data model, the interface contracts) and let the machine own the code. [10.](#10), [11.](#11) and [12.](#12) are how I check them. 
+I do not believe that human can or should review AI generated code. First of all, AI generates code fast, and is a function of how many tokens you use. Human will never keep up with that speed. Human, in order to review code, needs to have a good mental model of the code base itself. While during the initial introduction of AI coding to a system, human can still review as they have accumulated enough knowledge, this advantage will quickly be eroded as more code is generated by AI. If we insist that humans review code, then the review will become the bottleneck. Plus, in special domains, e.g. security, AI reviewers will likely outperform humans at finding arcane issues. Review does keep a human's mental model of the system alive, and that matters, but reading code is a very expensive way to get it. A cheaper way is for the human to own the system's invariants (the state model, the data model, the interface contracts) and let the machine own the code. [10.](#10), [11.](#11) and [12.](#12) are how I check them. 
 
 #### 8.
 
-I do not believe in spec-driven development, popularized by tools like [Spec Kit](https://github.com/github/spec-kit), [Kiro](https://kiro.dev) and [OpenSpec](https://github.com/Fission-AI/OpenSpec). All 🤖<those spec-driven development uses>{of them use} human language to describe system behavior. Human language is notoriously imprecise and I can't help but 🤖<feeling>{feel} using such an imprecise language to describe all the details of system behavior 🤖<missed the whole point: we may well>{misses the whole point: we may as well} write code ourselves. The precise kind of spec is code: types, schemas, property tests. That's where the invariants from [7.](#7) belong, so the machine can check them. 
+I do not believe in spec-driven development, popularized by tools like [Spec Kit](https://github.com/github/spec-kit), [Kiro](https://kiro.dev) and [OpenSpec](https://github.com/Fission-AI/OpenSpec). All of them use human language to describe system behavior. Human language is notoriously imprecise and I can't help but feel using such an imprecise language to describe all the details of system behavior misses the whole point: we may as well write code ourselves. The precise kind of spec is code: types, schemas, property tests. That's where the invariants from [7.](#7) belong, so the machine can check them. 
 
 #### 9.
 
-I don't review machine generated specs in detail 🤖<neither>{either}, for similar reasons to [8.](#8) Those 🤖<specs,>{specs} and engineering plans tend to be bloated. I view those plans as 🤖<form the corpus that influence how machine generate>{forming the corpus that influences how the machine generates}, i.e. point [5.b)](#5). 
+I don't review machine generated specs in detail either, for similar reasons to [8.](#8) Those specs and engineering plans tend to be bloated. I view those plans as forming the corpus that influences how the machine generates, i.e. point [5.b)](#5). 
 
 #### 10.
 
-I identify issues in several different ways. The first is to talk about expected surface behavior, based on my understanding of how I want the system to behave. It is a lot easier 🤖<for human>{for humans} to understand and reason about those surface behaviors, than the detailed construction of underlying components. This can be viewed as a form of [5.b)](#5) as well. 
+I identify issues in several different ways. The first is to talk about expected surface behavior, based on my understanding of how I want the system to behave. It is a lot easier for humans to understand and reason about those surface behaviors, than the detailed construction of underlying components. This can be viewed as a form of [5.b)](#5) as well. 
 
 #### 11.
 
-The second is to 🤖<review state model>{review the state model} I ask AI to generate as part of their engineering plan. It's a small table in that big file. More often than not, I will notice that portion is both over engineered: too many 🤖<state>{states} that I find reasoning about them hard; and also under engineered, partly due to the over engineering of state to begin with, that 🤖<machine often leave system in limbo state, that>{the machine often leaves the system in a limbo state that the} end user can't recover from. It's a form of on paper that state exists, but then also ultimately useless.🤖{This sentence doesn't parse. Do you mean "the state exists on paper, but is useless in practice"?} I view this as the [5.b)](#5) check as well, and 🤖<likely such piece of data that worth reviewing, should be extracted at and presented to human at>{data like this that's worth reviewing should likely be extracted and presented to the human in} a better place.
+The second is to review the state model I ask AI to generate as part of their engineering plan. It's a small table in that big file. More often than not, I will notice that portion is both over engineered: too many states that I find reasoning about them hard; and also under engineered, partly due to the over engineering of state to begin with, that the machine often leaves the system in a limbo state that the end user can't recover from. The state exists here on paper, but is useless in practice. I view this as the [5.b)](#5) check as well, and data like this that's worth reviewing should likely be extracted and presented to the human in a better place.
 
 #### 12.
 
-The third is to smoke test. That's the ultimate grounding step 🤖<human is still currently the gate keeper>{where the human is still the gatekeeper}. 🤖<Eat your dog food become>{Eating your own dog food becomes} a lot more important. I frequently identify issues, both 🤖<ergonomic, but also>{ergonomic and} performance issues, and uncover quite immature design choices. 
+The third is to smoke test. That's the ultimate grounding step where the human is still the gatekeeper. Eating your own dog food becomes a lot more important. I frequently identify issues, both ergonomic and performance issues, and uncover quite immature design choices. 
 
 #### 13.
 
-I believe AI can help improve those manual checks I do in [10.](#10), [11.](#11), [12.](#12) I think those improvements will come from harnesses and human/machine interface design. I also believe [3.](#3) (specialized architecture design model etc.) will arrive 🤖<eventually, those>{eventually; those} are going to be the core model improvements. 
+I believe AI can help improve those manual checks I do in [10.](#10), [11.](#11), [12.](#12) I think those improvements will come from harnesses and human/machine interface design. I also believe [3.](#3) (specialized architecture design model etc.) will arrive eventually; those are going to be the core model improvements. 
 
 #### 14.
 
-I believe we don't leverage AI enough in [1.](#1) (world knowledge) when it comes to AI coding. If 🤖<machine can code, they should be able to design sensible end user flow>{machines can code, they should be able to design sensible end-user flows} directly with minimal human input. 
+I believe we don't leverage AI enough in [1.](#1) (world knowledge) when it comes to AI coding. If machines can code, they should be able to design sensible end-user flows directly with minimal human input. 
 
 #### 15.
 
