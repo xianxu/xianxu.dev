@@ -33,12 +33,12 @@ const renderPermalink = (pattern: string, slug: string, publishDate: Date): stri
     '/' +
     pattern
       .replace('%slug%', slug)
-      .replace('%year%', String(publishDate.getFullYear()))
-      .replace('%month%', pad(publishDate.getMonth() + 1))
-      .replace('%day%', pad(publishDate.getDate()))
-      .replace('%hour%', pad(publishDate.getHours()))
-      .replace('%minute%', pad(publishDate.getMinutes()))
-      .replace('%second%', pad(publishDate.getSeconds()))
+      .replace('%year%', String(publishDate.getUTCFullYear()))
+      .replace('%month%', pad(publishDate.getUTCMonth() + 1))
+      .replace('%day%', pad(publishDate.getUTCDate()))
+      .replace('%hour%', pad(publishDate.getUTCHours()))
+      .replace('%minute%', pad(publishDate.getUTCMinutes()))
+      .replace('%second%', pad(publishDate.getUTCSeconds()))
       .replace('%category%', '')
   );
 };
