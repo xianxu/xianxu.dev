@@ -20,7 +20,7 @@ This is post 2 of a 5-post series on the AI-native development stack I built ove
 
 In this post, my hot takes on how we leverage AI. 
 
-## What is AI good at?
+## What is AI good at, and not so good at?
 
 #### 1.
 
@@ -28,21 +28,21 @@ AI (LLM) has all the world's knowledge. It's trained with basically all the writ
 
 #### 2.
 
-General purpose LLM is good at following some small-scale logical consistency. By small-scale, I mean: short reasoning chains before grounding. Errors compound with every step taken without grounding: if each step is right with probability $p$, a sequence of $n$ steps is right with $p^n$. Better models raise $p$, but don't change the exponent. Not even a human can write perfect code without a compiler. So I don't think one-shotting a very deep sequence of actions is something that will be solved; grounding is what resets the chain.  
+General purpose LLM is good at small-scale logical consistency. By small-scale, I mean: short reasoning chains before grounding. Errors compound with every step taken without grounding: if each step is right with probability $p$, a sequence of $n$ steps is right with $p^n$. Note that no human can write perfect code without a compiler neither. So I don't think one-shotting a very deep sequence of actions is something that will be solved; grounding is what resets the chain.  
 
 #### 3.
 
-It doesn't yet seem to have a good appreciation of the relative importance of different competing facts. You may say they lack the good intuition and "common sense" human experts have, for example, regarding system architecture, user ergonomics, performance etc. I used the term "general purpose LLM" here, as I don't think it's the case that such intuition is human only, as for example, AlphaGo/AlphaZero seems to have pretty good intuition in playing the game Go. It seems those intuitions are deep domain understanding, sort of needing customized training. General purpose LLM still lacks such specialization. This on the other hand, seems to indicate if the economic value is great, then likely such more specialized "LLM" will emerge. Or they will emerge when "LLM" learning efficiency increases by orders of magnitude.
+LLM doesn't yet seem to have a good appreciation of the relative importance of different competing facts and concerns. You may say they lack the good intuition and "common sense" human experts have, for example, regarding system architecture, user ergonomics, and performance requirements etc. I used the term "general purpose LLM" here, as I don't think it's the case that such intuition is human only, as for example, AlphaGo/AlphaZero seems to have pretty good intuition in playing the game Go. It seems those intuitions are deep domain understanding, needing customized training. General purpose LLM still lacks such specialization. This on the other hand, seems to indicate if the economic value is there, then likely such more specialized "LLM" will emerge. Or they will emerge when "LLM" learning efficiency increases by orders of magnitude.
 
 #### 4.
 
-Combining [1.](#1) and [2.](#2), they are pretty good at following rules and process, over a reasonable number of steps without definitive grounding. 
+Combining [1.](#1) and [2.](#2), they are pretty good at following rules and process, over a reasonable number of steps without definitive grounding. I think that's why coding agents performing so well.
 
 ## What does this mean for AI coding? 
 
 #### 5.
 
-Decompose system change into shorter steps. Improve performance by **a)** either providing definitive grounding after those short steps; or **b)** at least providing some guidance on the shape of some of the intermediate state. In AI coding, this means compile often, so languages with a fast compile/test cycle will have an advantage. And having some process, like asking it to write a plan first, or to write the domain entities down. 
+Decompose system change into shorter steps. Improve performance by **a)** either providing definitive grounding after those short steps; or **b)** at least providing some guidance on the shape of some of the intermediate state. In AI coding, a) means compile and run tests often, so languages with a fast compile/test cycle will have an advantage. And b) means to have some process, like asking it to write a plan before coding, or to write the domain entities and states down. 
 
 #### 6.
 
@@ -50,23 +50,25 @@ From point [4.](#4), make the software and product development process legible t
 
 #### 7.
 
-I do not believe that humans can or should review AI generated code. First of all, AI generates code fast, and how much it generates is a function of how many tokens you use. Humans will never keep up with that speed. A human, in order to review code, needs to have a good mental model of the code base itself. While during the initial introduction of AI coding to a system, humans can still review, as they have accumulated enough knowledge, this advantage will quickly be eroded as more code is generated by AI. If we insist that humans review code, then the review will become the bottleneck. Plus, in special domains, e.g. security, AI reviewers will likely outperform humans at finding arcane issues. Review does keep a human's mental model of the system alive, and that matters, but reading code is a very expensive way to get it. A cheaper way is for the human to own the system's invariants (the state model, the data model, the interface contracts) and let the machine own the code. [10.](#10), [11.](#11) and [12.](#12) are how I check them. 
+I do not believe that humans can or should review AI generated code. First of all, AI generates code fast, and how much it generates is largely a function of how many tokens you are willing to pay. Humans will never keep up in this race. While during the initial introduction of AI coding to a system, humans can still review, as they have accumulated enough knowledge, this advantage will quickly be eroded as more code is generated by AI. Or think of new comers who will not have such accumulated knowledge. If we insist that humans review code, then the review will become the bottleneck, foregoing a lot of the benefit of using AI to write code in the first place. Plus, in special domains, e.g. security, AI reviewers will likely outperform humans at finding arcane issues anyway. 
+
+Review does keep a human's mental model of the system alive, and that matters, but reading code is a very expensive way to get it. A much more efficient way is for the human to own the system's invariants (the state model, the data model, the interface contracts, performance behaviors) and let the machine own the code achieving it. [10.](#10), [11.](#11) and [12.](#12) are how I check them in practice, still a work in progroess.
 
 #### 8.
 
-I do not believe in spec-driven development, popularized by tools like [Spec Kit](https://github.com/github/spec-kit), [Kiro](https://kiro.dev) and [OpenSpec](https://github.com/Fission-AI/OpenSpec). All of them use human language to describe system behavior. Human language is notoriously imprecise and I can't help but feel that using such an imprecise language to describe all the details of system behavior misses the whole point: we may as well write code ourselves. The precise kind of spec is code: types, schemas, property tests. That's where the invariants from [7.](#7) belong, so the machine can check them. 
+I do not believe in spec-driven development, popularized by tools like [Spec Kit](https://github.com/github/spec-kit), [Kiro](https://kiro.dev) and [OpenSpec](https://github.com/Fission-AI/OpenSpec). All of them use human language to describe detailed inner componnet behavior. Human language is notoriously imprecise and I can't help but feel that using such an imprecise language to describe all the details of system behavior misses the whole point: we may as well write code ourselves. Maybe this is the calling of a new kind of program language at architectural level. The precise kind of spec is code: types, schemas, property tests. That's where the invariants from [7.](#7) belong, so the machine can check them. This is not an encouragement for human to write those more precise invariants neither, machine writes them well. Human needs to understand a subset of important invariants.
 
 #### 9.
 
-I don't review machine generated specs in detail either, for similar reasons to [8.](#8) Those specs and engineering plans tend to be bloated. I view those plans as forming the corpus that influences how the machine generates, i.e. point [5.b)](#5). 
+I don't review machine generated specs in detail either, for similar reasons to [8.](#8) Those specs and engineering plans tend to be bloated. I view those plans as forming the corpus that influences how the machine eventually writes code, as some internal artifact not for human consumption, i.e. point [5.b)](#5). 
 
 #### 10.
 
-I identify issues in several different ways. The first is to talk about expected surface behavior, based on my understanding of how I want the system to behave. It is a lot easier for humans to understand and reason about those surface behaviors than the detailed construction of underlying components. This can be viewed as a form of [5.b)](#5) as well. 
+I identify issues in several different ways. The first is to talk about expected surface behavior, based on my understanding of how I want the system to behave, following logical chain. It is a lot easier for humans to understand and reason about those surface behaviors than the detailed construction of underlying components. This can be viewed as a form of [5.b)](#5) as well. 
 
 #### 11.
 
-The second is to review the state model I ask AI to generate as part of its engineering plan. It's a small table in that big file. More often than not, I will notice that portion is both over-engineered: too many states, which I find hard to reason about; and also under-engineered, partly due to the over-engineering of state to begin with, so that the machine often leaves the system in a limbo state that the end user can't recover from. The state exists here on paper, but is useless in practice. I view this as the [5.b)](#5) check as well, and data like this that's worth reviewing should likely be extracted and presented to the human in a better place.
+The second is to review select intermediate artifacts, such as the state model I ask AI to generate as part of its engineering plan. It's a small table in that big plan markdown file. Quite often, I will notice that is both over-engineered: there're too many states, which I find hard to reason about; and also under-engineered: that the design often leaves the system in a limbo state that the end user can't recover from. The state is right on paper, but is rather useless in practice. I view this as the [5.b)](#5) check as well. Data like this that's worth reviewing should likely be extracted and presented to the human in a better place. I think that's going to be the new generation of software development process. 
 
 #### 12.
 
@@ -74,11 +76,11 @@ The third is to smoke test. That's the ultimate grounding step where the human i
 
 #### 13.
 
-I believe AI can help improve those manual checks I do in [10.](#10), [11.](#11), [12.](#12) I think those improvements will come from harnesses and human/machine interface design. I also believe [3.](#3) (specialized architecture design models etc.) will arrive eventually; those are going to be the core model improvements. 
+I believe we should use AI to improve those manual checks I do in [10.](#10), [11.](#11), [12.](#12) as well, sort of recursive improvement in how it codes. I think those improvements will come from harnesses and human/machine interface design. I also believe [3.](#3) (specialized architecture design models etc.) will arrive eventually; those are going to be the core model improvements. 
 
 #### 14.
 
-I believe we don't leverage AI enough in [1.](#1) (world knowledge) when it comes to AI coding. If machines can code, they should be able to design sensible end-user flows directly with minimal human input. 
+I believe we don't leverage AI enough in [1.](#1) (world knowledge) when it comes to AI coding. If machines can code, they should be able to design sensible end-user flows directly with minimal human input. The lag is probably due to the lack of clear groundign. In coding you rely on compilers and tests; in product design we still lack good grounding for good tastes.
 
 #### 15.
 
