@@ -14,9 +14,9 @@ I'm thinking of organizing this into a series of posts, roughly:
 
 1. **the 5-month journey of building the workflow that created `Parley`.** (this post)
 2. [reflection on how to leverage AI in software product development.](ariadne-2-hot-takes.md)
-3. [`couch` and `pair`, the coding environment I use daily.](ariadne-3-pair-couch.md)
-4. [`ariadne`, the skills and binaries that supported my workflow.](ariadne-4-ariadne.md)
-5. [and lastly, where to go from here.](ariadne-5-future.md)
+3. `couch` and `pair`, the coding environment I use daily. (TKTK)
+4. `ariadne`, the skills and binaries that supported my workflow. (TKTK)
+5. and lastly, where to go from here. (TKTK)
 
 ---
 
