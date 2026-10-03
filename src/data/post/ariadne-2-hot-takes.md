@@ -1,7 +1,7 @@
 ---
 title: "Hot Takes on AI Coding"
 publishDate: 2026-10-03
-published: false
+published: true
 excerpt: "Hot takes on current trends in AI coding. This is installment 2 of a series of 5 posts."
 tags:
   - tech
