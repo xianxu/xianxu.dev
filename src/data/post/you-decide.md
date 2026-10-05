@@ -13,7 +13,7 @@ tags:
 
 The goal of `you-decide` is to help a voter research how they should vote. Everyone is busy. My guess is the average voter spends less than two hours on an entire ballot. A California general election ballot has dozens of contests: candidates from governor down to school board, judicial retention votes, and more than a dozen state and local measures. So the real question is how someone can vote the way they care about within that time budget.
 
-The traditional shortcut is to vote a party line. But trust in both parties is breaking down. Recent elections showed the reshuffling of old aliances of electorals. Picking a team now doesn't tell you much about whether a specific candidate or measure matches what you believe, especially at more local level.
+The traditional shortcut is to vote a party line. But trust in both parties is breaking down. Recent elections showed the reshuffling of 🤖<old aliances of electorals>{old voter alliances}. Picking a team now doesn't tell you much about whether a specific candidate or measure matches what you believe, especially at 🤖<more local level>{the local level}.
 
 It seems to me AI can readily help to automate this process. So I went to test it out during the 2026 primary season. Now with the 2026 general election coming, I tried again, and it worked like a charm.
 
