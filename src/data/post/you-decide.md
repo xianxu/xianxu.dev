@@ -1,7 +1,7 @@
 ---
 title: "You Decide: An AI-Assisted Voter Guide Built On Your Own Values"
 publishDate: 2026-10-05
-published: false
+published: true
 excerpt: "you-decide helps a voter work out how to vote according to what they actually care about, in the couple of hours most of us can spare. How it's structured, and how privacy, research accuracy, and full transparency drive the design."
 tags:
   - tech
