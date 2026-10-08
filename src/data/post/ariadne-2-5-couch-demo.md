@@ -1,7 +1,7 @@
 ---
 title: "Couch: A Sneak Peek"
 publishDate: 2026-10-08
-published: false
+published: true
 excerpt: "A sneak peek of couch, an agentic coding workbench created by 100% agentic coding. The process of creating it was very liberating."
 tags:
   - tech
