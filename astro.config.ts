@@ -33,6 +33,10 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'static',
+  // Emit /blog as blog.html, not blog/index.html: Cloudflare Pages serves
+  // directory indexes only with a trailing slash (308 /blog → /blog/), which
+  // contradicts trailingSlash: false and every canonical URL the site emits.
+  build: { format: 'file' },
 
   integrations: [
     tailwind({
